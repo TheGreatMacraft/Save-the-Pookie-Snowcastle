@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject enemy;
+    public static Spawner instance;
 
     public GameObject map;
-
     private Vector2 spawnPoint;
     private Vector3 newEnemyPosition;
-
-    private float spawnCooldown = 5f;
 
     private Vector2 GetRandomSpawnPoint(GameObject gameMap)
     {
@@ -47,16 +44,15 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
-        map = GameObject.Find("MapBackground");
+        if(instance == null)
+            instance = this;
 
-        InvokeRepeating("SpawnInvoke",0f, spawnCooldown);
+        map = GameObject.Find("MapBackground");
     }
 
-    private void SpawnInvoke() { Spawn(enemy); }
-
-    private void Spawn(GameObject enemy)
+    public void Spawn(GameObject enemy)
     {
         spawnPoint = GetRandomSpawnPoint(map);
         newEnemyPosition = new Vector3(spawnPoint.x, spawnPoint.y, 0f);

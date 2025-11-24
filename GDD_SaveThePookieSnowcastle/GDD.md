@@ -3,7 +3,7 @@
 # Core Gameplay (Loop)
 
 ```bpmn
-url: [[diagram.bpmn]]
+url: [[CoreGameplayLoop.bpmn]]
 height: 300
 opendiagram: false
 ```
@@ -11,6 +11,33 @@ opendiagram: false
 The game is structured into waves. Each wave consists of random amount of different enemies, that provide a fair challenge for the players at all stages of progression.
 
 In between stages, players have a certain amount of time to purchase new defense artillery, weapons, pets, etc.
+
+# Game Mechanics
+## Wave Handling
+The game is structured into:
+- *grace periods*, which allow the player to *strategically* build defenses, purchase pets, ... $\implies$ **prepare for the next wave**
+- *wave periods*, which last from the game spawning the first enemy, to when the players kill the last enemy.
+Each wave is divided into subwaves, which allows for the *progressively harder* feel of each individual wave.
+
+```bpmn
+url: [[WaveHandling.bpmn]]
+height: 500
+```
+
+In order for this to work as intended, there will be 3 classes needed:
+- **Wave** - a collection of *subwaves* and the amount of *grace time* players will receive after finishing the wave.
+- **Subwave** - a collection of *enemy groups*.
+- **Enemy Group** - it contains:
+	- a *prefab* of the enemy that is supposed to be spawned,
+	- total amount of enemies that are planned to be spawned,
+	- an amount of enemies that have already spawned,
+	- 2 values, in between which, a random one will be picked as "cooldown" between spawning of 2 enemies,
+	- a *boolean* that will tell if the entire group has finished spawning
+
+```bpmn
+url: [[WaveClasses.bpmn]]
+width: 500
+```
 ## Enemies
 1. **Bad snowman** - This creature will throw snowballs at the castle.
 2. **Gnomes** - They will attack the players and attempt to disable traps. They will not attack the main castle until there is something else they can do.

@@ -10,6 +10,8 @@ public class HealthEnemy : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        Debug.Log("Spawned new enemy!");
+        EnemyTracker.instance.RegisterEnemy(gameObject);
     }
     public void DecreaseHelth(float health)
     {
@@ -25,6 +27,7 @@ public class HealthEnemy : MonoBehaviour
 
     private void Die()
     {
+        EnemyTracker.instance.UnregisterEnemy(gameObject);
         Destroy(gameObject);
     }
 }
