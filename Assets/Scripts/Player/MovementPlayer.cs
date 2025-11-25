@@ -12,6 +12,8 @@ public class MovementPlayer : MonoBehaviour
 
     private void Start()
     {
+        PlayerTracker.instance.Register(gameObject);
+
         rb = GetComponent<Rigidbody2D>();
     }
 

@@ -13,6 +13,7 @@ public class HurtEnemy : MonoBehaviour
     public bool nearbyCastle = false;
     private bool hasRangedAttack;
 
+
     private IEnumerator KeepHurtingCastle()
     {
         while (nearbyCastle)

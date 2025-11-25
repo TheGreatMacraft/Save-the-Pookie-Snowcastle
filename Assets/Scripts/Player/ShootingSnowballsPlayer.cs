@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ShootingSnowballsPlayer : MonoBehaviour
 {
-    public static ShootingSnowballsPlayer Instance;
-
     public GameObject snowball;
     public float shootSpeed = 12f;
 

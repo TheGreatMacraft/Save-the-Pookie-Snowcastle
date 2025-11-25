@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // Enemy Group ------------
@@ -77,6 +78,7 @@ public class Wave
 public class WaveHandling : MonoBehaviour
 {
     public static WaveHandling instance;
+    public bool isWave;
 
     //Coroutine Handling ------------
     public IEnumerator StartWave(Wave wave)
@@ -96,12 +98,13 @@ public class WaveHandling : MonoBehaviour
         while (!subwave.AllFinishedSpawning())
             yield return null;
 
-        while(!EnemyTracker.instance.anyAlive())
+        while(!EnemyTracker.instance.anyElementsRegistred())
             yield return null;
     }
 
     private void EndWave(Wave wave)
     {
+        isWave = false;
         Debug.Log("Wave Finished!");
     }
 
@@ -128,6 +131,7 @@ public class WaveHandling : MonoBehaviour
         if(instance == null)
             instance = this;
 
+        isWave = false;
         firstWave = SetupWave();
     }
 

@@ -39,10 +39,20 @@ url: [[WaveClasses.bpmn]]
 width: 500
 ```
 ## Enemies
-1. **Bad snowman** - This creature will throw snowballs at the castle.
-2. **Gnomes** - They will attack the players and attempt to disable traps. They will not attack the main castle until there is something else they can do.
-3. **Snow golem** - Massive creature, that moves slowly, but deals a lot of damage when it gets a hit on it.
-4. **Gingerbread man** - Fast and deals minimal damage to the castle. If it senses players nearby, it'll throw itself face first into snow, to camouflage.
+### Bad snowman
+This creature will throw snowballs at the castle.
+### Gnomes
+They will attack the players and attempt to disable defenses/traps. They will not attack the main castle until there is something else they can do. They will be shorter and will move at an average speed. Their smaller speed will make it **difficult** for defenses to hit them. Multiple gnomes disabling the same defense will manage to do that faster.
+
+Their priority list: disarming defenses > hurting players > damaging the castle
+
+```bpmn
+url: [[GnomeBehaviourPattern.bpmn]]
+```
+
+
+1. **Snow golem** - Massive creature, that moves slowly, but deals a lot of damage when it gets a hit on it.
+2. **Gingerbread man** - Fast and deals minimal damage to the castle. If it senses players nearby, it'll throw itself face first into snow, to camouflage.
 ### Boss Enemies
 1. **Papa Gnome** - Bigger, slower enemy.
 ## Buildings

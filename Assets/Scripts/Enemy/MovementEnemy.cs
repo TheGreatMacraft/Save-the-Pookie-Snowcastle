@@ -7,11 +7,6 @@ public class MovementEnemy : MonoBehaviour
     public HurtEnemy hurtScript;
 
     public float moveSpeed = 3f;
-    public bool nearbyCastle
-    {
-        get { return hurtScript.nearbyCastle; }
-        set { hurtScript.nearbyCastle = value; }
-    }
 
     public Rigidbody2D rb;
 
@@ -25,13 +20,13 @@ public class MovementEnemy : MonoBehaviour
 
     private void Update()
     {
-        if(!nearbyCastle)
+        if(!hurtScript.nearbyCastle)
             movementVector = (GameObject.Find("Castle").GetComponent<Transform>().position - transform.position).normalized;
     }
 
     private void FixedUpdate()
     {
-        if(!nearbyCastle)
+        if(!hurtScript.nearbyCastle)
             rb.MovePosition(rb.position + movementVector * moveSpeed * Time.fixedDeltaTime);
     }
 }
