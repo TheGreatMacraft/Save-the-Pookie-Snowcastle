@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1328569110755257250}
   - component: {fileID: 653728977297196023}
   - component: {fileID: 8317616150283967878}
-  - component: {fileID: 1510940293766915799}
+  - component: {fileID: 2640389048886354279}
   m_Layer: 7
   m_Name: Snowman
   m_TagString: Untagged
@@ -224,7 +224,7 @@ MonoBehaviour:
   hurtCooldown: 5
   damageAmount: 5
   nearbyCastle: 0
---- !u!114 &1510940293766915799
+--- !u!114 &2640389048886354279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,8 +233,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4873204914999720090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f001b356e1f154bb60d949773156e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 567f50bf943de9245932cf61742b3945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 100
+  _currentHealth: 0
+  maxHealth: 150

@@ -33,7 +33,7 @@ public class HitSnowball : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            collision.gameObject.GetComponent<HealthEnemy>().DecreaseHelth(hitDamage);
+            collision.gameObject.GetComponent<EnemyHealth>().DecreaseHelth(hitDamage);
             Destroy(gameObject);
         }
     }

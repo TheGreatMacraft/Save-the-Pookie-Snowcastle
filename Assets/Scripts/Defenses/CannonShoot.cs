@@ -15,6 +15,7 @@ public class CannonShoot : MonoBehaviour
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
 
+    //Shoot the Snowball
     private void Shoot(Vector2 shootDirection)
     {
         HealthCastle.Instance.DecreaseHelth(2); 
@@ -29,7 +30,7 @@ public class CannonShoot : MonoBehaviour
     {
         while (target != null && !defenseBasicsScript.isDisabled)
         {
-            Vector2 shootDirection = (target.transform.position - transform.position).normalized;
+            Vector2 shootDirection = GetAimDirection(transform.position,shootSpeed,target.transform.position,target.GetComponent<Rigidbody2D>().velocity);
             Shoot(shootDirection);
             yield return new WaitForSeconds(shootCooldown);
         }
@@ -77,5 +78,36 @@ public class CannonShoot : MonoBehaviour
     {
         if (!defenseBasicsScript.isDisabled)
             CheckForEnemies();
+    }
+
+    //Perplexity - Calculating the Direction of the Snowball - Doesnt Work Well!!!
+    public static Vector2 GetAimDirection(Vector2 shooterPos, float bulletSpeed,
+                                        Vector2 enemyPos, Vector2 enemyVelocity)
+    {
+        Vector2 targetDir = enemyPos - shooterPos;  // Direction to current enemy position
+        float distance = targetDir.magnitude;
+
+        // Quadratic equation: a*t^2 + b*t + c = 0
+        float a = enemyVelocity.sqrMagnitude - bulletSpeed * bulletSpeed;
+        float b = 2 * Vector2.Dot(enemyVelocity, targetDir);
+        float c = targetDir.sqrMagnitude;
+
+        float discriminant = b * b - 4 * a * c;
+
+        if (discriminant < 0 || a == 0)
+        {
+            // No real solution or linear case (fire directly at current position)
+            return targetDir.normalized;
+        }
+
+        // Use the smallest positive root for closest intercept
+        float t = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
+
+        if (t < 0) t = (-b + Mathf.Sqrt(discriminant)) / (2 * a);
+        if (t < 0) return Vector2.zero;  // Cannot intercept
+
+        // Predicted enemy position at intercept time
+        Vector2 predictedPos = enemyPos + enemyVelocity * t;
+        return (predictedPos - shooterPos).normalized;
     }
 }

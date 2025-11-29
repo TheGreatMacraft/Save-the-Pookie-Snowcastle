@@ -1,5 +1,6 @@
-*Save the Pookie Snowcastle* is a 2 player coop 2D pixel-art game about building and expending the snow castle whilst evil christmas themed enemies, that come in waves. The game is love themed for couples. The concept is similar to [ResevanjePragozda](https://github.com/Gulcar/ResevanjePragozda/releases).
+*Save the Pookie Snowcastle* is coop 2D pixel-art game about building and expending the snow castle whilst evil *christmas-themed* enemies attack the castle in waves. The concept is similar to [ResevanjePragozda](https://github.com/Gulcar/ResevanjePragozda/releases).
 
+Snow is a magical resource that can build 
 # Core Gameplay (Loop)
 
 ```bpmn
@@ -38,7 +39,19 @@ In order for this to work as intended, there will be 3 classes needed:
 url: [[WaveClasses.bpmn]]
 width: 500
 ```
-## Enemies
+
+## Grace Period
+During the grace period players are to examine the damage, rebuild what they can, expand their defenses and also do something fun?
+
+### Building
+Players will have the ability to build during the grace period. They will unlock new defenses as they progress. Those will be visible in the building UI.
+
+```bpmn
+url: [[Building.bpmn]]
+height: 475
+```
+
+# Enemies
 ### Bad snowman
 This creature will throw snowballs at the castle.
 ### Gnomes

@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthCastle : MonoBehaviour
+public class HealthCastle : BaseHealth<HealthCastle>
 {
     public static HealthCastle Instance;
 
     public Slider healthBarSlider;
 
-    public float currentHealth;
-    public float maxHealth = 1000;
+    public override void OnHealthChanged()
+    {
+        healthBarSlider.value = currentHealth / maxHealth;
+    }
+    public override void Die()
+    {
+        //Game Over
+    }
 
     private void Awake()
     {
@@ -20,24 +26,6 @@ public class HealthCastle : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = maxHealth;
-    }
-
-    public void SetHealthBar()
-    {
-        healthBarSlider.value = currentHealth / maxHealth;
-    }
-
-    public void DecreaseHelth(float health)
-    {
-        currentHealth -= health;
-        SetHealthBar();
-
-    }
-
-    public void IncreaseHealth(float health)
-    {
-        currentHealth += health;
-        SetHealthBar();
+        InitialiseHealth();
     }
 }

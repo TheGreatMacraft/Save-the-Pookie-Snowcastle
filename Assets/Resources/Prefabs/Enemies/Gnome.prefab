@@ -95,8 +95,8 @@ GameObject:
   - component: {fileID: 3733172887887164081}
   - component: {fileID: 1347587973735402826}
   - component: {fileID: 737456926014989670}
-  - component: {fileID: 5673249177886983825}
-  - component: {fileID: 7465925111053447061}
+  - component: {fileID: 6880895475422237818}
+  - component: {fileID: 8546427801995211927}
   m_Layer: 7
   m_Name: Gnome
   m_TagString: Untagged
@@ -192,7 +192,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &5673249177886983825
+--- !u!114 &6880895475422237818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,12 +201,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5067078596725065261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f001b356e1f154bb60d949773156e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 567f50bf943de9245932cf61742b3945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
+  _currentHealth: 0
   maxHealth: 75
---- !u!114 &7465925111053447061
+--- !u!114 &8546427801995211927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,12 +218,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c94295d6fc459e42b0a4b468acd6ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthScript: {fileID: 5673249177886983825}
-  scared: 0
+  enemyHealthScript: {fileID: 6880895475422237818}
+  rb: {fileID: 737456926014989670}
   movementSpeed: 5
   attackCooldown: 3
   target: {fileID: 0}
   isActing: 0
   nearbyTarget: 0
-  rb: {fileID: 737456926014989670}
-  maxAtemptsForRandomPos: 10
+  scared: 0

@@ -113,7 +113,8 @@ public class WaveHandling : MonoBehaviour
         EnemyGroup[] enemyGroups = new EnemyGroup[]
         {
             new EnemyGroup(PrefabManager.instance.enemy,12,(5,8)),
-            new EnemyGroup(PrefabManager.instance.snowman,3,(10,12))
+            new EnemyGroup(PrefabManager.instance.snowman,3,(10,12)),
+            new EnemyGroup(PrefabManager.instance.gnome,3,(3,5))
         };
 
         Subwave[] subwave = new Subwave[]
