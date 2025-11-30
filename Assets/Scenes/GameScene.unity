@@ -634,9 +634,11 @@ GameObject:
   - component: {fileID: 512309338}
   - component: {fileID: 512309337}
   - component: {fileID: 512309340}
+  - component: {fileID: 512309345}
   - component: {fileID: 512309339}
   - component: {fileID: 512309341}
   - component: {fileID: 512309342}
+  - component: {fileID: 512309344}
   - component: {fileID: 512309343}
   m_Layer: 6
   m_Name: Player
@@ -756,7 +758,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512309336}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64a1ab2686ca9164db4140ba745f162f, type: 3}
   m_Name: 
@@ -765,7 +767,6 @@ MonoBehaviour:
   shootSpeed: 12
   gunAnchor: {fileID: 776144814}
   gunShootPoint: {fileID: 2066138152}
-  shootKey: 101
 --- !u!114 &512309342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,7 +774,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512309336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be56304e7277f674d94d87412f1afa4c, type: 3}
   m_Name: 
@@ -798,6 +799,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuCanvas: {fileID: 1616107897}
   pauseMenuButton: 27
+--- !u!114 &512309344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512309336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d603b21bf980d1c42a9dafb5c0c20c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 776144814}
+  shootingScript: {fileID: 512309341}
+  buildingDefensesScript: {fileID: 512309342}
+--- !u!114 &512309345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512309336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 847dccd43a373854188174e978322bd9, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 512309341}
+        m_TargetAssemblyTypeName: ShootingSnowballsPlayer, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 74d58d73-ac55-46e1-929f-0d3577e8b1d3
+    m_ActionName: Attacking/ShootButton[/DualShock4GamepadHID/buttonNorth,/Keyboard/e]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Attacking
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &516268824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,7 +1353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &776144815
 Transform:
   m_ObjectHideFlags: 0
@@ -2612,6 +2674,50 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1701827058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1701827059}
+  - component: {fileID: 1701827060}
+  m_Layer: 0
+  m_Name: EnemyTypes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1701827059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701827058}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1849623994}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1701827060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701827058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d9ca371c191ec4088139a321c6d2e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1735057584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2788,6 +2894,7 @@ Transform:
   - {fileID: 876455640}
   - {fileID: 2128314590}
   - {fileID: 408181358}
+  - {fileID: 1701827059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1849623995
@@ -2797,12 +2904,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849623993}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ca7c161009d6b041ad96538427363b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isWave: 1
+  _isWave: 0
 --- !u!1 &1983168793
 GameObject:
   m_ObjectHideFlags: 0
@@ -3121,7 +3228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df0649a27ebbe24eaf003978d874d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  gingerbreadman: {fileID: 0}
   snowman: {fileID: 0}
   gnome: {fileID: 0}
   snowball: {fileID: 0}

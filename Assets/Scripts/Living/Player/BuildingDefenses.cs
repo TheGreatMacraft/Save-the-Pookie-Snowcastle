@@ -55,6 +55,12 @@ public class BuildingDefenses : MonoBehaviour
         Instantiate(obj, position, Quaternion.identity);
     }
 
+    public void StopBuilding()
+    {
+        buildMenuCanvas.SetActive(false);
+        DeleteHologram();
+    }
+
     private void Awake()
     {
         if(instance == null)

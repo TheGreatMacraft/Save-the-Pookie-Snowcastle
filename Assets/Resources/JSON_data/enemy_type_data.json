@@ -1,0 +1,25 @@
+{
+    "enemyTypes": [
+        {
+            "typeName": "snowman",
+            "spawnTimeRange": {
+                "min": 10,
+                "max": 12
+            }
+        },
+        {
+            "typeName": "gnome",
+            "spawnTimeRange": {
+                "min": 3,
+                "max": 5
+            }
+        },
+        {
+            "typeName": "gingerbreadman",
+            "spawnTimeRange": {
+                "min": 5,
+                "max": 8
+            }
+        }
+    ]
+}

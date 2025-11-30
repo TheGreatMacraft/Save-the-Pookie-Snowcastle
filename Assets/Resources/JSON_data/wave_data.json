@@ -1,0 +1,60 @@
+{
+    "waves": [
+        {
+            "graceTimeRange": {
+                "min": 10,
+                "max": 15
+            },
+            "subwaves": [
+                {
+                    "enemyGroups": [
+                        {
+                            "enemyType": "gingerbreadman",
+                            "enemyCount": 15
+                        },
+                        {
+                            "enemyType": "snowman",
+                            "enemyCount": 3
+                        },
+                        {
+                            "enemyType": "gnome",
+                            "enemyCount": 5
+                        }
+                    ]
+                },
+                {
+                    "enemyGroups": [
+                        {
+                            "enemyType": "gingerbreadman",
+                            "enemyCount": 20
+                        },
+                        {
+                            "enemyType": "snowman",
+                            "enemyCount": 7
+                        },
+                        {
+                            "enemyType": "gnome",
+                            "enemyCount": 10
+                        }
+                    ]
+                },
+                {
+                    "enemyGroups": [
+                        {
+                            "enemyType": "gingerbreadman",
+                            "enemyCount": 10
+                        },
+                        {
+                            "enemyType": "snowman",
+                            "enemyCount": 5
+                        },
+                        {
+                            "enemyType": "gnome",
+                            "enemyCount": 7
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

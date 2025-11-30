@@ -6,19 +6,39 @@ public class PrefabManager : MonoBehaviour
 {
     public static PrefabManager instance;
 
-    public GameObject enemy;
+    public GameObject gingerbreadman;
     public GameObject snowman;
     public GameObject gnome;
 
     public GameObject snowball;
 
+    private Dictionary<string, GameObject> prefabDict;
+
     private void LoadAllPrefabs()
     {
-        enemy = Resources.Load<GameObject>("Prefabs/Enemies/Enemy");
+        gingerbreadman = Resources.Load<GameObject>("Prefabs/Enemies/Gingerbreadman");
         snowman = Resources.Load<GameObject>("Prefabs/Enemies/Snowman");
         gnome = Resources.Load<GameObject>("Prefabs/Enemies/Gnome");
 
         snowball = Resources.Load<GameObject>("Prefabs/Projectiles/Snowball");
+    }
+
+    private void FillPrefabDict()
+    {
+        prefabDict = new Dictionary<string, GameObject>
+        {
+            {"gingerbreadman", gingerbreadman },
+            {"snowman", snowman },
+            {"gnome", gnome },
+
+            {"snowball", snowball}
+        };
+    }
+
+    //Pubic Functions for Getting Prefabs
+    public GameObject GetPrefabByName(string name)
+    {
+        return prefabDict[name];
     }
 
     private void Awake()
@@ -27,5 +47,6 @@ public class PrefabManager : MonoBehaviour
             instance = this;
 
         LoadAllPrefabs();
+        FillPrefabDict();
     }
 }
