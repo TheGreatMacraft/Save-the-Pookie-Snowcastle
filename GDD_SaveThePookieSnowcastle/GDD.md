@@ -1,7 +1,12 @@
 *Save the Pookie Snowcastle* is coop 2D pixel-art game about building and expending the snow castle whilst evil *christmas-themed* enemies attack the castle in waves. The concept is similar to [ResevanjePragozda](https://github.com/Gulcar/ResevanjePragozda/releases).
+# Gameplay
+The goal is to make the gameplay as orthogonal as possible. As players progress through the levels, which will seem the same, they will have to adapt new strategies and overall play differently.
 
-Snow is a magical resource that can build 
-# Core Gameplay (Loop)
+An example of such approach can be seen in a horror co-op game *R.E.P.O*. Players in earlier stages don't have an effective way to deal with monsters, besides hiding and checking corners. However, as they earn money and purchase weapons, they now have an actual way to fight the monsters. **The game stays the same, but player's abilities and capabilities change and in term changing the gameplay completely.**
+
+The goal is to progressively keep the game *interesting*, by adding variety and *familiar* by keeping the **core gameplay loop** roughly the same.
+
+## Gameplay Loops
 
 ```bpmn
 url: [[CoreGameplayLoop.bpmn]]
@@ -9,11 +14,15 @@ height: 300
 opendiagram: false
 ```
 
+All players will be doing in the game will be fighting monsters and reinforcing their defenses to fight off more monsters. The primary goal will always be the same: *Don't let the monsters destroy the snowcastle*.
+
+However, as they progress, the ways of doing that will change. At first players won't have much, but some guns, snowballs, a cannon and a snowcastle. But with time, they will unlock more cannons, traps, guns, swords,... each with some quality of life upgrades along the way.
+
+This will transform an originally very simple gameplay loop into a complex list of managing defenses, weapons, troops?, etc.
+# Game Mechanics
 The game is structured into waves. Each wave consists of random amount of different enemies, that provide a fair challenge for the players at all stages of progression.
 
 In between stages, players have a certain amount of time to purchase new defense artillery, weapons, pets, etc.
-
-# Game Mechanics
 ## Wave Handling
 The game is structured into:
 - *grace periods*, which allow the player to *strategically* build defenses, purchase pets, ... $\implies$ **prepare for the next wave**
@@ -64,7 +73,7 @@ url: [[GnomeBehaviourPattern.bpmn]]
 ```
 
 
-1. **Snow golem** - Massive creature, that moves slowly, but deals a lot of damage when it gets a hit on it.
+1. **Snow golem** - Massive creature, that moves slowly towards the castle, but deals a lot of damage when it gets a hit on it.
 2. **Gingerbread man** - Fast and deals minimal damage to the castle. If it senses players nearby, it'll throw itself face first into snow, to camouflage.
 ### Boss Enemies
 1. **Papa Gnome** - Bigger, slower enemy.

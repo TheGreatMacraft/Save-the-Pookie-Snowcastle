@@ -20,6 +20,13 @@
                 "min": 5,
                 "max": 8
             }
+        },
+        {
+            "typeName": "snow golem",
+            "spawnTimeRange": {
+                "min": 5,
+                "max": 8
+            }
         }
     ]
 }

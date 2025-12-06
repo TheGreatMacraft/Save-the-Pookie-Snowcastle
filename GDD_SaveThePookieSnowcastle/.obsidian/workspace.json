@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "GDD"
             }
+          },
+          {
+            "id": "88cc0ffeb3ab1014",
+            "type": "leaf",
+            "state": {
+              "type": "bpmn-view",
+              "state": {
+                "file": "Media/CameraMoveToCursor.bpmn"
+              },
+              "icon": "lucide-file",
+              "title": "CameraMoveToCursor"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -170,15 +183,16 @@
       "bases:Create new base": false
     }
   },
-  "active": "84df0a0ee729761c",
+  "active": "330e0d1d761434c5",
   "lastOpenFiles": [
+    "Media/EmptyDiagram.bpmn",
+    "Media/CameraMoveToCursor.bpmn",
+    "GDD.md",
     "Media/top down winter forest.png",
     "Media/Nepotrjeno 759065.crdownload",
     "Media/winter side scroller.png",
     "Media/Nepotrjeno 273973.crdownload",
     "Media/pixel art snow.jpg",
-    "GDD.md",
-    "Media/EmptyDiagram.bpmn",
     "Media/Diagrams/Building.bpmn",
     "Media/Diagrams",
     "Media/Diagrams/WaveClasses.bpmn",

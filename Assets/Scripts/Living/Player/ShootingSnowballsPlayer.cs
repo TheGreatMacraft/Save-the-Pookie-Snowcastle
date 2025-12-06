@@ -18,7 +18,8 @@ public class ShootingSnowballsPlayer : MonoBehaviour
 
     private void SetAngleKeyboardMouse()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
+        mousePosition = Camera.main.ScreenToWorldPoint(mouseScreenPos);
         mousePosition.z = 0;
 
         shootDirection = (mousePosition - gunAnchor.transform.position).normalized;

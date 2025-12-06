@@ -9,6 +9,7 @@ public class PrefabManager : MonoBehaviour
     public GameObject gingerbreadman;
     public GameObject snowman;
     public GameObject gnome;
+    public GameObject snow_golem;
 
     public GameObject snowball;
 
@@ -19,6 +20,7 @@ public class PrefabManager : MonoBehaviour
         gingerbreadman = Resources.Load<GameObject>("Prefabs/Enemies/Gingerbreadman");
         snowman = Resources.Load<GameObject>("Prefabs/Enemies/Snowman");
         gnome = Resources.Load<GameObject>("Prefabs/Enemies/Gnome");
+        snow_golem = Resources.Load<GameObject>("Prefabs/Enemies/Snow Golem");
 
         snowball = Resources.Load<GameObject>("Prefabs/Projectiles/Snowball");
     }
@@ -30,6 +32,7 @@ public class PrefabManager : MonoBehaviour
             {"gingerbreadman", gingerbreadman },
             {"snowman", snowman },
             {"gnome", gnome },
+            {"snow golem", snow_golem },
 
             {"snowball", snowball}
         };
