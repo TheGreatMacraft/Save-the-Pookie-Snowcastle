@@ -2,13 +2,31 @@
     "name": "PlayerInputActions",
     "maps": [
         {
-            "name": "Attacking",
+            "name": "Player Inputs",
             "id": "195d935c-6e6f-4772-bc47-ad72eac7a486",
             "actions": [
                 {
                     "name": "ShootButton",
                     "type": "Button",
                     "id": "74d58d73-ac55-46e1-929f-0d3577e8b1d3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ReloadButton",
+                    "type": "Button",
+                    "id": "09464350-417d-451c-b1ed-e61fe3b7890c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilityButton",
+                    "type": "Button",
+                    "id": "ead2d7fe-6d76-4457-9795-cc4c3134ff1b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -30,11 +48,33 @@
                 {
                     "name": "",
                     "id": "238eaed6-9910-4650-a301-ce40b3d2c13c",
-                    "path": "<Keyboard>/e",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ShootButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "085f08f4-9935-4a50-b71c-a24e74c60782",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReloadButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2de128ce-d940-46c2-ae10-25307dd2f3e2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilityButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

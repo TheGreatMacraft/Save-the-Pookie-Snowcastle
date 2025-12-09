@@ -13,7 +13,7 @@ public class CameraCursorMove : MonoBehaviour
 
     public Vector2 newCursorScreenPos;
 
-    private Vector2 GetMouseUIPosition(Vector2 mouseScreenPos)
+    Vector2 GetMouseUIPosition(Vector2 mouseScreenPos)
     {
         Vector2 localPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -60,7 +60,7 @@ public class CameraCursorMove : MonoBehaviour
         }
     }
 
-    //Move Camera Based on Cursor Position - Copilot (Inspired by Enter the Gungeon)
+    //Move Camera Based on Cursor Position - Microsoft Copilot (Inspired by Enter the Gungeon)
     private void LateUpdate()
     {
         Vector3 playerWorldPos = transform.position;

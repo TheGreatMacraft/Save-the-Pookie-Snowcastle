@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1e7zg1w" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.9.0">
+  <bpmn:process id="Process_04ssgh7" isExecutable="false">
+    <bpmn:task id="Activity_1pf8r5w" name="Move Cursor Image to Mouse Screen Position">
+      <bpmn:incoming>Flow_1ng8447</bpmn:incoming>
+      <bpmn:outgoing>Flow_17kpyu9</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_0scci4y" name="Calculate a Vector Between Player Player and Mouse World Position">
+      <bpmn:incoming>Flow_17kpyu9</bpmn:incoming>
+      <bpmn:incoming>Flow_0t97llp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0i04s13</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_17kpyu9" sourceRef="Activity_1pf8r5w" targetRef="Activity_0scci4y" />
+    <bpmn:task id="Activity_0x0z39z" name="Place the Camera on a Fraction of Said Vector">
+      <bpmn:incoming>Flow_0i04s13</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ru2rwn</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0i04s13" sourceRef="Activity_0scci4y" targetRef="Activity_0x0z39z" />
+    <bpmn:intermediateThrowEvent id="Event_1k4d8cu" name="Player Moves Mouse Cursor">
+      <bpmn:incoming>Flow_1ru2rwn</bpmn:incoming>
+      <bpmn:outgoing>Flow_1i9pwid</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_1ru2rwn" sourceRef="Activity_0x0z39z" targetRef="Event_1k4d8cu" />
+    <bpmn:exclusiveGateway id="Gateway_0t1dv9q" name="Is Cursor Inside the Screen Resolution Boarder?">
+      <bpmn:incoming>Flow_1i9pwid</bpmn:incoming>
+      <bpmn:outgoing>Flow_07p1cn3</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1ng8447</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1i9pwid" sourceRef="Event_1k4d8cu" targetRef="Gateway_0t1dv9q" />
+    <bpmn:task id="Activity_1mdmvi6" name="Move Cursor Image to The Boarder where It Surpasses it">
+      <bpmn:incoming>Flow_07p1cn3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0t97llp</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_07p1cn3" sourceRef="Gateway_0t1dv9q" targetRef="Activity_1mdmvi6" />
+    <bpmn:sequenceFlow id="Flow_1ng8447" sourceRef="Gateway_0t1dv9q" targetRef="Activity_1pf8r5w" />
+    <bpmn:sequenceFlow id="Flow_0t97llp" sourceRef="Activity_1mdmvi6" targetRef="Activity_0scci4y" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_04ssgh7">
+      <bpmndi:BPMNShape id="Activity_1pf8r5w_di" bpmnElement="Activity_1pf8r5w">
+        <dc:Bounds x="210" y="50" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1k4d8cu_di" bpmnElement="Event_1k4d8cu">
+        <dc:Bounds x="362" y="-88" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="404" y="-84" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0t1dv9q_di" bpmnElement="Gateway_0t1dv9q" isMarkerVisible="true">
+        <dc:Bounds x="355" y="-25" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="341" y="35" width="78" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0scci4y_di" bpmnElement="Activity_0scci4y">
+        <dc:Bounds x="320" y="170" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0x0z39z_di" bpmnElement="Activity_0x0z39z">
+        <dc:Bounds x="320" y="280" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1mdmvi6_di" bpmnElement="Activity_1mdmvi6">
+        <dc:Bounds x="440" y="50" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ru2rwn_di" bpmnElement="Flow_1ru2rwn">
+        <di:waypoint x="320" y="320" />
+        <di:waypoint x="190" y="320" />
+        <di:waypoint x="190" y="-70" />
+        <di:waypoint x="362" y="-70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17kpyu9_di" bpmnElement="Flow_17kpyu9">
+        <di:waypoint x="260" y="130" />
+        <di:waypoint x="260" y="150" />
+        <di:waypoint x="370" y="150" />
+        <di:waypoint x="370" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07p1cn3_di" bpmnElement="Flow_07p1cn3">
+        <di:waypoint x="405" y="0" />
+        <di:waypoint x="490" y="0" />
+        <di:waypoint x="490" y="50" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ng8447_di" bpmnElement="Flow_1ng8447">
+        <di:waypoint x="355" y="0" />
+        <di:waypoint x="260" y="0" />
+        <di:waypoint x="260" y="50" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i9pwid_di" bpmnElement="Flow_1i9pwid">
+        <di:waypoint x="380" y="-52" />
+        <di:waypoint x="380" y="-25" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0i04s13_di" bpmnElement="Flow_0i04s13">
+        <di:waypoint x="370" y="250" />
+        <di:waypoint x="370" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0t97llp_di" bpmnElement="Flow_0t97llp">
+        <di:waypoint x="490" y="130" />
+        <di:waypoint x="490" y="150" />
+        <di:waypoint x="370" y="150" />
+        <di:waypoint x="370" y="170" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

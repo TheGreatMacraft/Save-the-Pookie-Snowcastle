@@ -5,7 +5,7 @@ using UnityEngine;
 public class AddaptToWaveState : MonoBehaviour
 {
     public GameObject gun;
-    public ShootingSnowballsPlayer shootingScript;
+    public GunBaseClass shootingScript;
 
     public BuildingDefenses buildingDefensesScript;
 
@@ -21,6 +21,7 @@ public class AddaptToWaveState : MonoBehaviour
 
     private void Start()
     {
+        shootingScript = GetComponent<GunBaseClass>();
         WaveHandling.instance.onWaveStateChanged += WaveStateChanged;
     }
 }

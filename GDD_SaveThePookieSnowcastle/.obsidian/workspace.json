@@ -4,37 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "6d97497dcf5aa985",
+        "id": "a13d09202f306121",
         "type": "tabs",
         "children": [
           {
-            "id": "84df0a0ee729761c",
+            "id": "07a6f6b346b874e8",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "GDD.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "GDD"
-            }
-          },
-          {
-            "id": "88cc0ffeb3ab1014",
-            "type": "leaf",
-            "state": {
-              "type": "bpmn-view",
-              "state": {
-                "file": "Media/CameraMoveToCursor.bpmn"
-              },
-              "icon": "lucide-file",
-              "title": "CameraMoveToCursor"
+              "title": "New tab"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -180,14 +163,35 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-kanban:Create new board": false
     }
   },
-  "active": "330e0d1d761434c5",
+  "active": "07a6f6b346b874e8",
   "lastOpenFiles": [
-    "Media/EmptyDiagram.bpmn",
-    "Media/CameraMoveToCursor.bpmn",
+    "Progress Boards/Weapons.md",
     "GDD.md",
+    "Base Board.md",
+    "Media/Diagrams/GunBaseFunctionality.bpmn",
+    "Media/EmptyDiagram.bpmn",
+    "Media/Pasted image 20251207183351.png",
+    "Media/Pasted image 20251122130051.png",
+    "Media/Pasted image 20251122130009.png",
+    "Media/Pasted image 20251207183120.png",
+    "Progress Boards/Player.md",
+    "Progress Boards/Music.md",
+    "Progress Boards/Pets.md",
+    "Progress Boards/SFX.md",
+    "Progress Boards/Untitled",
+    "Progress Boards/Art.md",
+    "Progress Boards/Building System.md",
+    "Progress Boards/Multiplayer.md",
+    "Progress Boards/Enemy.md",
+    "Progress Boards",
+    "Media/snowman wizard.jpg",
+    "Media/Nepotrjeno 524434.crdownload",
+    "UntitledUntitled.md",
+    "Media/Diagrams/CameraMoveToCursor.bpmn",
     "Media/top down winter forest.png",
     "Media/Nepotrjeno 759065.crdownload",
     "Media/winter side scroller.png",
@@ -195,13 +199,6 @@
     "Media/pixel art snow.jpg",
     "Media/Diagrams/Building.bpmn",
     "Media/Diagrams",
-    "Media/Diagrams/WaveClasses.bpmn",
-    "Media/Diagrams/WaveHandling.bpmn",
-    "Media/Diagrams/GnomeBehaviourPattern.bpmn",
-    "Media/Nov Dokument z besedilom.txt",
-    "Media/Nepotrjeno 295050.crdownload",
-    "shit.bpnm.md",
-    "Media/Pasted image 20251122130051.png",
-    "Media/Pasted image 20251122130009.png"
+    "shit.bpnm.md"
   ]
 }
