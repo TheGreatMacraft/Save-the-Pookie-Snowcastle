@@ -6,7 +6,7 @@
             "id": "195d935c-6e6f-4772-bc47-ad72eac7a486",
             "actions": [
                 {
-                    "name": "ShootButton",
+                    "name": "AttackButton",
                     "type": "Button",
                     "id": "74d58d73-ac55-46e1-929f-0d3577e8b1d3",
                     "expectedControlType": "Button",
@@ -41,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ShootButton",
+                    "action": "AttackButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -52,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ShootButton",
+                    "action": "AttackButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

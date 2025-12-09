@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4109232196193272677}
   - component: {fileID: 8602286041769281195}
   - component: {fileID: 260418180832660650}
-  - component: {fileID: 3243206988083908294}
+  - component: {fileID: 7446474148137274800}
   m_Layer: 0
   m_Name: Icicle
   m_TagString: Untagged
@@ -107,7 +107,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.33718967, y: 1.5189619}
   m_EdgeRadius: 0
---- !u!114 &3243206988083908294
+--- !u!114 &7446474148137274800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4769518289802779101}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1474ba2a1d634d43b72a2cfb8253c5c, type: 3}
+  m_Script: {fileID: 11500000, guid: be9d74e0e74b0594d94f7e00e9ae406e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ownerGun: {fileID: 0}

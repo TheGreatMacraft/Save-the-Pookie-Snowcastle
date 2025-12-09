@@ -7,7 +7,6 @@ kanban-plugin: board
 ## To Do
 
 - [ ] Magic Wand
-- [ ] Melee Base Script
 - [ ] Ice Sword
 - [ ] Ice Axe
 - [ ] Icicles
@@ -18,14 +17,15 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] Ego Tripper
+- [ ] Melee Base Script
 
 
 ## Done
 
+- [ ] Ego Tripper
 - [ ] Icicle Launcher
-- [ ] Gun Base Script
 - [ ] Snow Cannon
+- [ ] Gun Base Script
 
 
 

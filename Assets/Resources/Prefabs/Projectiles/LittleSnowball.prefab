@@ -95,9 +95,9 @@ GameObject:
   - component: {fileID: 5513713966368744810}
   - component: {fileID: 3138058918060456074}
   - component: {fileID: 8930262150441636147}
-  - component: {fileID: -4900495521304277749}
+  - component: {fileID: 5453302095923526702}
   m_Layer: 11
-  m_Name: SubSnowball
+  m_Name: LittleSnowball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,7 +181,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-4900495521304277749
+--- !u!114 &5453302095923526702
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,8 +190,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8889201001007404881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1474ba2a1d634d43b72a2cfb8253c5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f3d39c74f7f067488ecb14e0bf00aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
   ownerGun: {fileID: 0}

@@ -18,7 +18,7 @@ public class HurtEnemy : MonoBehaviour
     {
         while (nearbyCastle)
         {
-            HealthCastle.Instance.DecreaseHelth(damageAmount);
+            HealthCastle.Instance.DecreaseHealth(damageAmount);
             yield return new WaitForSeconds(hurtCooldown);
         }
     }

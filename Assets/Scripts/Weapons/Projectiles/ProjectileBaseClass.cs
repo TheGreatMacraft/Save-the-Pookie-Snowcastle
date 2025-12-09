@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileBaseClass : MonoBehaviour
+public abstract class ProjectileBaseClass : MonoBehaviour
 {
     [System.NonSerialized]
     public float damage;
+
+    // Gun That Fired Projectile
     public GunBaseClass ownerGun;
 
     private void Update()
@@ -20,11 +22,13 @@ public class ProjectileBaseClass : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            collision.gameObject.GetComponent<EnemyHealth>().DecreaseHelth(damage);
+            // If Enemy is Hit, Decrease it's Hit Points and Destroy this Projectile 
+            collision.gameObject.GetComponent<EnemyHealth>().DecreaseHealth(damage, ownerGun);
             Destroy(gameObject);
         }
     }
 
+    // Magic that checks if Game Object is Out of Map Bounds
     private bool OutOfBounds()
     {
         float x = transform.position.x;

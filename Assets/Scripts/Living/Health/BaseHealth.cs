@@ -2,12 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public abstract class BaseHealth<H> : MonoBehaviour where H : BaseHealth<H>
+public abstract class BaseHealth: MonoBehaviour
 {
+    // Events for Notifying Other Scripts
     public event Action Hurt;
     public event Action Heal;
 
+    // UI Slider (Optional)
+    public Slider healthBarSlider;
+
+    // Current Health - When Changed Calls OnHealthChanged()
     public float _currentHealth;
     public float currentHealth
     {
@@ -19,6 +25,11 @@ public abstract class BaseHealth<H> : MonoBehaviour where H : BaseHealth<H>
         }
     }
 
+    public virtual void Start()
+    {
+        InitialiseHealth();
+    }
+
     public float maxHealth;
 
     public void InitialiseHealth()
@@ -26,12 +37,15 @@ public abstract class BaseHealth<H> : MonoBehaviour where H : BaseHealth<H>
         currentHealth = maxHealth;
     }
 
-    public void DecreaseHelth(float health)
+    public void DecreaseHealth(float health, WeaponBaseClass weapon = null)
     {
         currentHealth -= health;
-        if (currentHealth <= 0)
-            Die();
 
+        // Check if Object should Die
+        if (currentHealth <= 0)
+            Die(weapon);
+
+        // Call Hurt Event
         Hurt?.Invoke();
     }
 
@@ -42,9 +56,18 @@ public abstract class BaseHealth<H> : MonoBehaviour where H : BaseHealth<H>
         else
             currentHealth += health;
 
+        // Call Heal Event
         Heal?.Invoke();
     }
 
-    public virtual void OnHealthChanged() { }
+    public virtual void OnHealthChanged()
+    {
+        // Update UI Slider
+        if(healthBarSlider != null)
+            healthBarSlider.value = currentHealth / maxHealth;
+    }
+
+    // Virtual Methods for Derived Classes to Use
+    public virtual void Die(WeaponBaseClass weapon = null) { }
     public virtual void Die() { }
 }

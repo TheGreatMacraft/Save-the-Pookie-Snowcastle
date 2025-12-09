@@ -18,7 +18,7 @@ public class CannonShoot : MonoBehaviour
     //Shoot the Snowball
     private void Shoot(Vector2 shootDirection)
     {
-        HealthCastle.Instance.DecreaseHelth(2); 
+        HealthCastle.Instance.DecreaseHealth(2); 
 
         GameObject newSnowball = Instantiate(snowball, transform.position, Quaternion.Euler(0f, 0f, 0f));
         Rigidbody2D rb = newSnowball.GetComponent<Rigidbody2D>();

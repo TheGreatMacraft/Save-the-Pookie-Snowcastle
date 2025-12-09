@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GunBaseClass : MonoBehaviour
+public abstract class GunBaseClass : WeaponBaseClass
 {
     // Number of Projectiles
     public int projectilesBeforeReload;
@@ -14,7 +14,7 @@ public class GunBaseClass : MonoBehaviour
     public float reloadTime;
     public float timeBetweenShots;
 
-    // Bulet
+    // Bullet
     public int projectileDamage;
     public float projectileSpeed;
 
@@ -30,9 +30,6 @@ public class GunBaseClass : MonoBehaviour
     public GameObject gunRotationAnchor;
     public GameObject projectileSpawnPoint;
 
-    // Input Action Variables
-    [SerializeField] private PlayerInput playerInput;
-
     // Values Used in Script
     Vector2 shootDirection;
 
@@ -45,24 +42,17 @@ public class GunBaseClass : MonoBehaviour
     public List<GameObject> projectilesShot = new List<GameObject>();
 
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+
         // Set Ammo in Magazine to Max Allowed
         currentProjectileCount = projectilesBeforeReload;
-
-        SetButtonFunctions();
-    }
-    void Update()
-    {
-        if (KeyboardAndMouseConnected())
-        {
-            gunRotationAnchor.transform.rotation = AngleToPointCursor(gunRotationAnchor);
-        }
     }
 
-    public void ShootCall(InputAction.CallbackContext context)
+    public override void AttackCall(InputAction.CallbackContext context)
     {
-        if (!context.performed) { return; }
+        base.AttackCall(context);
 
         if (currentProjectileCount == 0) { return; }
 
@@ -77,7 +67,7 @@ public class GunBaseClass : MonoBehaviour
 
         // Start Cooldown
         canShoot = false;
-        StartCoroutine(AllowShootingAfterCooldown());
+        StartCoroutine(CallActionAfterTime(timeBetweenShots,() => canShoot = true));
 
         // Camera Shake
         StartCoroutine(CameraShake.instance.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration));
@@ -85,30 +75,30 @@ public class GunBaseClass : MonoBehaviour
 
     public void SpawnProjectile()
     {
-        float spreadAngle = Random.Range(-spread, spread);
+        // Calculate Angle with Spread
+        float spreadAngle = UnityEngine.Random.Range(-spread, spread);
 
-        Quaternion spreadRotation = gunRotationAnchor.transform.rotation * Quaternion.Euler(0f, 0f, spreadAngle);
-        Quaternion facingRotation = spreadRotation * Quaternion.Euler(0f, 0f, -90f);
+        // Calculate Rotation for Applied Velocity and Rotation which Projectile Should Face
+        Quaternion velocityRotation = gunRotationAnchor.transform.rotation * Quaternion.Euler(0f, 0f, spreadAngle);
+        Quaternion facingRotation = velocityRotation * Quaternion.Euler(0f, 0f, -90f);
 
+        // Instantiating New Projectile
         GameObject newProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, facingRotation);
         
+        // Altering Projectile's Damage and Registering This Gun as it's Owner Gun
         ProjectileBaseClass projectileBaseClass = newProjectile.GetComponent<ProjectileBaseClass>();
         projectileBaseClass.damage = projectileDamage;
         projectileBaseClass.ownerGun = this;
 
-        Vector2 spreadDirection = spreadRotation * Vector2.right;
+        // Apply Velocity
+        Vector2 spreadDirection = velocityRotation * Vector2.right;
         Rigidbody2D rb = newProjectile.GetComponent<Rigidbody2D>();
         rb.velocity = spreadDirection * projectileSpeed;
 
-        projectilesShot.Add(newProjectile);
-    }
-
-    public IEnumerator AllowShootingAfterCooldown()
-    {
-        yield return new WaitForSeconds(timeBetweenShots);
-
-        canShoot = true;
-    }    
+        // Register New Projectile to the List
+        if (!projectilesShot.Contains(newProjectile))
+            projectilesShot.Add(newProjectile);
+    }  
 
     public void ReloadCall(InputAction.CallbackContext context)
     {
@@ -120,61 +110,43 @@ public class GunBaseClass : MonoBehaviour
 
         // Call Reload after Reload Time
         isReloading = true;
-        StartCoroutine(ReloadAfterTime());
+        StartCoroutine(CallActionAfterTime(reloadTime,Reload));
     }
 
-    public IEnumerator ReloadAfterTime()
+    public void Reload()
     {
-        yield return new WaitForSeconds(reloadTime);
-
         // Set current ammo to max ammo
         currentProjectileCount = projectilesBeforeReload;
         isReloading = false;
     }
 
-    public void AbilityCall(InputAction.CallbackContext context)
+    // Coroutine that calls Parameter Method after Given Time
+    public IEnumerator CallActionAfterTime(float time, Action action)
     {
-        if(!context.performed) { return; }
+        yield return new WaitForSeconds(time);
+
+        action();
+    }
+
+    public override void AbilityCall(InputAction.CallbackContext context)
+    {
+        base.AbilityCall(context);
 
         Ability();
     }
 
+    // Virtual Method Ability, to be Defined in Derived Class
     public virtual void Ability() { }
 
-    private Quaternion AngleToPointCursor(GameObject gunRotationAnchor)
+    // Linking Base Weapon Buttons + Reload Button
+    public override void SetButtonFunctions()
     {
-        Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+        base.SetButtonFunctions();
 
-        shootDirection = (mouseWorldPosition - gunRotationAnchor.transform.position).normalized;
-
-        float shootAngle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-        return Quaternion.Euler(0f, 0f, shootAngle);
-    }
-
-    bool KeyboardAndMouseConnected()
-    {
-        return Keyboard.current != null && Mouse.current != null && Mouse.current.delta.ReadValue() != Vector2.zero;
-    }
-
-    bool ControllerConnected()
-    {
-        return Gamepad.current != null;
-    }
-
-    void SetButtonFunctions()
-    {
-        var shootAction = playerInput.actions["ShootButton"];
         var reloadAction = playerInput.actions["ReloadButton"];
-        var abilityAction = playerInput.actions["AbilityButton"];
-
-        shootAction.performed += ShootCall;
-        shootAction.Enable();
 
         reloadAction.performed += ReloadCall;
         reloadAction.Enable();
 
-        abilityAction.performed += AbilityCall;
-        abilityAction.Enable();
     }
 }
