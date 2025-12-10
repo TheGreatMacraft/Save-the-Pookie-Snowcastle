@@ -1,13 +1,20 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public abstract class WeaponBaseClass : MonoBehaviour
 {
+    // Variables to Tweak
+    public int damage;
+    public float timeBetweenAttacks;
+    public float knockbackStrength;
+
     // Input Action Variables
     public PlayerInput playerInput;
+
+    // Variables used in Script
+    public bool canAttack = true;
 
     public virtual void Start()
     {
@@ -38,7 +45,13 @@ public abstract class WeaponBaseClass : MonoBehaviour
     // Virtual Method Calls for Input Action
     public virtual void AttackCall(InputAction.CallbackContext context)
     {
-        if (!context.performed) { return; }
+        // Start Cooldown
+        Utils.ToggleBoolInTime(v => canAttack = v, canAttack, timeBetweenAttacks);
+    }
+
+    public bool CancelAttackCall(InputAction.CallbackContext context)
+    {
+        return (!context.performed || !canAttack);
     }
 
     public virtual void AbilityCall(InputAction.CallbackContext context)

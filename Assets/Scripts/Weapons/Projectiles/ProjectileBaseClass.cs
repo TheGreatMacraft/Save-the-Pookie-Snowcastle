@@ -5,7 +5,8 @@ using UnityEngine;
 public abstract class ProjectileBaseClass : MonoBehaviour
 {
     [System.NonSerialized]
-    public float damage;
+    public int damage;
+    public float knockbackStrength;
 
     // Gun That Fired Projectile
     public GunBaseClass ownerGun;
@@ -23,7 +24,7 @@ public abstract class ProjectileBaseClass : MonoBehaviour
         if (collision.gameObject.layer == 7)
         {
             // If Enemy is Hit, Decrease it's Hit Points and Destroy this Projectile 
-            collision.gameObject.GetComponent<EnemyHealth>().DecreaseHealth(damage, ownerGun);
+            WeaponRelatedUtils.HitEnemy(collision.gameObject, ownerGun, damage, transform.position,knockbackStrength);
             Destroy(gameObject);
         }
     }

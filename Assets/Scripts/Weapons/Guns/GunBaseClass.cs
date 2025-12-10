@@ -8,14 +8,12 @@ public abstract class GunBaseClass : WeaponBaseClass
 {
     // Number of Projectiles
     public int projectilesBeforeReload;
-    public int projectilesPerShoot;
+    public int projectilesPerShoot; 
 
     // Time
     public float reloadTime;
-    public float timeBetweenShots;
 
     // Bullet
-    public int projectileDamage;
     public float projectileSpeed;
 
     // Spread
@@ -35,7 +33,6 @@ public abstract class GunBaseClass : WeaponBaseClass
 
     int currentProjectileCount;
     bool isReloading;
-    bool canShoot = true;
 
     // Projectile Tracker
     [System.NonSerialized]
@@ -52,22 +49,16 @@ public abstract class GunBaseClass : WeaponBaseClass
 
     public override void AttackCall(InputAction.CallbackContext context)
     {
+        if (CancelAttackCall(context) || currentProjectileCount == 0) { return; }
+
         base.AttackCall(context);
 
-        if (currentProjectileCount == 0) { return; }
-
-        if(!canShoot) {  return; }
-
         // Spawn Projectiles
-        for(int i=0; i < projectilesPerShoot; i++)
+        for (int i=0; i < projectilesPerShoot; i++)
             SpawnProjectile();
 
         // Reduce Ammunition in Magazine
         currentProjectileCount -= projectilesPerShoot;
-
-        // Start Cooldown
-        canShoot = false;
-        StartCoroutine(CallActionAfterTime(timeBetweenShots,() => canShoot = true));
 
         // Camera Shake
         StartCoroutine(CameraShake.instance.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration));
@@ -87,7 +78,8 @@ public abstract class GunBaseClass : WeaponBaseClass
         
         // Altering Projectile's Damage and Registering This Gun as it's Owner Gun
         ProjectileBaseClass projectileBaseClass = newProjectile.GetComponent<ProjectileBaseClass>();
-        projectileBaseClass.damage = projectileDamage;
+        projectileBaseClass.damage = damage;
+        projectileBaseClass.knockbackStrength = knockbackStrength;
         projectileBaseClass.ownerGun = this;
 
         // Apply Velocity
@@ -108,24 +100,18 @@ public abstract class GunBaseClass : WeaponBaseClass
 
         if(isReloading) { return; }
 
-        // Call Reload after Reload Time
-        isReloading = true;
-        StartCoroutine(CallActionAfterTime(reloadTime,Reload));
+        // Toggle isReloading and call Reload Function in reloadTime
+        Utils.ToggleBoolInTime(
+            v => isReloading = v,
+            isReloading,
+            reloadTime,
+            (Action)Reload);
     }
 
     public void Reload()
     {
         // Set current ammo to max ammo
         currentProjectileCount = projectilesBeforeReload;
-        isReloading = false;
-    }
-
-    // Coroutine that calls Parameter Method after Given Time
-    public IEnumerator CallActionAfterTime(float time, Action action)
-    {
-        yield return new WaitForSeconds(time);
-
-        action();
     }
 
     public override void AbilityCall(InputAction.CallbackContext context)

@@ -19,12 +19,12 @@ public class EgoTripper : GunBaseClass
     {
         base.Start();
 
-        baseDamage = projectileDamage;
+        baseDamage = damage;
     }
 
     private void ResetTemporaryDamage()
     {
-        projectileDamage = baseDamage;
+        damage = baseDamage;
     }
 
     public override void KilledEnemy()
@@ -34,7 +34,7 @@ public class EgoTripper : GunBaseClass
             StopCoroutine(resetCoroutine);
 
         // Double damage, Start Resseting Damage after Time
-        projectileDamage *= 2;
+        damage *= 2;
         resetCoroutine = StartCoroutine(ResetDamageAfterTime());
     }
 
