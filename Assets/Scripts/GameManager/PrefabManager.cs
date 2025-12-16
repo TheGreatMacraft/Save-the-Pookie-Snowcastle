@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +14,15 @@ public class PrefabManager : MonoBehaviour
 
     private Dictionary<string, GameObject> prefabDict;
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+
+        LoadAllPrefabs();
+        FillPrefabDict();
+    }
+
     private void LoadAllPrefabs()
     {
         gingerbreadman = Resources.Load<GameObject>("Prefabs/Enemies/Gingerbreadman");
@@ -29,12 +37,12 @@ public class PrefabManager : MonoBehaviour
     {
         prefabDict = new Dictionary<string, GameObject>
         {
-            {"gingerbreadman", gingerbreadman },
-            {"snowman", snowman },
-            {"gnome", gnome },
-            {"snow golem", snow_golem },
+            { "gingerbreadman", gingerbreadman },
+            { "snowman", snowman },
+            { "gnome", gnome },
+            { "snow golem", snow_golem },
 
-            {"snowball", snowball}
+            { "snowball", snowball }
         };
     }
 
@@ -42,14 +50,5 @@ public class PrefabManager : MonoBehaviour
     public GameObject GetPrefabByName(string name)
     {
         return prefabDict[name];
-    }
-
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-
-        LoadAllPrefabs();
-        FillPrefabDict();
     }
 }

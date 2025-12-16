@@ -10,10 +10,15 @@ kanban-plugin: board
 
 ## Doing
 
+- [ ] Gnome Behavior
 
 
 ## Done
 
+- [ ] AI Base Class
+- [ ] Movement Base Class
+- [ ] Attack Base Class
+- [ ] Gingerbreadman Behavior
 
 
 

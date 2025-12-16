@@ -95,12 +95,10 @@ GameObject:
   - component: {fileID: 1178918657511593997}
   - component: {fileID: 1420041755196969143}
   - component: {fileID: 1328569110755257250}
-  - component: {fileID: 653728977297196023}
-  - component: {fileID: 8317616150283967878}
   - component: {fileID: 2640389048886354279}
   m_Layer: 7
   m_Name: Snowman
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,37 +191,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &653728977297196023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4873204914999720090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45a7cda0fd96fd4da161736ce12f16e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hurtScript: {fileID: 8317616150283967878}
-  moveSpeed: 2
-  rb: {fileID: 1328569110755257250}
---- !u!114 &8317616150283967878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4873204914999720090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267fbea04b2634d4f9b8ea0b4754b5a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hurtDistance: 10
-  hurtCooldown: 5
-  damageAmount: 5
-  nearbyCastle: 0
 --- !u!114 &2640389048886354279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,5 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567f50bf943de9245932cf61742b3945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarSlider: {fileID: 0}
   _currentHealth: 0
   maxHealth: 150

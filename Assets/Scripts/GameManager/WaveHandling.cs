@@ -2,32 +2,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static WaveHandling;
+using Random = UnityEngine.Random;
 
 // Enemy Group ------------
 
-[System.Serializable]
+[Serializable]
 public class EnemyGroup
 {
     public GameObject enemyPrefab;
     public int groupCount;
     public int spawnedEnemies;
-    public (float, float) spawnTimerRange;
     public bool finishedSpawning;
+    public (float, float) spawnTimerRange;
 
     public EnemyGroup(string enemyTypeName, int enemyCount)
     {
-        EnemyType enemyType = EnemyTypes.instance.GetTypeByName(enemyTypeName);
+        var enemyType = EnemyTypes.instance.GetTypeByName(enemyTypeName);
 
-        this.enemyPrefab = enemyType.enemyPrefab;
-        this.groupCount = enemyCount;
-        this.spawnTimerRange = (enemyType.spawnTimerRange.min, enemyType.spawnTimerRange.max);
+        enemyPrefab = enemyType.enemyPrefab;
+        groupCount = enemyCount;
+        spawnTimerRange = (enemyType.spawnTimerRange.min, enemyType.spawnTimerRange.max);
 
-        this.finishedSpawning = false;
-        this.spawnedEnemies = 0;
+        finishedSpawning = false;
+        spawnedEnemies = 0;
     }
 
-    public float GetSpawnTime() { return UnityEngine.Random.Range(spawnTimerRange.Item1, spawnTimerRange.Item2); }
+    public float GetSpawnTime()
+    {
+        return Random.Range(spawnTimerRange.Item1, spawnTimerRange.Item2);
+    }
 
     public IEnumerator SpawnEnemyGroup()
     {
@@ -37,13 +40,14 @@ public class EnemyGroup
             Spawner.instance.Spawn(enemyPrefab);
             spawnedEnemies++;
         }
+
         finishedSpawning = true;
     }
 }
 
 // Subwave ------------
 
-[System.Serializable]
+[Serializable]
 public class Subwave
 {
     public EnemyGroup[] enemyGroups;
@@ -56,9 +60,8 @@ public class Subwave
     public bool AllFinishedSpawning()
     {
         foreach (var group in enemyGroups)
-        {
-            if(!group.finishedSpawning) return false;
-        }
+            if (!group.finishedSpawning)
+                return false;
 
         return true;
     }
@@ -68,12 +71,13 @@ public class Subwave
 
 public class Wave
 {
-    public Subwave[] subwaves;
     public float graceTime;
+    public Subwave[] subwaves;
+
     public Wave(Subwave[] subwaves, (float, float) graceTimeRange)
-    {  
+    {
         this.subwaves = subwaves;
-        graceTime = UnityEngine.Random.Range(graceTimeRange.Item1,graceTimeRange.Item2);
+        graceTime = Random.Range(graceTimeRange.Item1, graceTimeRange.Item2);
     }
 }
 
@@ -83,12 +87,11 @@ public class WaveHandling : MonoBehaviour
 {
     public static WaveHandling instance;
 
+    public bool _isWave;
+
     private TextAsset jsonFile;
     public Wave[] waves;
 
-    public event Action<bool> onWaveStateChanged;
-
-    public bool _isWave;
     public bool isWave
     {
         get => _isWave;
@@ -102,16 +105,29 @@ public class WaveHandling : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+
+        isWave = false;
+        waves = LoadWavesFromFile();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(StartWave(0));
+    }
+
+    public event Action<bool> onWaveStateChanged;
+
     //Coroutine Handling ------------
     public IEnumerator StartWave(int waveIndex)
     {
         isWave = true;
-        Wave wave = waves[waveIndex];
-        
-        foreach (Subwave subwave in wave.subwaves)
-        {
-            yield return StartCoroutine(StartSubwave(subwave));
-        }
+        var wave = waves[waveIndex];
+
+        foreach (var subwave in wave.subwaves) yield return StartCoroutine(StartSubwave(subwave));
         EndWave(waveIndex);
     }
 
@@ -122,7 +138,6 @@ public class WaveHandling : MonoBehaviour
 
         while (!subwave.AllFinishedSpawning() || !EnemyTracker.instance.anyElementsRegistred())
             yield return null;
-
     }
 
     private void EndWave(int waveIndex)
@@ -141,73 +156,58 @@ public class WaveHandling : MonoBehaviour
 
     private Wave[] LoadWavesFromFile()
     {
-        List<Wave> waves = new List<Wave>();
+        var waves = new List<Wave>();
 
         jsonFile = Resources.Load<TextAsset>("JSON_data/wave_data");
-        WaveList data = JsonUtility.FromJson<WaveList>(jsonFile.text);
+        var data = JsonUtility.FromJson<WaveList>(jsonFile.text);
 
-        foreach(var wave in data.waves)
+        foreach (var wave in data.waves)
         {
-            List<Subwave> subwaves = new List<Subwave>();
-            foreach(var subwave in wave.subwaves)
+            var subwaves = new List<Subwave>();
+            foreach (var subwave in wave.subwaves)
             {
-                List<EnemyGroup> enemyGroups = new List<EnemyGroup>();
-                foreach(var enemyGroup in subwave.enemyGroups)
-                {
+                var enemyGroups = new List<EnemyGroup>();
+                foreach (var enemyGroup in subwave.enemyGroups)
                     enemyGroups.Add(new EnemyGroup(enemyGroup.enemyType, enemyGroup.enemyCount));
-                }
                 subwaves.Add(new Subwave(enemyGroups.ToArray()));
             }
-            waves.Add(new Wave(subwaves.ToArray(),(wave.graceTimeRange.min,wave.graceTimeRange.max)));
+
+            waves.Add(new Wave(subwaves.ToArray(), (wave.graceTimeRange.min, wave.graceTimeRange.max)));
         }
 
         return waves.ToArray();
     }
 
-    private void Awake()
-    {
-        if(instance == null)
-            instance = this;
-
-        isWave = false;
-        waves = LoadWavesFromFile();
-    }
-
-    private void Start()
-    {
-        StartCoroutine(StartWave(0));
-    }
-
     // Json Helper Classes
 
-    [System.Serializable]
+    [Serializable]
     public class FloatRange
     {
         public float min;
         public float max;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class enemyGroupJson
     {
         public string enemyType;
         public int enemyCount;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class SubwaveJson
     {
         public enemyGroupJson[] enemyGroups;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class WaveJson
     {
         public SubwaveJson[] subwaves;
         public FloatRange graceTimeRange;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class WaveList
     {
         public WaveJson[] waves;

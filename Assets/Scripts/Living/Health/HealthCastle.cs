@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class HealthCastle : BaseHealth
+public class HealthCastle : HealthBase
 {
     public static HealthCastle Instance;
 
@@ -12,6 +7,7 @@ public class HealthCastle : BaseHealth
         if (Instance == null)
             Instance = this;
     }
+
     public override void Die()
     {
         //Game Over

@@ -13,7 +13,46 @@ public class CameraCursorMove : MonoBehaviour
 
     public Vector2 newCursorScreenPos;
 
-    Vector2 GetMouseUIPosition(Vector2 mouseScreenPos)
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
+
+    private void Update()
+    {
+        // Crosshair UI
+        if (crosshairImage && crosshairCanvas)
+        {
+            var mouseScreenPos = Mouse.current.position.ReadValue();
+            newCursorScreenPos = mouseScreenPos;
+            newCursorScreenPos = LimitToScreenResolution(newCursorScreenPos);
+            var newCursorWorldPos = GetMouseUIPosition(newCursorScreenPos);
+            crosshairImage.anchoredPosition = newCursorWorldPos;
+        }
+    }
+
+    //Move Camera Based on Cursor Position - Microsoft Copilot (Inspired by Enter the Gungeon)
+    private void LateUpdate()
+    {
+        var playerWorldPos = transform.position;
+
+        var playerDepth = playerCamera.WorldToScreenPoint(playerWorldPos).z;
+        var mouseWorldPos = playerCamera.ScreenToWorldPoint(
+            new Vector3(newCursorScreenPos.x, newCursorScreenPos.y, playerDepth)
+        );
+
+        var playerToMouse = mouseWorldPos - playerWorldPos;
+
+        var fraction = 1f / fractionOfCursorPlayerVector;
+        var offset = playerToMouse * fraction;
+
+        var newCameraWorldPos = playerWorldPos + offset;
+        newCameraWorldPos.z = -1f;
+
+        playerCamera.transform.position = newCameraWorldPos;
+    }
+
+    private Vector2 GetMouseUIPosition(Vector2 mouseScreenPos)
     {
         Vector2 localPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -41,43 +80,5 @@ public class CameraCursorMove : MonoBehaviour
             cursorScreenPos.y = 0;
 
         return cursorScreenPos;
-    }
-
-    private void Start()
-    {
-        Cursor.visible = false;
-    }
-    private void Update()
-    {
-        // Crosshair UI
-        if (crosshairImage && crosshairCanvas)
-        {
-            Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
-            newCursorScreenPos = mouseScreenPos;
-            newCursorScreenPos = LimitToScreenResolution(newCursorScreenPos);
-            Vector2 newCursorWorldPos = GetMouseUIPosition(newCursorScreenPos);
-            crosshairImage.anchoredPosition = newCursorWorldPos;
-        }
-    }
-
-    //Move Camera Based on Cursor Position - Microsoft Copilot (Inspired by Enter the Gungeon)
-    private void LateUpdate()
-    {
-        Vector3 playerWorldPos = transform.position;
-
-        float playerDepth = playerCamera.WorldToScreenPoint(playerWorldPos).z;
-        Vector3 mouseWorldPos = playerCamera.ScreenToWorldPoint(
-            new Vector3(newCursorScreenPos.x, newCursorScreenPos.y, playerDepth)
-        );
-
-        Vector3 playerToMouse = mouseWorldPos - playerWorldPos;
-
-        float fraction = 1f / fractionOfCursorPlayerVector;
-        Vector3 offset = playerToMouse * fraction;
-
-        Vector3 newCameraWorldPos = playerWorldPos + offset;
-        newCameraWorldPos.z = -1f;
-
-        playerCamera.transform.position = newCameraWorldPos; 
     }
 }

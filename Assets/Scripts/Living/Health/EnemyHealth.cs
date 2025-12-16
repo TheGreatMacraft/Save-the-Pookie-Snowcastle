@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class EnemyHealth : BaseHealth
+public class EnemyHealth : HealthBase
 {
     public override void Start()
     {
@@ -11,13 +6,10 @@ public class EnemyHealth : BaseHealth
         EnemyTracker.instance.Register(gameObject);
     }
 
-    public override void Die(WeaponBaseClass weapon = null)
+    public override void Die(WeaponBase attackingweapon = null)
     {
         // Notify Weapon an Enemy was Killed
-        if(weapon != null)
-        {
-            weapon.KilledEnemy();
-        }
+        if (attackingweapon != null) attackingweapon.KilledEnemy();
 
         // Remove Enemy from Tracker and Self Destruct
         EnemyTracker.instance.Unregister(gameObject);

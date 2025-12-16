@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MapSize : MonoBehaviour
@@ -8,22 +6,22 @@ public class MapSize : MonoBehaviour
 
     public GameObject gameMap;
 
-    public (float, float) GetMapDimensions()
-    {
-        SpriteRenderer sr = gameMap.GetComponent<SpriteRenderer>();
-
-        Vector2 spriteSize = sr.size;
-        Vector3 scale = gameMap.transform.lossyScale;
-
-        float mapWidth = spriteSize.x * scale.x;
-        float mapHeight = spriteSize.y * scale.y;
-
-        return (mapWidth, mapHeight);
-    }
-
     private void Start()
     {
         if (instance == null)
             instance = this;
+    }
+
+    public (float, float) GetMapDimensions()
+    {
+        var sr = gameMap.GetComponent<SpriteRenderer>();
+
+        var spriteSize = sr.size;
+        var scale = gameMap.transform.lossyScale;
+
+        var mapWidth = spriteSize.x * scale.x;
+        var mapHeight = spriteSize.y * scale.y;
+
+        return (mapWidth, mapHeight);
     }
 }

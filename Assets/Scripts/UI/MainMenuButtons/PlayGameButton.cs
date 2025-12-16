@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayGameButton : OnButtonClickBase<PlayGameButton>
@@ -11,5 +8,4 @@ public class PlayGameButton : OnButtonClickBase<PlayGameButton>
     {
         SceneManager.LoadScene(sceneName);
     }
-
 }

@@ -22,7 +22,47 @@
             }
           },
           {
+            "id": "463fe6906562b0c4",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "Base Board.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    false,
+                    false
+                  ]
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "Base Board"
+            }
+          },
+          {
             "id": "07a6f6b346b874e8",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "Progress Boards/Enemy.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    false,
+                    false
+                  ]
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "Enemy"
+            }
+          },
+          {
+            "id": "75c484cd4e2d2865",
             "type": "leaf",
             "state": {
               "type": "kanban",
@@ -40,9 +80,21 @@
               "icon": "lucide-trello",
               "title": "Weapons"
             }
+          },
+          {
+            "id": "7286703756ba3468",
+            "type": "leaf",
+            "state": {
+              "type": "bpmn-view",
+              "state": {
+                "file": "Media/Diagrams/GnomeBehaviourPattern.bpmn"
+              },
+              "icon": "lucide-file",
+              "title": "GnomeBehaviourPattern"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -192,11 +244,12 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "07a6f6b346b874e8",
+  "active": "330e0d1d761434c5",
   "lastOpenFiles": [
-    "Base Board.md",
-    "GDD.md",
     "Progress Boards/Weapons.md",
+    "Base Board.md",
+    "Progress Boards/Enemy.md",
+    "GDD.md",
     "Media/Diagrams/GunBaseFunctionality.bpmn",
     "Media/EmptyDiagram.bpmn",
     "Media/Pasted image 20251207183351.png",
@@ -211,7 +264,6 @@
     "Progress Boards/Art.md",
     "Progress Boards/Building System.md",
     "Progress Boards/Multiplayer.md",
-    "Progress Boards/Enemy.md",
     "Progress Boards",
     "Media/snowman wizard.jpg",
     "Media/Nepotrjeno 524434.crdownload",

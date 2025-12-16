@@ -1,13 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public abstract class TrackerBase<T> : MonoBehaviour where T : TrackerBase<T>
+public abstract class TrackerBase<T> : TrackerBase where T : TrackerBase<T>
 {
     public static T instance { get; private set; }
 
-    public List<GameObject> registeredElements = new List<GameObject>();
+    protected virtual void Awake()
+    {
+        if (instance == null)
+            instance = this as T;
+    }
+}
+
+public abstract class TrackerBase : MonoBehaviour
+{
+    public List<GameObject> registeredElements = new();
 
     public void Register(GameObject obj)
     {
@@ -19,11 +26,8 @@ public abstract class TrackerBase<T> : MonoBehaviour where T : TrackerBase<T>
         registeredElements.Remove(obj);
     }
 
-    public bool anyElementsRegistred() { return registeredElements.Count > 0; }
-
-    protected virtual void Awake()
+    public bool anyElementsRegistred()
     {
-        if (instance == null)
-            instance = this as T;
+        return registeredElements.Count > 0;
     }
 }

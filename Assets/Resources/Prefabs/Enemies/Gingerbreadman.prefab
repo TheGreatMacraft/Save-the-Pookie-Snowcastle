@@ -94,13 +94,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1178918657511593997}
   - component: {fileID: 1420041755196969143}
-  - component: {fileID: 1328569110755257250}
-  - component: {fileID: 653728977297196023}
-  - component: {fileID: 8317616150283967878}
+  - component: {fileID: 6594727842966281435}
   - component: {fileID: 1890682114547886997}
+  - component: {fileID: 8259829382549930585}
+  - component: {fileID: 7943939316022822752}
+  - component: {fileID: 7809430600219051998}
   m_Layer: 7
   m_Name: Gingerbreadman
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,7 +167,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
---- !u!50 &1328569110755257250
+--- !u!50 &6594727842966281435
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -191,39 +192,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &653728977297196023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4873204914999720090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45a7cda0fd96fd4da161736ce12f16e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hurtScript: {fileID: 8317616150283967878}
-  moveSpeed: 5
-  rb: {fileID: 1328569110755257250}
---- !u!114 &8317616150283967878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4873204914999720090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267fbea04b2634d4f9b8ea0b4754b5a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hurtDistance: 0
-  hurtCooldown: 3
-  damageAmount: 1
-  nearbyCastle: 0
 --- !u!114 &1890682114547886997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,5 +206,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567f50bf943de9245932cf61742b3945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarSlider: {fileID: 0}
   _currentHealth: 0
   maxHealth: 60
+--- !u!114 &8259829382549930585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873204914999720090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 869b4d95d319427d8ca71587337c8323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pursuingTargetType: 0
+  currentState: 0
+  _currentTarget: {fileID: 0}
+--- !u!114 &7943939316022822752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873204914999720090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd7c66713fa4d57a2683269bebf6f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDistance: 5
+  attackCooldown: 5
+  damage: 5
+  attackRadious: 0
+  attackPoint: {fileID: 1178918657511593997}
+  AIBaseScript: {fileID: 8259829382549930585}
+  executingAttack: 0
+--- !u!114 &7809430600219051998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873204914999720090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9d8a4297d7477a9e3b0916445b56f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 20
+  enemyRb: {fileID: 6594727842966281435}
+  AIBaseScript: {fileID: 8259829382549930585}
+  isKnockedback: 0

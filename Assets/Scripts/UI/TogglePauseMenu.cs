@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TogglePauseMenu : MonoBehaviour
@@ -10,7 +8,7 @@ public class TogglePauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(pauseMenuButton))
+        if (Input.GetKeyDown(pauseMenuButton))
             pauseMenuCanvas.SetActive(!pauseMenuCanvas.activeInHierarchy);
     }
 }

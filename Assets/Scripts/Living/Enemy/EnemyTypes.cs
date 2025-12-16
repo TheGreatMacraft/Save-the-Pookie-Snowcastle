@@ -1,26 +1,24 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using static EnemyTypes;
 
 // Json Helper Classes
 
-[System.Serializable]
+[Serializable]
 public class FloatRange
 {
     public float min;
     public float max;
 }
 
-[System.Serializable]
+[Serializable]
 public class EnemyTypeJson
 {
     public string typeName;
     public FloatRange spawnTimeRange;
 }
 
-[System.Serializable]
+[Serializable]
 public class EnemyTypeList
 {
     public EnemyTypeJson[] enemyTypes;
@@ -28,7 +26,7 @@ public class EnemyTypeList
 
 
 // Enemy Type
-[System.Serializable]
+[Serializable]
 public class EnemyType
 {
     public GameObject enemyPrefab;
@@ -36,7 +34,7 @@ public class EnemyType
 
     public EnemyType(string enemyTypeName, FloatRange spawnTimerRange)
     {
-        this.enemyPrefab = PrefabManager.instance.GetPrefabByName(enemyTypeName);
+        enemyPrefab = PrefabManager.instance.GetPrefabByName(enemyTypeName);
         this.spawnTimerRange = spawnTimerRange;
     }
 }
@@ -51,30 +49,30 @@ public class EnemyTypes : MonoBehaviour
 
     private TextAsset jsonFile;
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+
+        ReadEnemyTypeDictFromFile();
+    }
+
     private void ReadEnemyTypeDictFromFile()
     {
         jsonFile = Resources.Load<TextAsset>("JSON_data/enemy_type_data");
-        EnemyTypeList data = JsonUtility.FromJson<EnemyTypeList>(jsonFile.text);
+        var data = JsonUtility.FromJson<EnemyTypeList>(jsonFile.text);
 
         enemyTypeDict = new Dictionary<string, EnemyType>();
 
         foreach (var enemyType in data.enemyTypes)
         {
-            EnemyType type = new EnemyType(enemyType.typeName, enemyType.spawnTimeRange);
+            var type = new EnemyType(enemyType.typeName, enemyType.spawnTimeRange);
             enemyTypeDict[enemyType.typeName] = type;
         }
     }
 
-    public EnemyType GetTypeByName(string name)
+    public EnemyType GetTypeByName(string typeName)
     {
-        return enemyTypeDict[name];
-    }
-
-    private void Awake()
-    {
-        if(instance == null)
-            instance = this;
-
-        ReadEnemyTypeDictFromFile();
+        return enemyTypeDict[typeName];
     }
 }

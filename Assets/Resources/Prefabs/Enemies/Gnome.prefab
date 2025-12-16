@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 8546427801995211927}
   m_Layer: 7
   m_Name: Gnome
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567f50bf943de9245932cf61742b3945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarSlider: {fileID: 0}
   _currentHealth: 0
   maxHealth: 75
 --- !u!114 &8546427801995211927
@@ -218,11 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c94295d6fc459e42b0a4b468acd6ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthScript: {fileID: 6880895475422237818}
-  rb: {fileID: 737456926014989670}
-  movementSpeed: 5
-  attackCooldown: 3
-  target: {fileID: 0}
-  isActing: 0
-  nearbyTarget: 0
-  scared: 0
+  pursuingTargetType: 0
+  currentState: 0
+  _currentTarget: {fileID: 0}

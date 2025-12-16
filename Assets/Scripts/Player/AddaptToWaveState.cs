@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AddaptToWaveState : MonoBehaviour
 {
     public GameObject weapon;
-    public WeaponBaseClass weaponScript;
+    public WeaponBase playerWeaponScript;
 
     public BuildingDefenses buildingDefensesScript;
 
     private void Start()
     {
         // Setup Weapon Script
-        if(weaponScript == null)
+        if (playerWeaponScript == null)
         {
-            weaponScript = GetComponentInChildren<WeaponBaseClass>();
-            weapon = weaponScript.gameObject;
+            playerWeaponScript = GetComponentInChildren<WeaponBase>();
+            weapon = playerWeaponScript.gameObject;
         }
 
         // Subscribe to Even OnWaveStateChanged - Called after A Wave and at Beggining of New Wave
@@ -26,11 +24,11 @@ public class AddaptToWaveState : MonoBehaviour
     {
         // Set Weapon Activity
         weapon.SetActive(isWave);
-        weaponScript.enabled = isWave;
+        playerWeaponScript.enabled = isWave;
 
         // Set Building Script
         buildingDefensesScript.enabled = !isWave;
-        if(!isWave)
+        if (!isWave)
             buildingDefensesScript.StopBuilding();
     }
 }

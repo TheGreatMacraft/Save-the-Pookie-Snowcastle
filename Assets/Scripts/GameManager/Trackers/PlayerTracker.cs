@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerTracker : TrackerBase<PlayerTracker> { }
+public class PlayerTracker : TrackerBase<PlayerTracker>
+{
+}
