@@ -10,8 +10,10 @@ public class EgoTripper : GunBase
 
     private Coroutine resetCoroutine;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         SetupComponents();
     }
 

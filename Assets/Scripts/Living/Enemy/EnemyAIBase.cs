@@ -51,7 +51,7 @@
      protected virtual void Update()
      {
          // Set Current State to Attacking if Near Enemy, or Pursuing if Not
-         if(!attackScript.executingAttack)
+         if(!attackScript.weapon.actionModules["Attack"].canAct)
             currentState = NearbyTarget() ? EnemyState.Attacking : EnemyState.Pursuing;
      }
 
@@ -87,6 +87,6 @@
      public bool NearbyTarget()
      {
          var distanceToTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
-         return  distanceToTarget <= attackScript.enemyAttackScript.attackDistance;
+         return  distanceToTarget <= attackScript.weapon.weaponRange;
      }
  }

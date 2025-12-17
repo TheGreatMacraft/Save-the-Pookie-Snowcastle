@@ -1,14 +1,23 @@
 using System;
-using UnityEngine;
 
-public class WeaponActionModule
+// Helper Class
+[System.Serializable]
+public class ActionModuleConfig
+{
+    public string name;
+    public float cooldown;
+    public bool callAfterCooldown;
+}
+
+// Main Module Class
+public class ActionModule
 {
     public bool canAct = true;
     public float cooldown;
     public bool callActionAfterCooldown;
     public Action action;
 
-    public WeaponActionModule( float cooldown, bool callActionAfterCooldown, Action action)
+    public ActionModule( float cooldown, bool callActionAfterCooldown, Action action)
     {
         this.cooldown = cooldown;
         this.callActionAfterCooldown = callActionAfterCooldown;

@@ -839,6 +839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gingerbreadman
       objectReference: {fileID: 0}
+    - target: {fileID: 4873204914999720090, guid: 2aeaf820935af7d42b06b246c62985f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7809430600219051998, guid: 2aeaf820935af7d42b06b246c62985f5, type: 3}
       propertyPath: moveSpeed
       value: 5
@@ -1065,6 +1069,7 @@ GameObject:
   - component: {fileID: 512309346}
   - component: {fileID: 512309348}
   - component: {fileID: 512309349}
+  - component: {fileID: 512309350}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1221,7 +1226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
-  weaponScript: {fileID: 0}
+  playerWeaponScript: {fileID: 0}
   buildingDefensesScript: {fileID: 512309342}
 --- !u!114 &512309345
 MonoBehaviour:
@@ -1347,6 +1352,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
   playerCamera: {fileID: 0}
+--- !u!114 &512309350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512309336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1103732bcb024417b7eafe6202ea274b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &516268824
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,12 +2232,64 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: targetTag
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: weaponRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: damageAmount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: knockbackDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
       propertyPath: knockbackStrength
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
       propertyPath: timeBetweenAttacks
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: moduleConfigs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: moduleConfigs.Array.data[0].name
+      value: Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: moduleConfigs.Array.data[1].name
+      value: Reload
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: moduleConfigs.Array.data[2].name
+      value: Ability
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: moduleConfigs.Array.data[0].cooldown
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: moduleConfigs.Array.data[1].cooldown
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: moduleConfigs.Array.data[2].cooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: moduleConfigs.Array.data[1].callAfterCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985401089645344844, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
+      propertyPath: moduleConfigs.Array.data[2].callAfterCooldown
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5595582209515003903, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
       propertyPath: m_Name

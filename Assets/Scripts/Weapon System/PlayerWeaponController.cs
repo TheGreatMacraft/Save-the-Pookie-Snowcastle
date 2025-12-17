@@ -9,7 +9,7 @@ public class PlayerWeaponController : MonoBehaviour
     
     private WeaponBase weapon;
 
-    private void Awake()
+    private void Start()
     {
         SetupComponents();
         

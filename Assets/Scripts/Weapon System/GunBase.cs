@@ -14,10 +14,6 @@ public abstract class GunBase : WeaponBase
     // Spread
     public float spread;
 
-    // Camera Shake
-    public float cameraShakeMagnitude;
-    public float cameraShakeDuration;
-
     // Variables to be Assigned in Inspector
     public GameObject projectilePrefab;
     public GameObject gunRotationAnchor;
@@ -32,16 +28,18 @@ public abstract class GunBase : WeaponBase
     private Vector2 shootDirection;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         // Set Ammo in Magazine to Max Allowed
         currentProjectileCount = projectilesBeforeReload;
     }
 
     public void Attack()
     {
-        // Cancel if no Ammo in Magazine
-        if (currentProjectileCount == 0) return;
+        // Cancel if no Ammo in Magazine or Is Reloading
+        if (currentProjectileCount == 0 || !actionModules["Reload"].canAct) return;
         
         for (var i = 0; i < projectilesPerShoot; i++)
             ShootingComponent.SpawnProjectile(
@@ -56,9 +54,6 @@ public abstract class GunBase : WeaponBase
         
         // Reduce Ammunition in Magazine
         currentProjectileCount -= projectilesPerShoot;
-        
-        // Camera Shake
-        StartCoroutine(CameraShake.instance.ShakeCamera(cameraShakeMagnitude, cameraShakeDuration));
     }
 
     public void Reload()
@@ -68,6 +63,11 @@ public abstract class GunBase : WeaponBase
 
         // Set current ammo to max ammo
         currentProjectileCount = projectilesBeforeReload;
+    }
+
+    public bool NeedsReloading()
+    {
+        return currentProjectileCount == 0;
     }
 
     protected override Dictionary<string, Action> WeaponActionFunctions()

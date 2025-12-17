@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public abstract class EnemyAttackBase : MonoBehaviour
     public EnemyAIBase AIBaseScript;
     
     // Variables used in Script
-    public WeaponBase weaponScript;
+    public WeaponBase weapon;
     protected void Start()
     {
         SetupComponents();
@@ -22,54 +23,35 @@ public abstract class EnemyAttackBase : MonoBehaviour
             AIBaseScript = GetComponent<EnemyAIBase>();
         
         // Weapon Script
-        if (weaponScript == null)
-            weaponScript = GetComponent<WeaponBase>();
+        weapon = GetComponentInChildren<WeaponBase>();
     }
 
     protected void Update()
     {
-        if(AIBaseScript.currentTarget == null) {return;}
-
-        // Attempt Attack, if Current State is Attacking
-        if (AIBaseScript.currentState == EnemyState.Attacking)
-        {
-           AttemptAttacking();
-        }
+        // Cancel if:
+        if(AIBaseScript.currentTarget == null   // Target is Null
+           || AIBaseScript.currentState != EnemyState.Attacking // Current State isn't Attacking
+           ) {return;}
+        
+        if(weapon is GunBase gunWeapon)
+            GunLogic(gunWeapon);
+        
+        else if(weapon is MeleeBase meleeWeapon)
+            MeleeLogic(meleeWeapon);
     }
 
-    public virtual void AttemptAttacking()
+    protected void GunLogic(GunBase gunWeapon)
     {
-        // Attack After Cooldown, toggle executingAttack
-        Utils.ToggleBoolInTime(
-            v => executingAttack = v,
-            executingAttack,
-            enemyAttackScript.,
-            (Action)TriggerAttack);
+        // If can Attack
+        gunWeapon.actionModules["Attack"].ActionCall();
+        
+        // If magazine empty reload
+        if(gunWeapon.NeedsReloading())
+            gunWeapon.actionModules["Reload"].ActionCall();
     }
-
-    protected void TriggerAttack()
+    
+    protected void MeleeLogic(MeleeBase meleeWeapon)
     {
-        // Get Colliders in Attack Radious
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRadious);
         
-        // Attack Appropriate Colliders
-        foreach (Collider2D hitCollider in hitColliders)
-        {
-            if(hitCollider.CompareTag(AIBaseScript.pursuingTargetTag))
-                AttackObject(hitCollider.gameObject);
-        }
-        
-        // Set State
-        AIBaseScript.currentState = AIBaseScript.NearbyTarget() ? EnemyState.Attacking : EnemyState.Pursuing;
-    }
-
-    public void AttackObject(GameObject target)
-    {
-        target.GetComponent<HealthBase>().DecreaseHealth(damage);
-        
-        if (target.CompareTag("Player"))
-        {
-            //INSERT: Display Hurt Animation
-        }
     }
 }

@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public abstract class MeleeBase : WeaponBase
 {
     // Variables to be Assigned in Inspector
-    public float hurtRadius;
     public string opponentTag;
 
     // Variables used in Script
@@ -18,7 +17,7 @@ public abstract class MeleeBase : WeaponBase
     {
         // Get all Opponents In Range
         GameObject[] opponentsInRange = 
-            Utils.GetObjectsInRadiousWithTag(attackPoint.position, hurtRadius,opponentTag);
+            Utils.GetObjectsInRadiousWithTag(attackPoint.position, weaponRange,opponentTag);
 
         // Hit Every Enemy In Range
         HitInRadious(opponentsInRange);

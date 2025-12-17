@@ -2,20 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-
-public class WeaponActionModuleConfig
-{
-    public string name;
-    public float cooldown;
-    public bool callAfterCooldown;
-}
-
 public abstract class WeaponBase : MunitionBase
 {
-    [SerializeField] private List<WeaponActionModuleConfig> moduleConfigs;
+    public float weaponRange; // Used by Entities, as Minimal Distance for Attack
     
-    public Dictionary<string, WeaponActionModule> actionModules = new();
+    [SerializeField] private List<ActionModuleConfig> moduleConfigs;
+    
+    public Dictionary<string, ActionModule> actionModules = new();
 
     protected abstract Dictionary<string, Action> WeaponActionFunctions();
 
@@ -27,7 +20,7 @@ public abstract class WeaponBase : MunitionBase
         {
             if (actions.TryGetValue(config.name, out var action))
             {
-                actionModules[config.name] = new WeaponActionModule(
+                actionModules[config.name] = new ActionModule(
                 config.cooldown,
                 config.callAfterCooldown,
                 action);
