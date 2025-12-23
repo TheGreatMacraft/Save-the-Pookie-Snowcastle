@@ -1,44 +1,27 @@
- using System;
- using UnityEngine;
+using UnityEngine;
 
  public abstract class EnemyAIBase : MonoBehaviour
  {
-     // Assigned in Inspector
-     
-     
      // External Objects Necessary
      protected EnemyAttackBase attackScript;
      protected EnemyMovementBase movementScript;
      
+     protected Rigidbody2D enemyRb;
+     protected Collider2D currentTargetCollider;
+     
      // Variables used in Script
      public string pursuingTargetTag;
-     public EnemyState currentState;
      
-     // Current Target reference
-     public GameObject _currentTarget;
-     
-     // When Current Target becomes Null, Find New Target
-     public GameObject currentTarget
-     {
-         get => _currentTarget;
-         set
-         {
-             if (_currentTarget != value)
-             {
-                 _currentTarget = value;
+     [field: SerializeField]
+     public EnemyState currentState { get; private set; }
+     public bool stateLocked;
 
-                 if (ShouldChangeCurrentTarget(_currentTarget))
-                 {
-                     SetNewTarget();
-                 }
-             }
-         }
-     }
+     public GameObject currentTarget;
      
      // The condition under which the Current Target Should Be Replaced 
-     protected virtual bool ShouldChangeCurrentTarget(GameObject newCurrentValue)
+     protected virtual bool ShouldChangeCurrentTarget(GameObject value)
      {
-         return (newCurrentValue == null);
+         return (value == null);
      }
      
      protected virtual void Start()
@@ -51,8 +34,13 @@
      protected virtual void Update()
      {
          // Set Current State to Attacking if Near Enemy, or Pursuing if Not
-         if(!attackScript.weapon.actionModules["Attack"].canAct)
-            currentState = NearbyTarget() ? EnemyState.Attacking : EnemyState.Pursuing;
+         if(NearbyTarget())
+             RequestStateChange(EnemyState.Attacking);
+         else
+             RequestStateChange(EnemyState.Pursuing);
+         
+         if(ShouldChangeCurrentTarget(currentTarget))
+             SetNewTarget();
      }
 
      protected virtual void SetupComponents()
@@ -64,29 +52,43 @@
          // Movement Base Script
          if (movementScript == null)
              movementScript = GetComponent<EnemyMovementBase>();
+         
+         // Rigidbody
+         if (enemyRb == null)
+             enemyRb = GetComponent<Rigidbody2D>();
      }
      
      // Replace Current Target
-     public void SetNewTarget(GameObject target = null)
+     public virtual void SetNewTarget(GameObject target = null)
      {
          currentTarget = target != null ? target : FindNewTarget();
+         
+         currentTargetCollider = currentTarget.GetComponent<Collider2D>();
      }
      
      // Find New Target
      protected virtual GameObject FindNewTarget()
      {
-         return FilterAppropriateTargets(GameObject.FindGameObjectsWithTag(pursuingTargetTag));
+         return GameObject.FindGameObjectWithTag(pursuingTargetTag);
      }
 
-     protected virtual GameObject FilterAppropriateTargets(GameObject[] targets)
+
+     public void RequestStateChange(EnemyState newState)
      {
-         return targets[0];
+         if(stateLocked) {return;}
+         
+         currentState = newState;
+     }
+
+     public void LockState(float duration)
+     {
+         Utils.ToggleBoolInTime(v => stateLocked = v, stateLocked, duration);
      }
 
      // Check if Current Target is within Attack Distance
      public bool NearbyTarget()
      {
          var distanceToTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
-         return  distanceToTarget <= attackScript.weapon.weaponRange;
+         return  distanceToTarget <= attackScript.actionHandler.actionRange || enemyRb.IsTouching(currentTargetCollider);
      }
  }

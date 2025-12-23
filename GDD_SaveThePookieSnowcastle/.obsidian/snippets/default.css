@@ -1,0 +1,51 @@
+.callout[data-callout="npc"] {
+    --callout-color: 72, 107, 177;
+    --callout-icon: lucide-user;
+}
+
+.callout[data-callout="enemy"] {
+    --callout-color: 210, 55, 55;
+    --callout-icon: lucide-skull;
+}
+
+.callout[data-callout="treasure"] {
+    --callout-color: 244, 211, 47;
+    --callout-icon: lucide-crown;
+}
+
+.callout[data-callout="scroll"] {
+    --callout-color: 108, 72, 199;
+    --callout-icon: lucide-scroll;
+}
+
+.callout[data-callout="talk"] {
+    --callout-color: 46, 133, 58;
+    --callout-icon: lucide-speech;
+}
+
+.callout[data-callout="fire"] {
+    --callout-color: 204, 91, 53;
+    --callout-icon: lucide-flame;
+}
+
+.callout[data-callout="mischief"] {
+    --callout-color: 181, 67, 132;
+    --callout-icon: lucide-handshake;
+}
+
+.callout[data-callout="sun"] {
+    --callout-color: 255, 251, 43;
+    --callout-icon: lucide-sun;
+}
+
+.callout[data-callout="music"] {
+    --callout-color: 196, 138, 57;
+    --callout-icon: lucide-guitar;
+}
+
+i, em, span.cm-em {
+color: #50648c; }
+
+body {
+    --bold-color: #8f5b39;
+}

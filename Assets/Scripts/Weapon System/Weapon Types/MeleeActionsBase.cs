@@ -4,20 +4,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class MeleeBase : WeaponBase
+public class MeleeActionsBase : AttackActions
 {
-    // Variables to be Assigned in Inspector
-    public string opponentTag;
-
     // Variables used in Script
     public Transform attackPoint;
-    
 
-    public void Attack()
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        SetupComponents();
+    }
+
+    protected virtual void SetupComponents()
+    {
+        // Attack Point
+        if(attackPoint  == null)
+            attackPoint = transform;
+    }
+
+    protected override void Attack()
     {
         // Get all Opponents In Range
         GameObject[] opponentsInRange = 
-            Utils.GetObjectsInRadiousWithTag(attackPoint.position, weaponRange,opponentTag);
+            Utils.GetObjectsInRadiousWithTag(attackPoint.position, actionRange, hitEssentials.targetTag);
 
         // Hit Every Enemy In Range
         HitInRadious(opponentsInRange);
@@ -31,20 +41,9 @@ public abstract class MeleeBase : WeaponBase
         foreach (var opponent in opponentsInRange)
             WeaponComponent.HitTarget(
                 opponent,
-                damageAmount,
                 transform.position,
-                knockbackStrength,
-                knockbackDuration,
                 this,
-                opponentTag
+                hitEssentials
             );
-    }
-
-    protected override Dictionary<string, Action> WeaponActionFunctions()
-    {
-        return new Dictionary<string, Action>()
-        {
-            { "Attack", Attack }
-        };
     }
 }

@@ -9,7 +9,7 @@ public class RotateToFaceCursor : MonoBehaviour
     private void Start()
     {
         // Get Weapon Transform from Child Object with Weapon Script
-        weapon = GetComponentInChildren<WeaponBase>().transform;
+        weapon = GetComponentInChildren<AttackActions>().transform;
         
         // Get Camera from Player
         playerCamera = GetComponentInChildren<Camera>();
@@ -19,11 +19,6 @@ public class RotateToFaceCursor : MonoBehaviour
     {
         // INSERT: Flip Player Sprite to Face Mouse Cursor
 
-        RotateWeaponToFaceCursor();
-    }
-
-    private void RotateWeaponToFaceCursor()
-    {
         weapon.transform.rotation = RotationToPointCursor();
     }
 

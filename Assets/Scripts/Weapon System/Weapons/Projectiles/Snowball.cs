@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Snowball : ProjectileBase
+public class Snowball : ProjectileEssentials
 {
     public int subSnowballsCount;
     public float subSnowballSpeed;
@@ -17,21 +17,18 @@ public class Snowball : ProjectileBase
         if (!isDestroyedByAbility) return;
 
         var randomAngleShift = Random.Range(1f, 360f);
-        for (var i = 0; i < subSnowballsCount; i++) SpawnSnowball(i, randomAngleShift);
-    }
-
-    private void SpawnSnowball(int index, float randomAngleShift)
-    {
-        var angle = index * (360f / subSnowballsCount) + randomAngleShift;
-        var rotation = Quaternion.Euler(0f, 0f, angle);
-
-        var newProjectile = Instantiate(subSnowballPrefab, transform.position, rotation);
-
-        var projectileBaseClass = newProjectile.GetComponent<ProjectileBase>();
-        projectileBaseClass.damageAmount = subSnowballDamage;
-
-        var rb = newProjectile.GetComponent<Rigidbody2D>();
-        Vector2 direction = rotation * Vector2.right;
-        rb.velocity = direction.normalized * subSnowballSpeed;
+        
+        for (var i = 0; i < subSnowballsCount; i++)
+        {
+            var angle = i * (360f / subSnowballsCount) + randomAngleShift;
+            var rotation = Quaternion.Euler(0f, 0f, angle);
+            
+            ShootingComponent.SpawnProjectile(
+                subSnowballPrefab,
+                rotation,
+                transform.position,
+                subSnowballSpeed,
+                this);
+        }
     }
 }

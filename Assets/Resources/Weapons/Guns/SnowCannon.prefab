@@ -193,16 +193,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ae53a6b7715ba41a335c845faf892c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 10
+  knockbackStrength: 2
+  knockbackDuration: 1
+  targetTag: Enemy
+  weaponRange: 5
+  moduleConfigs:
+  - name: Attack
+    cooldown: 0.2
+    callAfterCooldown: 0
+  - name: Reload
+    cooldown: 0.75
+    callAfterCooldown: 1
+  - name: Ability
+    cooldown: 2
+    callAfterCooldown: 0
   projectilesBeforeReload: 4
   projectilesPerShoot: 1
-  reloadTime: 1
-  timeBetweenShots: 0.05
-  projectileDamage: 40
   projectileSpeed: 12
   spread: 10
-  cameraShakeMagnitude: 0.75
-  cameraShakeDuration: 0.1
   projectilePrefab: {fileID: 8889201001007404881, guid: dc38d6179cf4eb0499d65899d7431c4f, type: 3}
   gunRotationAnchor: {fileID: 5595582209515003903}
   projectileSpawnPoint: {fileID: 4248916098150275468}
-  playerInput: {fileID: 0}

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EgoTripper : GunBase
+public class EgoTripper : GunActionsBase
 {
     // Variables to be Assigned in Inspector
     public float timeToKillNewEnemy;
@@ -23,7 +23,7 @@ public class EgoTripper : GunBase
         transform.parent.GetComponent<PlayerHealth>().maxHealth = newMaxHealth;
         
         // Set the Base Damage
-        baseDamage = damageAmount;
+        baseDamage = hitEssentials.damageAmount;
     }
 
     public override void KilledEnemy()
@@ -33,7 +33,7 @@ public class EgoTripper : GunBase
             StopCoroutine(resetCoroutine);
 
         // Double damage, Start Resseting Damage after Time
-        damageAmount *= 2;
+        hitEssentials.damageAmount *= 2;
         resetCoroutine = StartCoroutine(ResetDamageAfterTime());
     }
 
@@ -46,6 +46,6 @@ public class EgoTripper : GunBase
     
     private void ResetTemporaryDamage()
     {
-        damageAmount = baseDamage;
+        hitEssentials.damageAmount = baseDamage;
     }
 }

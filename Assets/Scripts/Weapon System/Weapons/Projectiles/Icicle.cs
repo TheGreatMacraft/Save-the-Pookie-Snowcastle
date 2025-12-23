@@ -1,3 +1,3 @@
-public class Icicle : ProjectileBase
+public class Icicle : ProjectileEssentials
 {
 }

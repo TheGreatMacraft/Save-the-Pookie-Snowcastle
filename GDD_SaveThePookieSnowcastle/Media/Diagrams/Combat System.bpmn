@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1e7zg1w" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.9.0">
+  <bpmn:process id="Process_04ssgh7" isExecutable="false">
+    <bpmn:task id="Activity_0ae12nx" name="Munition Base">
+      <bpmn:outgoing>Flow_014otlw</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0qowagr</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_036udzk" name="Weapon Base">
+      <bpmn:incoming>Flow_014otlw</bpmn:incoming>
+      <bpmn:outgoing>Flow_0p60185</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0l3mfz5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_0un4sxh" name="Projectile Base">
+      <bpmn:incoming>Flow_0qowagr</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_014otlw" sourceRef="Activity_0ae12nx" targetRef="Activity_036udzk" />
+    <bpmn:sequenceFlow id="Flow_0qowagr" sourceRef="Activity_0ae12nx" targetRef="Activity_0un4sxh" />
+    <bpmn:task id="Activity_18rmkrm" name="Gun Base">
+      <bpmn:incoming>Flow_0p60185</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:task id="Activity_1kr56ij" name="Melee Base">
+      <bpmn:incoming>Flow_0l3mfz5</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0p60185" sourceRef="Activity_036udzk" targetRef="Activity_18rmkrm" />
+    <bpmn:sequenceFlow id="Flow_0l3mfz5" sourceRef="Activity_036udzk" targetRef="Activity_1kr56ij" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_04ssgh7">
+      <bpmndi:BPMNShape id="Activity_0ae12nx_di" bpmnElement="Activity_0ae12nx">
+        <dc:Bounds x="310" y="40" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_036udzk_di" bpmnElement="Activity_036udzk">
+        <dc:Bounds x="360" y="180" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18rmkrm_di" bpmnElement="Activity_18rmkrm">
+        <dc:Bounds x="290" y="290" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1kr56ij_di" bpmnElement="Activity_1kr56ij">
+        <dc:Bounds x="430" y="290" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0un4sxh_di" bpmnElement="Activity_0un4sxh">
+        <dc:Bounds x="240" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_014otlw_di" bpmnElement="Flow_014otlw">
+        <di:waypoint x="360" y="120" />
+        <di:waypoint x="360" y="140" />
+        <di:waypoint x="410" y="140" />
+        <di:waypoint x="410" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qowagr_di" bpmnElement="Flow_0qowagr">
+        <di:waypoint x="360" y="120" />
+        <di:waypoint x="360" y="140" />
+        <di:waypoint x="290" y="140" />
+        <di:waypoint x="290" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0p60185_di" bpmnElement="Flow_0p60185">
+        <di:waypoint x="410" y="260" />
+        <di:waypoint x="410" y="275" />
+        <di:waypoint x="340" y="275" />
+        <di:waypoint x="340" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0l3mfz5_di" bpmnElement="Flow_0l3mfz5">
+        <di:waypoint x="410" y="260" />
+        <di:waypoint x="410" y="275" />
+        <di:waypoint x="480" y="275" />
+        <di:waypoint x="480" y="290" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

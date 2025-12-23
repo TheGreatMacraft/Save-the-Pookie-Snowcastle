@@ -20,15 +20,36 @@ public class CameraCursorMove : MonoBehaviour
 
     private void Update()
     {
-        // Crosshair UI
-        if (crosshairImage && crosshairCanvas)
-        {
-            var mouseScreenPos = Mouse.current.position.ReadValue();
-            newCursorScreenPos = mouseScreenPos;
-            newCursorScreenPos = LimitToScreenResolution(newCursorScreenPos);
-            var newCursorWorldPos = GetMouseUIPosition(newCursorScreenPos);
-            crosshairImage.anchoredPosition = newCursorWorldPos;
-        }
+        if (crosshairImage == null || crosshairCanvas == null) {return;}
+        
+        // Get Mouse Screen Pos, limited by Screen Resolution
+        newCursorScreenPos = GetMouseScreenPos();
+        
+        // Set Crosshair Image Pos to Local Mouse Cursor Pos
+        var newCursorWorldPos = GetMouseUIPosition(newCursorScreenPos);
+        crosshairImage.anchoredPosition = newCursorWorldPos;
+
+    }
+
+    private Vector2 GetMouseScreenPos()
+    {
+        var mouseScreenPos = Mouse.current.position.ReadValue();
+        
+        return LimitToScreenResolution(mouseScreenPos);
+    }
+    
+    private Vector2 GetMouseUIPosition(Vector2 mouseScreenPos)
+    {
+        Vector2 localPos;
+        
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            crosshairCanvas.transform as RectTransform,
+            mouseScreenPos,
+            crosshairCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : crosshairCanvas.worldCamera,
+            out localPos
+        );
+        
+        return localPos;
     }
 
     //Move Camera Based on Cursor Position - Microsoft Copilot (Inspired by Enter the Gungeon)
@@ -50,18 +71,6 @@ public class CameraCursorMove : MonoBehaviour
         newCameraWorldPos.z = -1f;
 
         playerCamera.transform.position = newCameraWorldPos;
-    }
-
-    private Vector2 GetMouseUIPosition(Vector2 mouseScreenPos)
-    {
-        Vector2 localPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            crosshairCanvas.transform as RectTransform,
-            mouseScreenPos,
-            crosshairCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : crosshairCanvas.worldCamera,
-            out localPos
-        );
-        return localPos;
     }
 
     private Vector2 LimitToScreenResolution(Vector2 cursorScreenPos)

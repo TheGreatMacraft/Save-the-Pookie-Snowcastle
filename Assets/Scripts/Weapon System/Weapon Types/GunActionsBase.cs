@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GunBase : WeaponBase
+public class GunActionsBase : AttackActions
 {
     // Number of Projectiles
     public int projectilesBeforeReload;
@@ -27,7 +27,6 @@ public abstract class GunBase : WeaponBase
     // Variables used in Script
     private Vector2 shootDirection;
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -36,7 +35,7 @@ public abstract class GunBase : WeaponBase
         currentProjectileCount = projectilesBeforeReload;
     }
 
-    public void Attack()
+    protected override void Attack()
     {
         // Cancel if no Ammo in Magazine or Is Reloading
         if (currentProjectileCount == 0 || !actionModules["Reload"].canAct) return;
@@ -44,11 +43,12 @@ public abstract class GunBase : WeaponBase
         for (var i = 0; i < projectilesPerShoot; i++)
             ShootingComponent.SpawnProjectile(
                 projectilePrefab, 
-                gunRotationAnchor,
-                projectileSpawnPoint,
+                gunRotationAnchor.transform.rotation,
+                projectileSpawnPoint.transform.position,
                 projectileSpeed,
-                spread,
+                hitEssentials,
                 this,
+                spread,
                 projectilesShot
             );
         
@@ -70,12 +70,10 @@ public abstract class GunBase : WeaponBase
         return currentProjectileCount == 0;
     }
 
-    protected override Dictionary<string, Action> WeaponActionFunctions()
+    protected override void RegisterActions()
     {
-        return new Dictionary<string, Action>
-        {
-            { "Attack", Attack },
-            { "Reload", Reload },
-        };
+        base.RegisterActions();
+        
+        actions["Reload"] = Reload;
     }
 }

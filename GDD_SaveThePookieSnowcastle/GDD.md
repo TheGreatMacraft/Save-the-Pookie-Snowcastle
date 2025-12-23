@@ -55,7 +55,6 @@ Whenever a player attacks an enemy, the camera will slightly shake in a way that
 1. **Ice Sword** - a melee weapon ==middle of the pack melee weapon==
 2. **Ice Axe** - a big axe, that has long wind attack time, but the attack can be released by releasing the wind button, at any time. While the attack is ready, player moves slower.
 3. **Icicles** - daggers that can be used as a melee weapon or thrown ==mixed weapon==
-4. 
 ### Tools
 1. **Soul Catcher** - A secondary, that consumes the souls of victims, storing them into a primary weapon power up, that can be used later.
 2. **Skis** - Increases the player movement speed and adds a sort of "glidy" feel
@@ -105,12 +104,13 @@ height: 475
 
 # Enemies
 All enemies need to challenge the players in unique ways. Some will try to distract the player by attacking them and wasting their time, while others deal damage to defenses and the castle. **Player needs to deal with different enemies differently.**
-## Enemies Attacking the Player
+## Attacking the Player
 ### Gingerbread man
-Fast and deals minimal damage to the castle. If it senses players nearby, it'll throw itself face first into snow, to camouflage. If uncovered, it will try to run away and retreat to the castle in a little bit.
+Fast, dealing minimal damage. It's AI is very simple. It just runs towards the nearest player, to attack it.
 ### Bad snowman
 This creature will throw snowballs at the castle.
-### Gnomes
+## Attacking the Buildings
+### Gnome
 They will attack the players and attempt to disable defenses/traps. They will not attack the main castle until there is something else they can do. They will be shorter and will move at an average speed. Their smaller speed will make it **difficult** for defenses to hit them. Multiple gnomes disabling the same defense will manage to do that faster.
 
 Their priority list: disarming defenses > hurting players > damaging the castle
@@ -119,13 +119,20 @@ Their priority list: disarming defenses > hurting players > damaging the castle
 url: [[GnomeBehaviourPattern.bpmn]]
 ```
 
+## Attacking the Castle
 
 1. **Snow golem** - Massive creature, that moves slowly towards the castle, but deals a lot of damage when it gets a hit on it.
 ### Boss Enemies
 1. **Papa Gnome** - Bigger, slower enemy.
 ## Buildings
 ### Defenses
-1. **Snow cannon** - can be mounted by a player and used to shoot snowballs. When upgraded, it fires automatically at closest enemy, it can reach.
+1. **Snow cannon** - automatically shoots enemies. It can also be mounted by the player, making it fire faster and counting towards any kill-specific quota. *slower shoot speed, stronger hits*
+Upgrade ideas:
+- ability to shoot at multiple targets at once
+- faster shooting speed
+- custom ammo
+
+2. **
 ### Assistance
 1. **Radar** - Provides a mini-map until disabled or destroyed
 ## Weapons

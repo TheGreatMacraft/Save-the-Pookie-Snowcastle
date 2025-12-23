@@ -3,17 +3,17 @@ using UnityEngine;
 public class AddaptToWaveState : MonoBehaviour
 {
     public GameObject weapon;
-    public WeaponBase playerWeaponScript;
+    public AttackActions playerAttackScript;
 
     public BuildingDefenses buildingDefensesScript;
 
     private void Start()
     {
         // Setup Weapon Script
-        if (playerWeaponScript == null)
+        if (playerAttackScript == null)
         {
-            playerWeaponScript = GetComponentInChildren<WeaponBase>();
-            weapon = playerWeaponScript.gameObject;
+            playerAttackScript = GetComponentInChildren<AttackActions>();
+            weapon = playerAttackScript.gameObject;
         }
 
         // Subscribe to Even OnWaveStateChanged - Called after A Wave and at Beggining of New Wave
@@ -24,7 +24,7 @@ public class AddaptToWaveState : MonoBehaviour
     {
         // Set Weapon Activity
         weapon.SetActive(isWave);
-        playerWeaponScript.enabled = isWave;
+        playerAttackScript.enabled = isWave;
 
         // Set Building Script
         buildingDefensesScript.enabled = !isWave;

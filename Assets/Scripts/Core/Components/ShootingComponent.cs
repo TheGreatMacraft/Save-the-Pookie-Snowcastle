@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public static class ShootingComponent
@@ -17,11 +16,12 @@ public static class ShootingComponent
     
     public static void SpawnProjectile(
         GameObject projectilePrefab,
-        GameObject gunRotationAnchor,
-        GameObject projectileSpawnPoint,
+        Quaternion originRotation,
+        Vector3 projectileSpawnPoint,
         float projectileSpeed,
+        HitEssentials hitEssentials,
+        GunActionsBase ownerGun = null,
         [CanBeNull] float? spread = null,
-        [CanBeNull] GunBase ownerGunScript = null,
         [CanBeNull] List<GameObject> projectilesShot = null)
     {
         
@@ -29,19 +29,20 @@ public static class ShootingComponent
         float spreadAngle = spread.HasValue ? Random.Range(-spread.Value, spread.Value) : 0;
 
         // Calculate Rotation for Applied Velocity and Rotation which Projectile Should Face
-        var velocityRotation = gunRotationAnchor.transform.rotation * Quaternion.Euler(0f, 0f, spreadAngle);
+        var velocityRotation = originRotation * Quaternion.Euler(0f, 0f, spreadAngle);
         var facingRotation = velocityRotation * Quaternion.Euler(0f, 0f, -90f);
 
         // Instantiating New Projectile
         var newProjectile = Object.Instantiate(
             projectilePrefab,
-            projectileSpawnPoint.transform.position, 
+            projectileSpawnPoint, 
             facingRotation);
 
         // Altering Projectile's Variables and Registering This Gun as it's Owner Gun
-        var projectileBase = newProjectile.GetComponent<ProjectileBase>();
-        projectileBase.CopyFrom(ownerGunScript);
-        projectileBase.ownerGun = ownerGunScript;
+        var projectileBase = newProjectile.GetComponent<ProjectileEssentials>();
+        projectileBase.CopyFrom(hitEssentials);
+        if(ownerGun != null)
+            projectileBase.ownerGun = ownerGun;
 
         // Apply Velocity
         Vector2 spreadDirection = velocityRotation * Vector2.right;

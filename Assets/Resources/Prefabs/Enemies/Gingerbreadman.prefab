@@ -120,6 +120,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5755918343260496204}
+  - {fileID: 7817443755137863059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1420041755196969143
@@ -180,7 +181,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 15
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -221,9 +222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869b4d95d319427d8ca71587337c8323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pursuingTargetType: 0
-  currentState: 0
-  _currentTarget: {fileID: 0}
+  pursuingTargetTag: Player
+  <currentState>k__BackingField: 0
+  stateLocked: 0
+  currentTarget: {fileID: 0}
 --- !u!114 &7943939316022822752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,13 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd7c66713fa4d57a2683269bebf6f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 5
-  attackCooldown: 5
-  damage: 5
-  attackRadious: 0
-  attackPoint: {fileID: 1178918657511593997}
   AIBaseScript: {fileID: 8259829382549930585}
-  executingAttack: 0
+  actionHandler: {fileID: 0}
 --- !u!114 &7809430600219051998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +252,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9d8a4297d7477a9e3b0916445b56f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 0.75
   enemyRb: {fileID: 6594727842966281435}
   AIBaseScript: {fileID: 8259829382549930585}
   isKnockedback: 0
+--- !u!1001 &9210147235071247901
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1178918657511593997}
+    m_Modifications:
+    - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348855082122606246, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: m_Name
+      value: MeleeEnemyAttackHandler
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+--- !u!4 &7817443755137863059 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+  m_PrefabInstance: {fileID: 9210147235071247901}
+  m_PrefabAsset: {fileID: 0}

@@ -1,3 +1,3 @@
-public class IcicleLauncher : GunBase
+public class IcicleLauncher : GunActionsBase
 {
 }

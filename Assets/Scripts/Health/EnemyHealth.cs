@@ -6,7 +6,7 @@ public class EnemyHealth : HealthBase
         EnemyTracker.instance.Register(gameObject);
     }
 
-    public override void Die(WeaponBase attackingweapon = null)
+    public override void Die(AttackActions attackingweapon = null)
     {
         // Notify Weapon an Enemy was Killed
         if (attackingweapon != null) attackingweapon.KilledEnemy();

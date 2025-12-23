@@ -1,4 +1,7 @@
 {
   "accentColor": "#8b6a32",
-  "baseFontSize": 21
+  "baseFontSize": 21,
+  "enabledCssSnippets": [
+    "default"
+  ]
 }

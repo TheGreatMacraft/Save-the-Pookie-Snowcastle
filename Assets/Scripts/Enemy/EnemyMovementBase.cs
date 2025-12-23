@@ -42,23 +42,11 @@ public abstract class EnemyMovementBase : MonoBehaviour
     public void MoveTowardsTarget()
     {
         Vector2 movementDirection = (AIBaseScript.currentTarget.transform.position - transform.position).normalized;
-        enemyRb.MovePosition(enemyRb.position + movementDirection * (moveSpeed * Time.fixedDeltaTime));
+        enemyRb.AddForce(movementDirection * moveSpeed, ForceMode2D.Impulse);
     }
 
-    public void ApplyKnockback(float force, Vector2 knockbackDirection, float duration)
+    public void ApplyKnockback(float force, Vector2 knockbackDirection)
     {
-        Knockback(force, knockbackDirection);
-        
-        Utils.ToggleBoolInTime(
-            v => isKnockedback = v,
-            false,
-            duration,
-            (Action)(() => enemyRb.velocity = Vector2.zero)
-            );
-    }
-
-    public void Knockback(float force, Vector2 knockbackDirection)
-    {
-        enemyRb.velocity = knockbackDirection * force;
+        enemyRb.AddForce(knockbackDirection * force, ForceMode2D.Impulse);
     }
 }

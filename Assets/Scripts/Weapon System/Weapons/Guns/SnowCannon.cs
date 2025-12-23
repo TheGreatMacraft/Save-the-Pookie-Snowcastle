@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
 
-public class SnowCannon : GunBase
+public class SnowCannon : GunActionsBase
 {
     public void Ability()
     {
@@ -12,12 +10,10 @@ public class SnowCannon : GunBase
         }
     }
 
-    protected override Dictionary<string, Action> WeaponActionFunctions()
+    protected override void RegisterActions()
     {
-        var baseFunctions = base.WeaponActionFunctions();
-
-        baseFunctions["Ability"] = Ability;
+        base.RegisterActions();
         
-        return baseFunctions;
+        actions["Ability"] = Ability;
     }
 }

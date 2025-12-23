@@ -2,26 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefenseCannon : DefenseBase
+public class DefenseCannon : BuildingBase
 {
     // Variables to be Assigned in Inspector
     [SerializeField] private float shootSpeed;
     [SerializeField] private float shootCooldown;
-    [SerializeField] private int damageAmount;
-    [SerializeField] private float knockbackStrength;
+    
+    [SerializeField] private HitEssentials projectileProperties;
     
     [SerializeField] private int maxTargetsAtOnce;
     [SerializeField] private int shootCost; 
 
     // External Objects Necessary
     public GameObject projectilePrefab;
-    public GameObject gunRotationAnchor;
-    public GameObject shootPoint;
     
     // Variables used in Script
     private readonly List<GameObject> enemiesInRange = new();
     private int targetsCurrentlyShooting;
-    
+
+    protected override void SetupComponents()
+    {
+        base.SetupComponents();
+        
+        if(projectileProperties == null)
+            projectileProperties = GetComponent<HitEssentials>();
+    }
+
     // Adding to the List of Enemies in Range
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -54,15 +60,14 @@ public class DefenseCannon : DefenseBase
     
     private void FindEnemy()
     {
-        StartCoroutine(ShootTillDead(enemiesInRange[0]));
-        enemiesInRange.RemoveAt(0);
+        StartCoroutine(ShootTillDeadOrOutside(enemiesInRange[0]));
         targetsCurrentlyShooting++;
     }
     
     // Targeting the Enemies in Range
-    private IEnumerator ShootTillDead(GameObject target)
+    private IEnumerator ShootTillDeadOrOutside(GameObject target)
     {
-        while (target != null)
+        while (target != null && enemiesInRange.Contains(target))
         {
             var shootDirection = GetAimDirection(transform.position, shootSpeed, target.transform.position,
                 target.GetComponent<Rigidbody2D>().velocity);
@@ -79,47 +84,80 @@ public class DefenseCannon : DefenseBase
         // Decrease the Currency
         HealthCastle.Instance.DecreaseHealth(shootCost);
 
+        Quaternion shootRotation = Quaternion.FromToRotation(Vector2.right, shootDirection);
+        
         // Spawn Projectile
         ShootingComponent.SpawnProjectile(
             projectilePrefab,
-            gunRotationAnchor,
-            shootPoint,
-            shootSpeed
-            );
+            shootRotation,
+            transform.position,
+            shootSpeed,
+            projectileProperties);
     }
 
     //Perplexity - Calculating the Direction of the Snowball - Doesnt Work Well!!!
-    public static Vector2 GetAimDirection(Vector2 shooterPos, float bulletSpeed,
-        Vector2 enemyPos, Vector2 enemyVelocity)
+    public static Vector2 GetAimDirection(
+        Vector2 shooterPos,
+        float bulletSpeed,
+        Vector2 enemyPos,
+        Vector2 enemyVelocity)
     {
-        var targetDir = enemyPos - shooterPos; // Direction to current enemy position
-        var distance = targetDir.magnitude;
+        // Direction to enemy
+        Vector2 toEnemy = enemyPos - shooterPos;
 
-        // Quadratic equation: a*t^2 + b*t + c = 0
-        var a = enemyVelocity.sqrMagnitude - bulletSpeed * bulletSpeed;
-        var b = 2 * Vector2.Dot(enemyVelocity, targetDir);
-        var c = targetDir.sqrMagnitude;
+        // If enemy is exactly on top of shooter
+        if (toEnemy.sqrMagnitude < 0.0001f)
+            return Vector2.right; // arbitrary fallback
 
-        var discriminant = b * b - 4 * a * c;
+        float distance = toEnemy.magnitude;
 
-        if (discriminant < 0 || a == 0)
-            // No real solution or linear case (fire directly at current position)
-            return targetDir.normalized;
+        // Clamp insane velocities (prevents NaN explosions)
+        enemyVelocity = Vector2.ClampMagnitude(enemyVelocity, 50f);
 
-        // Use the smallest positive root for closest intercept
-        var t = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
+        // Quadratic coefficients
+        float a = enemyVelocity.sqrMagnitude - bulletSpeed * bulletSpeed;
+        float b = 2f * Vector2.Dot(enemyVelocity, toEnemy);
+        float c = toEnemy.sqrMagnitude;
 
-        if (t < 0) t = (-b + Mathf.Sqrt(discriminant)) / (2 * a);
-        if (t < 0) return Vector2.zero; // Cannot intercept
+        float discriminant = b * b - 4f * a * c;
 
-        // Predicted enemy position at intercept time
-        var predictedPos = enemyPos + enemyVelocity * t;
-        return (predictedPos - shooterPos).normalized;
+        // If no real solution OR bullet too slow → fallback to direct aim
+        if (discriminant < 0f || Mathf.Abs(a) < 0.0001f)
+            return toEnemy.normalized;
+
+        float sqrtDisc = Mathf.Sqrt(discriminant);
+
+        // Two possible times
+        float t1 = (-b - sqrtDisc) / (2f * a);
+        float t2 = (-b + sqrtDisc) / (2f * a);
+
+        // Pick the smallest positive time
+        float t = Mathf.Min(t1, t2);
+        if (t < 0f) t = Mathf.Max(t1, t2);
+
+        // If still negative → fallback
+        if (t < 0f)
+            return toEnemy.normalized;
+
+        // Predict enemy position
+        Vector2 predictedPos = enemyPos + enemyVelocity * t;
+
+        // Final direction
+        Vector2 finalDir = predictedPos - shooterPos;
+
+        // Avoid zero vectors
+        if (finalDir.sqrMagnitude < 0.0001f)
+            return toEnemy.normalized;
+
+        return finalDir.normalized;
     }
+
 
     // Stop All Coroutines when Cannon Gets Disabled
     protected override void OnBuildingDisable()
     {
+        base.OnBuildingDisable();
+        
         StopAllCoroutines();
     }
 }

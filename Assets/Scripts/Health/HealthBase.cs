@@ -36,7 +36,7 @@ public abstract class HealthBase : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void DecreaseHealth(float health, WeaponBase attackingweapon = null)
+    public void DecreaseHealth(float health, AttackActions attackingweapon = null)
     {
         currentHealth -= health;
 
@@ -67,7 +67,7 @@ public abstract class HealthBase : MonoBehaviour
     }
 
     // Virtual Methods for Derived Classes to Use
-    public virtual void Die(WeaponBase attackingweapon = null)
+    public virtual void Die(AttackActions attackingweapon = null)
     {
     }
 

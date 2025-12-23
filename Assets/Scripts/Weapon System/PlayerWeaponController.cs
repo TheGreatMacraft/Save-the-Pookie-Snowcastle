@@ -7,7 +7,7 @@ public class PlayerWeaponController : MonoBehaviour
     // Assigned in Inspector
     private PlayerInput playerInput;
     
-    private WeaponBase weapon;
+    private AttackActions attack;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class PlayerWeaponController : MonoBehaviour
     private void SetupComponents()
     {
         // Weapon Script
-        weapon = GetComponentInChildren<WeaponBase>();
+        attack = GetComponentInChildren<AttackActions>();
         
         // Player Input
         if(playerInput == null)
@@ -29,8 +29,8 @@ public class PlayerWeaponController : MonoBehaviour
     private void SubscribeButtonsToEvents()
     {
         // Match Input Buttons to Action Calls
-        playerInput.actions["AttackButton"].performed += ctx => weapon.actionModules["Attack"].ActionCall();
-        playerInput.actions["ReloadButton"].performed += ctx => weapon.actionModules["Reload"].ActionCall();
-        playerInput.actions["AbilityButton"].performed += ctx => weapon.actionModules["Ability"].ActionCall();
+        playerInput.actions["AttackButton"].performed += ctx => attack.actionModules["Attack"].ActionCall();
+        playerInput.actions["ReloadButton"].performed += ctx => attack.actionModules["Reload"].ActionCall();
+        playerInput.actions["AbilityButton"].performed += ctx => attack.actionModules["Ability"].ActionCall();
     }
 }

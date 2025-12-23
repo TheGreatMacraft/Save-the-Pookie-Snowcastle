@@ -5,21 +5,18 @@ public static class WeaponComponent
 {
     public static void HitTarget(
         GameObject target,
-        int damageAmount,
         Vector3 hitOrigin3D,
-        float knockbackStrength,
-        float knockbackDuration,
-        WeaponBase attackingWeapon,
-        string targetTag
+        AttackActions attackingAttack,
+        HitEssentials hitEssentials
         )
     {
         // Check that Target still Exists
         if(target == null) {return;}
         
         // Decrease Target Health
-        target.GetComponent<HealthBase>().DecreaseHealth(damageAmount, attackingWeapon);
+        target.GetComponent<HealthBase>().DecreaseHealth(hitEssentials.damageAmount, attackingAttack);
         
-        if (targetTag != "Enemy") {return;}
+        if (hitEssentials.targetTag != "Enemy") {return;}
         
         // If Target is Enemy:
         
@@ -30,7 +27,7 @@ public static class WeaponComponent
             
         // Apply Knockback Velocity
         target.GetComponent<EnemyMovementBase>().
-            ApplyKnockback(knockbackStrength, knockbackDirection, knockbackDuration);
+            ApplyKnockback(hitEssentials.knockbackStrength, knockbackDirection);
     }
 }
 

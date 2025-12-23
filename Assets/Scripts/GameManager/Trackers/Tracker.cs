@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,15 +16,22 @@ public abstract class TrackerBase<T> : TrackerBase where T : TrackerBase<T>
 public abstract class TrackerBase : MonoBehaviour
 {
     public List<GameObject> registeredElements = new();
+    
+    public event Action OnAllUnregistered;
 
     public void Register(GameObject obj)
     {
-        registeredElements.Add(obj);
+        if(!registeredElements.Contains(obj))
+            registeredElements.Add(obj);
     }
 
     public void Unregister(GameObject obj)
     {
-        registeredElements.Remove(obj);
+        if(registeredElements.Contains(obj))
+            registeredElements.Remove(obj);
+
+        if (!anyElementsRegistred())
+            OnAllUnregistered?.Invoke();
     }
 
     public bool anyElementsRegistred()

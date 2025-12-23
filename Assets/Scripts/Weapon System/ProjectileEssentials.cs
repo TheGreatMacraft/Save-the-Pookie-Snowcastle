@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-public abstract class ProjectileBase : MunitionBase
+public abstract class ProjectileEssentials : HitEssentials
 {
     // Gun That Fired Projectile
-    public GunBase ownerGun;
+    public GunActionsBase ownerGun;
 
     private void Update()
     {
@@ -26,17 +26,14 @@ public abstract class ProjectileBase : MunitionBase
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 7)
+        if (collision.CompareTag(targetTag))
         {
             // If Enemy is Hit, Call Hit Target and Destroy this Projectile 
             WeaponComponent.HitTarget(
                 collision.gameObject,
-                damageAmount,
                 transform.position, 
-                knockbackStrength,
-                knockbackDuration,
                 ownerGun,
-                targetTag
+                this
             );
             
             Destroy(gameObject);

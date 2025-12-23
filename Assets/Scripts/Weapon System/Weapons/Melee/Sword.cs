@@ -1,3 +1,3 @@
-public class Sword : MeleeBase
+public class Sword : MeleeActionsBase
 {
 }

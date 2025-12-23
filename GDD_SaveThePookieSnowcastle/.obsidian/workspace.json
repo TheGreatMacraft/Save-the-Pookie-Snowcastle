@@ -80,21 +80,8 @@
               "icon": "lucide-trello",
               "title": "Weapons"
             }
-          },
-          {
-            "id": "7286703756ba3468",
-            "type": "leaf",
-            "state": {
-              "type": "bpmn-view",
-              "state": {
-                "file": "Media/Diagrams/GnomeBehaviourPattern.bpmn"
-              },
-              "icon": "lucide-file",
-              "title": "GnomeBehaviourPattern"
-            }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -244,14 +231,16 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "330e0d1d761434c5",
+  "active": "aecc0ced70a5d15f",
   "lastOpenFiles": [
     "Progress Boards/Weapons.md",
     "Base Board.md",
     "Progress Boards/Enemy.md",
+    "Media/Diagrams/Combat System.bpmn",
+    "Media/EmptyDiagram.bpmn",
+    "Media/Diagrams/GnomeBehaviourPattern.bpmn",
     "GDD.md",
     "Media/Diagrams/GunBaseFunctionality.bpmn",
-    "Media/EmptyDiagram.bpmn",
     "Media/Pasted image 20251207183351.png",
     "Media/Pasted image 20251122130051.png",
     "Media/Pasted image 20251122130009.png",
@@ -274,8 +263,6 @@
     "Media/winter side scroller.png",
     "Media/Nepotrjeno 273973.crdownload",
     "Media/pixel art snow.jpg",
-    "Media/Diagrams/Building.bpmn",
-    "Media/Diagrams",
     "shit.bpnm.md"
   ]
 }

@@ -97,6 +97,9 @@ GameObject:
   - component: {fileID: 737456926014989670}
   - component: {fileID: 6880895475422237818}
   - component: {fileID: 8546427801995211927}
+  - component: {fileID: 1860496625541450898}
+  - component: {fileID: 2670120037976110187}
+  - component: {fileID: 6675106830472511}
   m_Layer: 7
   m_Name: Gnome
   m_TagString: Enemy
@@ -178,7 +181,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 15
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -206,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarSlider: {fileID: 0}
   _currentHealth: 0
-  maxHealth: 75
+  maxHealth: 10000
 --- !u!114 &8546427801995211927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +222,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c94295d6fc459e42b0a4b468acd6ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pursuingTargetType: 0
-  currentState: 0
-  _currentTarget: {fileID: 0}
+  pursuingTargetTag: 
+  <currentState>k__BackingField: 0
+  stateLocked: 0
+  currentTarget: {fileID: 0}
+--- !u!114 &1860496625541450898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067078596725065261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00e10efe2724e8eabf7f530911d4bd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  enemyRb: {fileID: 0}
+  AIBaseScript: {fileID: 0}
+  isKnockedback: 0
+--- !u!114 &2670120037976110187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067078596725065261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c027355b264575b6aec7174fe5dcd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AIBaseScript: {fileID: 0}
+  actionHandler: {fileID: 0}
+--- !u!114 &6675106830472511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067078596725065261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1665e1ed81840178f3570552146ad4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionRange: 1
+  moduleConfigs:
+  - name: Disarm
+    cooldown: 0
+    callAfterCooldown: 1
+  gnomeAI: {fileID: 0}
+  targetBuilding: {fileID: 0}

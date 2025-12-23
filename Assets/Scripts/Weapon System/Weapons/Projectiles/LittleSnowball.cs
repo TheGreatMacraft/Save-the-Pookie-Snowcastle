@@ -1,3 +1,3 @@
-public class LittleSnowball : ProjectileBase
+public class LittleSnowball : ProjectileEssentials
 {
 }
