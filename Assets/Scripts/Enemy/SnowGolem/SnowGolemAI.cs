@@ -1,0 +1,4 @@
+public class SnowGolemAI : EnemyAIBase
+{
+        
+}

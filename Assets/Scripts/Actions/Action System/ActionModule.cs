@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 // Helper Class
 [System.Serializable]
@@ -16,7 +15,11 @@ public class ActionModule
     public bool canAct = true;
     public float cooldown;
     public bool callActionAfterCooldown;
+
     public Action action;
+    public Action onFinished = null;
+
+    public Func<bool> cancelCallOverride;
 
     public ActionModule( float cooldown, bool callActionAfterCooldown, Action action)
     {
@@ -28,27 +31,48 @@ public class ActionModule
     public void ActionCall()
     {
         // Cancel If Can't Act
-        if(!canAct) {return;}
+        if(!canAct
+           || CancelCall()
+           ) {return;}
         
         // Toggle Act bool after Cooldown and call Action
         if (callActionAfterCooldown)
         {
-            Utils.ToggleBoolInTime(
+            Utils.ToggleValueInTime(
                 v => canAct = v,
                 canAct,
+                false,
                 cooldown,
-                action);
+                () =>
+                {
+                    action?.Invoke();
+                    onFinished?.Invoke();
+                }
+                );
             
             return;
         }
         
         // Call Action
-        action();
+        action?.Invoke();
+        
+        // Optional Action, called at the end of Attack
+        onFinished?.Invoke();
         
         // Toggle Act bool in Cooldown
-        Utils.ToggleBoolInTime(
+        Utils.ToggleValueInTime(
             v => canAct = v,
             canAct,
+            false,
             cooldown);
     }
+
+    protected virtual bool CancelCall()
+    {
+        if (cancelCallOverride != null)
+            return cancelCallOverride.Invoke();
+        
+        return false;
+    }
+
 }

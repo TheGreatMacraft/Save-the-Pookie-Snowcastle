@@ -7,19 +7,27 @@ public abstract class EnemyAttackBase : MonoBehaviour
     
     // Variables used in Script
     public ActionHandler actionHandler;
+    public ActionModule attackAction;
     
     protected void Start()
     {
         SetupComponents();
     }
 
-    protected void SetupComponents()
+    protected virtual void SetupComponents()
     {
         // AI Base Script
         AIBaseScript ??= GetComponent<EnemyAIBase>();
         
-        // Attack Script
+        // Actions Script
         actionHandler = GetComponentInChildren<ActionHandler>();
+        
+        // Attack Finish Action
+        if (actionHandler.actionModules.TryGetValue("Attack", out var attackAction))
+        {
+            attackAction.onFinished = AIBaseScript.UpdateCurrentState;
+            this.attackAction = attackAction;
+        }
     }
 
     protected void Update()

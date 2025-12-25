@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarSlider: {fileID: 0}
   _currentHealth: 0
-  maxHealth: 10000
+  maxHealth: 100
 --- !u!114 &8546427801995211927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pursuingTargetTag: 
   <currentState>k__BackingField: 0
-  stateLocked: 0
   currentTarget: {fileID: 0}
 --- !u!114 &1860496625541450898
 MonoBehaviour:

@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,7 +43,7 @@ public abstract class HealthBase : MonoBehaviour
 
         // Check if Object should Die
         if (currentHealth <= 0)
-            Die(attackingweapon);
+            DieWithWeapon(attackingweapon);
 
         // Call Hurt Event
         Hurt?.Invoke();
@@ -67,11 +68,14 @@ public abstract class HealthBase : MonoBehaviour
     }
 
     // Virtual Methods for Derived Classes to Use
-    public virtual void Die(AttackActions attackingweapon = null)
+    public void DieWithWeapon([CanBeNull] AttackActions attackingweapon = null)
     {
-    }
+        // Notify Weapon an Enemy was Killed
+        if (attackingweapon != null)
+            attackingweapon.enemiesKilled++;
 
-    public virtual void Die()
-    {
+        Die();
     }
+    
+    public virtual void Die() {}
 }

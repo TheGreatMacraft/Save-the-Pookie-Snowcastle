@@ -9,14 +9,13 @@ kanban-plugin: board
 - [ ] Magic Wand
 - [ ] Ice Axe
 - [ ] Icicles
-- [ ] Tools Base Script
-- [ ] Soul Catcher
-- [ ] Skis
 
 
 ## Doing
 
-- [ ] Ice Sword
+- [ ] Tools Base Script
+- [ ] Skis
+- [ ] Soul Catcher
 
 
 ## Done
@@ -26,6 +25,7 @@ kanban-plugin: board
 - [ ] Icicle Launcher
 - [ ] Snow Cannon
 - [ ] Gun Base Script
+- [ ] Ice Sword
 
 
 

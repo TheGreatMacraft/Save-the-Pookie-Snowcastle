@@ -136,8 +136,10 @@ public class WaveHandling : MonoBehaviour
         foreach (var group in subwave.enemyGroups)
             StartCoroutine(group.SpawnEnemyGroup());
 
-        while (!subwave.AllFinishedSpawning() || !EnemyTracker.instance.anyElementsRegistred())
+        while (!subwave.AllFinishedSpawning() || EnemyTracker.instance.anyElementsRegistred())
             yield return null;
+        
+        Debug.Log("Subwave Finished!");
     }
 
     private void EndWave(int waveIndex)

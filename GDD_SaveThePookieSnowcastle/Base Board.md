@@ -6,7 +6,6 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] [[Building System]]
 - [ ] [[Pets]]
 - [ ] [[Art]]
 - [ ] [[SFX]]
@@ -20,12 +19,13 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] [[Enemy]]
 - [ ] [[Weapons]]
+- [ ] [[Building System]]
 
 
 ## Done
 
+- [ ] [[Enemy]]
 - [ ] [[Player]]
 
 

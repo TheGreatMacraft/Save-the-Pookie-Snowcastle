@@ -304,6 +304,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4781937710177142057, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: moduleConfigs.Array.data[0].callAfterCooldown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5348855082122606246, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
       propertyPath: m_Name
       value: MeleeEnemyAttackHandler

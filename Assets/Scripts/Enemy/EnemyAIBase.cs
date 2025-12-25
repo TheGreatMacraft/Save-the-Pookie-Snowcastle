@@ -14,7 +14,6 @@ using UnityEngine;
      
      [field: SerializeField]
      public EnemyState currentState { get; private set; }
-     public bool stateLocked;
 
      public GameObject currentTarget;
      
@@ -33,16 +32,13 @@ using UnityEngine;
 
      protected virtual void Update()
      {
-         // Set Current State to Attacking if Near Enemy, or Pursuing if Not
-         if(NearbyTarget())
-             RequestStateChange(EnemyState.Attacking);
-         else
-             RequestStateChange(EnemyState.Pursuing);
+         if(attackScript.attackAction.canAct)
+            UpdateCurrentState();
          
          if(ShouldChangeCurrentTarget(currentTarget))
              SetNewTarget();
      }
-
+     
      protected virtual void SetupComponents()
      {
          // Attack Base Script
@@ -57,13 +53,20 @@ using UnityEngine;
          if (enemyRb == null)
              enemyRb = GetComponent<Rigidbody2D>();
      }
+
+     public void UpdateCurrentState()
+     {
+         // Set Current State to Attacking if Near Enemy, or Pursuing if Not
+         currentState = NearbyTarget() ? EnemyState.Attacking : EnemyState.Pursuing;
+     }
      
      // Replace Current Target
      public virtual void SetNewTarget(GameObject target = null)
      {
          currentTarget = target != null ? target : FindNewTarget();
          
-         currentTargetCollider = currentTarget.GetComponent<Collider2D>();
+         if(currentTarget != null)
+            currentTargetCollider = currentTarget.GetComponent<Collider2D>();
      }
      
      // Find New Target
@@ -71,20 +74,7 @@ using UnityEngine;
      {
          return GameObject.FindGameObjectWithTag(pursuingTargetTag);
      }
-
-
-     public void RequestStateChange(EnemyState newState)
-     {
-         if(stateLocked) {return;}
-         
-         currentState = newState;
-     }
-
-     public void LockState(float duration)
-     {
-         Utils.ToggleBoolInTime(v => stateLocked = v, stateLocked, duration);
-     }
-
+     
      // Check if Current Target is within Attack Distance
      public bool NearbyTarget()
      {

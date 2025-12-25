@@ -158,6 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8231787786894213209}
   - component: {fileID: 6846203194347283065}
+  - component: {fileID: 8388793267373217617}
   m_Layer: 6
   m_Name: IcicleLauncher
   m_TagString: Untagged
@@ -193,16 +194,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09977c68b4c2ce4b8ac499d225a1f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionRange: 5
+  moduleConfigs:
+  - name: Attack
+    cooldown: 1.5
+    callAfterCooldown: 0
+  - name: Reload
+    cooldown: 0.75
+    callAfterCooldown: 1
+  hitEssentials: {fileID: 0}
   projectilesBeforeReload: 8
   projectilesPerShoot: 1
-  reloadTime: 1
-  timeBetweenShots: 0.1
-  projectileDamage: 20
   projectileSpeed: 20
   spread: 12
-  cameraShakeMagnitude: 0.5
-  cameraShakeDuration: 0.05
   projectilePrefab: {fileID: 4769518289802779101, guid: 56b1f8075afb7bd4abfc25af272d65dc, type: 3}
   gunRotationAnchor: {fileID: 5595582209515003903}
   projectileSpawnPoint: {fileID: 4248916098150275468}
-  playerInput: {fileID: 0}
+--- !u!114 &8388793267373217617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595582209515003903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b80bf2f0a73f4051a28a9366354589a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 3
+  knockbackStrength: 1
+  targetTag: 

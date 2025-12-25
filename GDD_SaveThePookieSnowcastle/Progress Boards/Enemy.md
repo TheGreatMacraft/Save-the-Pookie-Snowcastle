@@ -10,7 +10,6 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] Gnome Behavior
 
 
 ## Done
@@ -19,6 +18,9 @@ kanban-plugin: board
 - [ ] Movement Base Class
 - [ ] Attack Base Class
 - [ ] Gingerbreadman Behavior
+- [ ] Gnome Behavior
+- [ ] Snowman Behavior
+- [ ] Snow Golem Behavior
 
 
 

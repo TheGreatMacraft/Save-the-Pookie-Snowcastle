@@ -26,7 +26,7 @@ public class EgoTripper : GunActionsBase
         baseDamage = hitEssentials.damageAmount;
     }
 
-    public override void KilledEnemy()
+    public override void OnKilledEnemy()
     {
         // Cancel Reseting Damage after Time
         if (resetCoroutine != null)

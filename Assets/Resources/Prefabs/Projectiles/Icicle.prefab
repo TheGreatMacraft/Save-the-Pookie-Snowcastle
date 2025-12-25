@@ -119,6 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9d74e0e74b0594d94f7e00e9ae406e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 0
+  knockbackStrength: 0
+  targetTag: 
   ownerGun: {fileID: 0}
 --- !u!1 &7969534734467102498
 GameObject:
@@ -192,7 +195,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 0.41530794, g: 0.7169812, b: 0.70854354, a: 1}
   m_FlipX: 0

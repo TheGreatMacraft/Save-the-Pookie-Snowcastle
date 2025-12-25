@@ -1,6 +1,13 @@
 {
   "enemyTypes": [
     {
+      "typeName": "gingerbreadman",
+      "spawnTimeRange": {
+        "min": 5,
+        "max": 8
+      }
+    },
+    {
       "typeName": "snowman",
       "spawnTimeRange": {
         "min": 10,
@@ -12,13 +19,6 @@
       "spawnTimeRange": {
         "min": 3,
         "max": 5
-      }
-    },
-    {
-      "typeName": "gingerbreadman",
-      "spawnTimeRange": {
-        "min": 5,
-        "max": 8
       }
     },
     {

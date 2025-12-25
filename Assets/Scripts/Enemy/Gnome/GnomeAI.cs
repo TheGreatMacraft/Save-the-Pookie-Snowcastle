@@ -36,6 +36,8 @@ public class GnomeAI : EnemyAIBase
     {
         base.SetNewTarget(target);
 
+        if (currentTarget == null) { return;}
+
         if (attackScript.actionHandler is GnomeActions gnomeActionHandler)
         {
             BuildingBase targetBuilding = currentTarget.GetComponent<BuildingBase>();

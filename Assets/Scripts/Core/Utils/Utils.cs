@@ -5,23 +5,23 @@ using UnityEngine;
 
 public static class Utils
 {
-    // Toggle Bool After Time
-    public static void ToggleBoolInTime(
-        Action<bool> setFlag,
-        bool valueToToggle,
+    // Toggle Value After Time
+    public static void ToggleValueInTime<T>(
+        Action<T> setFlag,
+        T originalValue,
+        T temporaryValue,
         float time,
-        Delegate additionalAction = null,
+        Action additionalAction = null,
         params object[] args
     )
     {
-        // Toggle Bool
-        var newValue = !valueToToggle;
-        setFlag(newValue);
+        // Toggle Value
+        setFlag(temporaryValue);
 
         CoroutineCaller.Instance.StartCoroutine(CallActionAfterTime(time, () =>
             {
                 // Toggle Bool Back to Original Value
-                setFlag(valueToToggle);
+                setFlag(originalValue);
 
                 // Run Aditional Method
                 additionalAction?.DynamicInvoke(args);
