@@ -8,11 +8,10 @@ public abstract class HealthBase : MonoBehaviour
     // UI Slider (Optional)
     public Slider healthBarSlider;
 
+    public float maxHealth;
+    
     // Current Health - When Changed Calls OnHealthChanged()
     public float _currentHealth;
-
-    public float maxHealth;
-
     public float currentHealth
     {
         get => _currentHealth;

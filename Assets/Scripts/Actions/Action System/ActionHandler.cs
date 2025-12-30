@@ -24,6 +24,7 @@ public class ActionHandler : MonoBehaviour
                 actionModules[config.name] = new ActionModule(
                 config.cooldown,
                 config.callAfterCooldown,
+                config.cancelWithButton,
                 action);
             }
         }

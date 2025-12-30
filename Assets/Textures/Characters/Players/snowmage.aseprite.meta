@@ -146,8 +146,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 30
-      y: 4
+      x: 4
+      y: 34
       width: 18
       height: 22
     spriteID: 6c996f50dae8c1f4a81e149a982b8ca2
@@ -158,7 +158,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 30, y: 4}
+    uvTransform: {x: 4, y: 34}
   - name: snowmage_Frame_2
     originalName: 
     pivot: {x: 0.5, y: 0}
@@ -167,7 +167,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 34
+      y: 64
       width: 18
       height: 22
     spriteID: a754d77b20f39fb428e2c3ae7530494a
@@ -178,7 +178,87 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 34}
+    uvTransform: {x: 4, y: 64}
+  - name: snowmage_Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 94
+      width: 18
+      height: 22
+    spriteID: e847da009a67b994e89e259045b9ead9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 94}
+  - name: snowmage_Frame_4
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 30
+      y: 4
+      width: 18
+      height: 22
+    spriteID: 9ffaa66dbd4d04b4389107738c3b4e54
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 30, y: 4}
+  - name: snowmage_Frame_5
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 30
+      y: 34
+      width: 18
+      height: 22
+    spriteID: 6a17ace08e6fcd64ab9522c75a319b3b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 30, y: 34}
+  - name: snowmage_Frame_6
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 30
+      y: 64
+      width: 18
+      height: 22
+    spriteID: 9853dfbd77c36ce4fa879e5b65e6e180
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 30, y: 64}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -212,6 +292,38 @@ ScriptedImporter:
         width: 18
         height: 22
       spriteId: a754d77b20f39fb428e2c3ae7530494a
+    - name: snowmage_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 7
+        y: 0
+        width: 18
+        height: 22
+      spriteId: e847da009a67b994e89e259045b9ead9
+    - name: snowmage_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 7
+        y: 0
+        width: 18
+        height: 22
+      spriteId: 9ffaa66dbd4d04b4389107738c3b4e54
+    - name: snowmage_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 7
+        y: 0
+        width: 18
+        height: 22
+      spriteId: 6a17ace08e6fcd64ab9522c75a319b3b
+    - name: snowmage_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 7
+        y: 0
+        width: 18
+        height: 22
+      spriteId: 9853dfbd77c36ce4fa879e5b65e6e180
     linkedCells: []
     parentIndex: -1
   platformSettings: []

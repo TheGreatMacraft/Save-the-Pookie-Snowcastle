@@ -40,48 +40,9 @@
               "icon": "lucide-trello",
               "title": "Base Board"
             }
-          },
-          {
-            "id": "07a6f6b346b874e8",
-            "type": "leaf",
-            "state": {
-              "type": "kanban",
-              "state": {
-                "file": "Progress Boards/Enemy.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false
-                  ]
-                }
-              },
-              "icon": "lucide-trello",
-              "title": "Enemy"
-            }
-          },
-          {
-            "id": "75c484cd4e2d2865",
-            "type": "leaf",
-            "state": {
-              "type": "kanban",
-              "state": {
-                "file": "Progress Boards/Weapons.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false
-                  ]
-                }
-              },
-              "icon": "lucide-trello",
-              "title": "Weapons"
-            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -231,12 +192,13 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "aecc0ced70a5d15f",
+  "active": "463fe6906562b0c4",
   "lastOpenFiles": [
-    "Base Board.md",
     "Progress Boards/Building System.md",
-    "Progress Boards/Weapons.md",
+    "Base Board.md",
     "Progress Boards/Enemy.md",
+    "Progress Boards/Weapons.md",
+    "Media/snowman wizard.jpg",
     "GDD.md",
     "Media/Diagrams/Combat System.bpmn",
     "Media/EmptyDiagram.bpmn",
@@ -254,7 +216,6 @@
     "Progress Boards/Art.md",
     "Progress Boards/Multiplayer.md",
     "Progress Boards",
-    "Media/snowman wizard.jpg",
     "Media/Nepotrjeno 524434.crdownload",
     "UntitledUntitled.md",
     "Media/Diagrams/CameraMoveToCursor.bpmn",

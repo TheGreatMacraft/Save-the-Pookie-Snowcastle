@@ -6,7 +6,7 @@ using UnityEngine;
 public static class Utils
 {
     // Toggle Value After Time
-    public static void ToggleValueInTime<T>(
+    public static Coroutine ToggleValueInTime<T>(
         Action<T> setFlag,
         T originalValue,
         T temporaryValue,
@@ -18,7 +18,7 @@ public static class Utils
         // Toggle Value
         setFlag(temporaryValue);
 
-        CoroutineCaller.Instance.StartCoroutine(CallActionAfterTime(time, () =>
+        Coroutine thisCoroutine = CoroutineCaller.Instance.StartCoroutine(CallActionAfterTime(time, () =>
             {
                 // Toggle Bool Back to Original Value
                 setFlag(originalValue);
@@ -27,6 +27,8 @@ public static class Utils
                 additionalAction?.DynamicInvoke(args);
             }
         ));
+
+        return thisCoroutine;
     }
 
 

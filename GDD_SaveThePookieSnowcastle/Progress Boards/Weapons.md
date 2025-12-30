@@ -13,19 +13,19 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] Tools Base Script
-- [ ] Skis
-- [ ] Soul Catcher
 
 
 ## Done
 
-- [ ] Melee Base Script
+- [ ] Gun Base Script
 - [ ] Ego Tripper
 - [ ] Icicle Launcher
 - [ ] Snow Cannon
-- [ ] Gun Base Script
+- [ ] Melee Base Script
 - [ ] Ice Sword
+- [ ] Tools Base Script
+- [ ] Soul Catcher
+- [ ] Skis
 
 
 

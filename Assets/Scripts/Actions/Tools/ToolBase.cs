@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 public class ToolBase : ActionHandler
 {
     protected virtual void Start()

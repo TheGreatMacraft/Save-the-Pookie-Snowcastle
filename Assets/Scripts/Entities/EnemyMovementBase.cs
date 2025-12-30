@@ -1,18 +1,14 @@
 using System;
 using UnityEngine;
 
-public abstract class EnemyMovementBase : MonoBehaviour
+public abstract class EnemyMovementBase : MovementBase
 {
-    // Variables to be Assigned in Inspector
-    public float moveSpeed;
-
-    // External Objects Necessary
-    public Rigidbody2D enemyRb;
+    // Used in Script
     public EnemyAIBase AIBaseScript;
-
-    // Variables used in Script
+    
     public bool isKnockedback;
 
+    
     private void Start()
     {
         SetupComponents();
@@ -31,8 +27,8 @@ public abstract class EnemyMovementBase : MonoBehaviour
     private void SetupComponents()
     {
         // Rigidbody
-        if (enemyRb == null)
-            enemyRb = GetComponent<Rigidbody2D>();
+        if (entityRb == null)
+            entityRb = GetComponent<Rigidbody2D>();
         
         // AI Base Script
         if (AIBaseScript == null)
@@ -42,11 +38,11 @@ public abstract class EnemyMovementBase : MonoBehaviour
     public void MoveTowardsTarget()
     {
         Vector2 movementDirection = (AIBaseScript.currentTarget.transform.position - transform.position).normalized;
-        enemyRb.AddForce(movementDirection * moveSpeed, ForceMode2D.Impulse);
+        entityRb.AddForce(movementDirection * moveSpeed, ForceMode2D.Impulse);
     }
 
     public void ApplyKnockback(float force, Vector2 knockbackDirection)
     {
-        enemyRb.AddForce(knockbackDirection * force, ForceMode2D.Impulse);
+        entityRb.AddForce(knockbackDirection * force, ForceMode2D.Impulse);
     }
 }

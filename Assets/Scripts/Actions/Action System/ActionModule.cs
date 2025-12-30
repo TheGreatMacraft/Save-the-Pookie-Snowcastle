@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 // Helper Class
 [System.Serializable]
@@ -7,6 +8,7 @@ public class ActionModuleConfig
     public string name;
     public float cooldown;
     public bool callAfterCooldown;
+    public bool cancelWithButton;
 }
 
 // Main Module Class
@@ -15,30 +17,38 @@ public class ActionModule
     public bool canAct = true;
     public float cooldown;
     public bool callActionAfterCooldown;
+    public bool cancelWithButton;
 
+    public Coroutine actionCoroutine;
+    
     public Action action;
     public Action onFinished = null;
 
     public Func<bool> cancelCallOverride;
+    public Action cancelCallAftermath;
 
-    public ActionModule( float cooldown, bool callActionAfterCooldown, Action action)
+    public ActionModule( float cooldown, bool callActionAfterCooldown, bool cancelWithButton, Action action)
     {
         this.cooldown = cooldown;
         this.callActionAfterCooldown = callActionAfterCooldown;
+        this.cancelWithButton = cancelWithButton;
         this.action = action;
     }
     
     public void ActionCall()
     {
+        if (cancelWithButton && !canAct)
+            CancelCall();
+            
         // Cancel If Can't Act
         if(!canAct
-           || CancelCall()
+           || CheckIfCancelCall()
            ) {return;}
         
         // Toggle Act bool after Cooldown and call Action
         if (callActionAfterCooldown)
         {
-            Utils.ToggleValueInTime(
+            actionCoroutine = Utils.ToggleValueInTime(
                 v => canAct = v,
                 canAct,
                 false,
@@ -60,14 +70,14 @@ public class ActionModule
         onFinished?.Invoke();
         
         // Toggle Act bool in Cooldown
-        Utils.ToggleValueInTime(
+        actionCoroutine = Utils.ToggleValueInTime(
             v => canAct = v,
             canAct,
             false,
             cooldown);
     }
 
-    protected virtual bool CancelCall()
+    protected virtual bool CheckIfCancelCall()
     {
         if (cancelCallOverride != null)
             return cancelCallOverride.Invoke();
@@ -75,4 +85,8 @@ public class ActionModule
         return false;
     }
 
+    protected virtual void CancelCall()
+    {
+        cancelCallAftermath?.Invoke();
+    }
 }

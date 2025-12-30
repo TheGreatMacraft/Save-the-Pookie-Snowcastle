@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class SoulCatcher : ToolBase
@@ -36,12 +35,12 @@ public class SoulCatcher : ToolBase
         int newKills = weapon.enemiesKilled - killedEnemiesUsed;
         int buffedDamage = baseWeaponDamage + newKills * 5; 
         
+        killedEnemiesUsed = weapon.enemiesKilled;
+        
         Utils.ToggleValueInTime<int>(
             v => weapon.hitEssentials.damageAmount = v,
             baseWeaponDamage,
             buffedDamage,
             duration);
-
-        killedEnemiesUsed = weapon.enemiesKilled;
     }
 }
