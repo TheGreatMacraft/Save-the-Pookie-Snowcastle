@@ -87,7 +87,7 @@ public class DefenseCannon : BuildingBase
         Quaternion shootRotation = Quaternion.FromToRotation(Vector2.right, shootDirection);
         
         // Spawn Projectile
-        ShootingComponent.SpawnProjectile(
+        RangedComponent.SpawnProjectile(
             projectilePrefab,
             shootRotation,
             transform.position,

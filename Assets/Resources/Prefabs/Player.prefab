@@ -323,8 +323,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80073ad5bb2132740a91873bca2fa074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushForce: 5
+  pushInterval: 0.25
+  maxSpeed: 1
+  steeringStrength: 2.5
+  lateralDamping: 0.9
+  minSteerSpeed: 0.2
   moveSpeed: 5
-  playerRb: {fileID: 0}
+  entityRb: {fileID: 0}
+  movementVector: {x: 0, y: 0}
+  isSliding: 0
 --- !u!114 &3143672065946139537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,8 +410,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarSlider: {fileID: 0}
-  _currentHealth: 0
   maxHealth: 100
+  _currentHealth: 0
 --- !u!114 &4241883027347597595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,33 +602,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5595582209515003903, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1923183864777122735}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
 --- !u!4 &4638509146689352490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8231787786894213209, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
   m_PrefabInstance: {fileID: 3630574333651006323}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9207015983641275532 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5595582209515003903, guid: 648ebf1f91d99c143b782f72bb368860, type: 3}
-  m_PrefabInstance: {fileID: 3630574333651006323}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1923183864777122735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9207015983641275532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b80bf2f0a73f4051a28a9366354589a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 10
-  knockbackStrength: 10
-  targetTag: Enemy

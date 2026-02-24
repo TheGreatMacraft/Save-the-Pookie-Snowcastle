@@ -1,33 +1,34 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MeleeActionsBase : AttackActions
 {
     // Variables used in Script
     public Transform attackPoint;
 
-    protected override void Awake()
+    protected override void UpdateActionNameList()
     {
-        base.Awake();
+        base.UpdateActionNameList();
         
-        SetupComponents();
+        mainActionName = "Slash";
+        
+        actionNames.Add("Slash");
     }
 
-    protected virtual void SetupComponents()
+    protected override void SetupComponents()
     {
+        base.SetupComponents();
+        
         // Attack Point
         if(attackPoint  == null)
             attackPoint = transform;
     }
 
-    protected override void Attack()
+    private void Slash()
     {
         // Get all Opponents In Range
         GameObject[] opponentsInRange = 
-            Utils.GetObjectsInRadiousWithTag(attackPoint.position, actionRange, hitEssentials.targetTag);
+            Utils.GetObjectsInRadiousWithTag(attackPoint.position, actionRange, hitEssentials.affectedObjectsTag);
 
         // Hit Every Enemy In Range
         HitInRadious(opponentsInRange);
@@ -39,11 +40,16 @@ public class MeleeActionsBase : AttackActions
     public void HitInRadious(GameObject[] opponentsInRange)
     {
         foreach (var opponent in opponentsInRange)
-            WeaponComponent.HitTarget(
+            MeleeComponent.HitTarget(
                 opponent,
                 transform.position,
                 this,
                 hitEssentials
             );
+    }
+
+    public override void ActionExecutionOrder()
+    {
+        actionModules["Slash"].ActionCall();
     }
 }

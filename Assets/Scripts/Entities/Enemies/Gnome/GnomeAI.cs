@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class GnomeAI : EnemyAIBase
+public class GnomeAI : EntityAIBase
 {
-    protected override bool ShouldChangeCurrentTarget(GameObject value)
+    protected override bool ShouldChangeCurrentTarget()
     {
-        return (base.ShouldChangeCurrentTarget(value) || !(ActiveBuildingTracker.instance.registeredElements.Contains(value)));
+        return (base.ShouldChangeCurrentTarget() || !(ActiveBuildingTracker.instance.registeredElements.Contains(currentTarget)));
     }
 
     protected override void Update()
     {
         if(!ActiveBuildingTracker.instance.anyElementsRegistred()) {return;}
-        
         base.Update();
     }
 
@@ -28,7 +27,7 @@ public class GnomeAI : EnemyAIBase
                 currentPick = defense;
             }
         }
-
+        
         return currentPick;
     }
 
@@ -38,11 +37,10 @@ public class GnomeAI : EnemyAIBase
 
         if (currentTarget == null) { return;}
 
-        if (attackScript.actionHandler is GnomeActions gnomeActionHandler)
+        if (actScript.actionHandler is GnomeActions gnomeActionHandler)
         {
             BuildingBase targetBuilding = currentTarget.GetComponent<BuildingBase>();
             
-            gnomeActionHandler.targetBuilding = targetBuilding;
             gnomeActionHandler.actionModules["Disarm"].cooldown = targetBuilding.timeToDisable;
         }
     }

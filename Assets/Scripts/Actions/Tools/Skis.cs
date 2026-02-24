@@ -32,6 +32,7 @@ public class Skis : ToolBase
 
         baseSpeed = movementScript.moveSpeed;
 
+        /*
         // Prevent stacking
         actionModules["Tool"].cancelCallOverride = () =>
         {
@@ -43,6 +44,7 @@ public class Skis : ToolBase
         {
             StopTool();
         };
+        */
     }
 
     protected override void Tool()

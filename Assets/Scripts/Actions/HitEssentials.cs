@@ -4,15 +4,13 @@ using UnityEngine;
 public class HitEssentials : MonoBehaviour
 {
     public int damageAmount;
-    
     public float knockbackStrength;
-    
-    public string targetTag;
+    public string affectedObjectsTag;
 
     public void CopyFrom(HitEssentials hitEssentials)
     {
         damageAmount = hitEssentials.damageAmount;
         knockbackStrength = hitEssentials.knockbackStrength;
-        targetTag = hitEssentials.targetTag;
+        affectedObjectsTag = hitEssentials.affectedObjectsTag;
     }
 }

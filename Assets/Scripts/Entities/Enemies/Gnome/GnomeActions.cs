@@ -1,28 +1,24 @@
-using System;
-
 public class GnomeActions : ActionHandler
 {
     public GnomeAI gnomeAI;
     
-    public BuildingBase targetBuilding;
-
-    protected override void Awake()
+    protected override void UpdateActionNameList()
     {
-        base.Awake();
+        base.UpdateActionNameList();
         
-        if(gnomeAI == null)
-            gnomeAI = GetComponent<GnomeAI>();
+        mainActionName = "Disarm";
+        
+        actionNames.Add("Disarm");
     }
 
-    protected void Disarm(BuildingBase buildingBase)
+    protected void Disarm()
     {
+        BuildingBase buildingBase = gnomeAI.currentTarget.GetComponent<BuildingBase>();
         buildingBase.isEnabled = false;
     }
-    
-    protected override void RegisterActions()
+
+    public override void ActionExecutionOrder()
     {
-        base.RegisterActions();
-        
-        actions["Disarm"] = () => Disarm(targetBuilding);
+        actionModules["Disarm"].ActionCall();
     }
 }

@@ -193,12 +193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d054ba921e577ff4c8e34af727a6070f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
-  timeBetweenAttacks: 1
-  knockbackStrength: 2
-  playerInput: {fileID: 0}
-  canAttack: 1
-  hurtRadius: 20
-  swingAngleDegrees: 60
-  angle: 0
+  actionRange: 0
+  moduleConfigs: []
+  mainAction: 
+  hitEssentials: {fileID: 0}
+  _enemiesKilled: 0
   attackPoint: {fileID: 8970969902033241978}

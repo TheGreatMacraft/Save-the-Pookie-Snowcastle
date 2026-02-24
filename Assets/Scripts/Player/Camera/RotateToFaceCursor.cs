@@ -28,6 +28,6 @@ public class RotateToFaceCursor : MonoBehaviour
         var mouseScreenPos = Mouse.current.position.ReadValue();
         var mouseWorldPosition = playerCamera.ScreenToWorldPoint(mouseScreenPos);
 
-        return ShootingComponent.GetAimRotation(weapon.position, mouseWorldPosition);
+        return RangedComponent.GetAimRotation(weapon.position, mouseWorldPosition);
     }
 }

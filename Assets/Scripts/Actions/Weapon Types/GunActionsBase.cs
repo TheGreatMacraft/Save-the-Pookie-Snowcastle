@@ -27,6 +27,16 @@ public class GunActionsBase : AttackActions
     // Variables used in Script
     private Vector2 shootDirection;
 
+    protected override void UpdateActionNameList()
+    {
+        base.UpdateActionNameList();
+        
+        mainActionName = "Shoot";
+        
+        actionNames.Add("Shoot");
+        actionNames.Add("Reload");
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -35,13 +45,13 @@ public class GunActionsBase : AttackActions
         currentProjectileCount = projectilesBeforeReload;
     }
 
-    protected override void Attack()
+    public void Shoot()
     {
         // Cancel if no Ammo in Magazine or Is Reloading
         if (currentProjectileCount == 0 || !actionModules["Reload"].canAct) return;
         
         for (var i = 0; i < projectilesPerShoot; i++)
-            ShootingComponent.SpawnProjectile(
+            RangedComponent.SpawnProjectile(
                 projectilePrefab, 
                 gunRotationAnchor.transform.rotation,
                 projectileSpawnPoint.transform.position,
@@ -69,11 +79,18 @@ public class GunActionsBase : AttackActions
     {
         return currentProjectileCount == 0;
     }
-
-    protected override void RegisterActions()
+    
+    public override void ActionExecutionOrder()
     {
-        base.RegisterActions();
+        actionModules["Shoot"].ActionCall();
         
-        actions["Reload"] = Reload;
+        if(NeedsReloading())
+            actionModules["Reload"].ActionCall();
+        
+        // Ability Call
+        /*
+        if(actionModules.TryGetValue("Ability", out var abilityAction))
+            abilityAction.ActionCall();
+        */
     }
 }

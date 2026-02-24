@@ -1,23 +1,20 @@
 public class ToolBase : ActionHandler
 {
-    protected virtual void Start()
+    protected override void UpdateActionNameList()
     {
-        SetupComponents();
+        base.UpdateActionNameList();
         
-        ExecuteOnStart();
+        actionNames.Add("Tool");
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        SetupComponents();
     }
     
     protected virtual void SetupComponents() {}
-
-    protected virtual void ExecuteOnStart() {}
+    
     
     protected virtual void Tool() {}
-    
-    protected override void RegisterActions()
-    {
-        base.RegisterActions();
-        
-        actions["Tool"] = Tool;
-    }
-    
 }

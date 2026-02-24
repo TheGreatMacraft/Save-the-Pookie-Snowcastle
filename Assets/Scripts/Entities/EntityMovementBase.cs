@@ -1,11 +1,15 @@
 using System;
 using UnityEngine;
 
-public abstract class EnemyMovementBase : MovementBase
+public abstract class EntityMovementBase : MonoBehaviour,IKnockbackable
 {
-    // Used in Script
-    public EnemyAIBase AIBaseScript;
+    // Variables to be Assigned in Inspector
+    public float moveSpeed;
     
+    public EntityAIBase AIBaseScript;
+    public Rigidbody2D entityRb;
+    
+    // Used in Script
     public bool isKnockedback;
 
     
@@ -20,7 +24,7 @@ public abstract class EnemyMovementBase : MovementBase
         if(AIBaseScript.currentTarget == null) {return;}
         
         // If Target not within range, Move towards it
-        if (AIBaseScript.currentState == EnemyState.Pursuing && !isKnockedback)
+        if (AIBaseScript.currentState == EntityState.Pursuing && !isKnockedback)
             MoveTowardsTarget();
     }
 
@@ -32,7 +36,7 @@ public abstract class EnemyMovementBase : MovementBase
         
         // AI Base Script
         if (AIBaseScript == null)
-            AIBaseScript = GetComponent<EnemyAIBase>();
+            AIBaseScript = GetComponent<EntityAIBase>();
     }
 
     public void MoveTowardsTarget()

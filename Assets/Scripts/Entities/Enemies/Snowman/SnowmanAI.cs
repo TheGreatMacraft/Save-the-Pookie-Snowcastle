@@ -1,4 +1,4 @@
-public class SnowmanAI : EnemyAIBase
+public class SnowmanAI : EntityAIBase
 {
     
 }

@@ -158,6 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8231787786894213209}
   - component: {fileID: 7025939122829177990}
+  - component: {fileID: 5775782966654075756}
   m_Layer: 6
   m_Name: EgoTripper
   m_TagString: Untagged
@@ -193,19 +194,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c904e292de3a26d45beed51f985f6dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionRange: 0
+  moduleConfigs:
+  - name: Shoot
+    cooldown: 0.2
+    callAfterCooldown: 0
+  - name: Reload
+    cooldown: 1
+    callAfterCooldown: 1
+  mainAction: Shoot
+  hitEssentials: {fileID: 5775782966654075756}
+  _enemiesKilled: 0
   projectilesBeforeReload: 5
   projectilesPerShoot: 1
-  reloadTime: 0.25
-  timeBetweenShots: 0.1
-  projectileDamage: 20
   projectileSpeed: 20
   spread: 10
-  cameraShakeMagnitude: 0.5
-  cameraShakeDuration: 0.2
   projectilePrefab: {fileID: 8889201001007404881, guid: 52b9aaeb1edbce449a46893a5c5bb3a0, type: 3}
   gunRotationAnchor: {fileID: 5595582209515003903}
   projectileSpawnPoint: {fileID: 4248916098150275468}
-  playerInput: {fileID: 0}
   timeToKillNewEnemy: 5
   baseDamage: 0
   newMaxHealth: 1
+--- !u!114 &5775782966654075756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595582209515003903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b80bf2f0a73f4051a28a9366354589a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 2
+  knockbackStrength: 1
+  affectedObjectsTag: Enemy

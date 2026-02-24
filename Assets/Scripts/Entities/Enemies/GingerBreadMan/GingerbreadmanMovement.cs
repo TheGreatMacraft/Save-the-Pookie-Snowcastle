@@ -1,4 +1,4 @@
-public class GingerbreadmanMovement : EnemyMovementBase
+public class GingerbreadmanMovement : EntityMovementBase
 {
         
 }

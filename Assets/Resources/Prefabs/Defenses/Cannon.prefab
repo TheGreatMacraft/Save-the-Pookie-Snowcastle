@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3299765018040129096}
   m_Layer: 10
   m_Name: Cannon
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,8 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToDisable: 5
   _isEnabled: 0
-  shootSpeed: 12
-  shootCooldown: 1.25
+  shootSpeed: 15
+  shootCooldown: 0.3
   projectileProperties: {fileID: 0}
   maxTargetsAtOnce: 1
   shootCost: 0
@@ -138,9 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80bf2f0a73f4051a28a9366354589a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
-  knockbackStrength: 25
-  targetTag: Enemy
+  damageAmount: 4
+  knockbackStrength: 0
+  affectedObjectsTag: Enemy
 --- !u!1 &7887917717923596674
 GameObject:
   m_ObjectHideFlags: 0

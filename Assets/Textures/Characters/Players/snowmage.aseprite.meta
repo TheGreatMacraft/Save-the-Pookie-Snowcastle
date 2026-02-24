@@ -259,6 +259,66 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 30, y: 64}
+  - name: snowmage_Frame_7
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 30
+      y: 94
+      width: 18
+      height: 22
+    spriteID: 3c58f3ba569cc1740982b6b46ace9953
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 30, y: 94}
+  - name: snowmage_Frame_8
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 4
+      width: 18
+      height: 22
+    spriteID: 9875398ead8dbfa4087bd45f5cd355c9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 4}
+  - name: snowmage_Frame_9
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 34
+      width: 18
+      height: 22
+    spriteID: 51b8403056a87bb47bbefd89da508c1e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 34}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -324,6 +384,30 @@ ScriptedImporter:
         width: 18
         height: 22
       spriteId: 9853dfbd77c36ce4fa879e5b65e6e180
+    - name: snowmage_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 7
+        y: 0
+        width: 18
+        height: 22
+      spriteId: 3c58f3ba569cc1740982b6b46ace9953
+    - name: snowmage_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 7
+        y: 0
+        width: 18
+        height: 22
+      spriteId: 9875398ead8dbfa4087bd45f5cd355c9
+    - name: snowmage_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 7
+        y: 0
+        width: 18
+        height: 22
+      spriteId: 51b8403056a87bb47bbefd89da508c1e
     linkedCells: []
     parentIndex: -1
   platformSettings: []

@@ -6,7 +6,7 @@
             "id": "195d935c-6e6f-4772-bc47-ad72eac7a486",
             "actions": [
                 {
-                    "name": "AttackButton",
+                    "name": "MainActionButton",
                     "type": "Button",
                     "id": "74d58d73-ac55-46e1-929f-0d3577e8b1d3",
                     "expectedControlType": "Button",
@@ -50,7 +50,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AttackButton",
+                    "action": "MainActionButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -61,7 +61,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AttackButton",
+                    "action": "MainActionButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

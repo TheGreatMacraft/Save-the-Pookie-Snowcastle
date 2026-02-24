@@ -26,10 +26,10 @@ public abstract class ProjectileEssentials : HitEssentials
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(targetTag))
+        if (collision.CompareTag(affectedObjectsTag))
         {
             // If Enemy is Hit, Call Hit Target and Destroy this Projectile 
-            WeaponComponent.HitTarget(
+            MeleeComponent.HitTarget(
                 collision.gameObject,
                 transform.position, 
                 ownerGun,

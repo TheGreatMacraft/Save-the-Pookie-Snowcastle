@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public static class ShootingComponent
+public static class RangedComponent
 {
     public static Quaternion GetAimRotation(Vector3 source, Vector3 target)
     {

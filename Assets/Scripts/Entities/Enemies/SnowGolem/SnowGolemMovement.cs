@@ -1,4 +1,4 @@
-public class SnowGolemMovement : EnemyMovementBase
+public class SnowGolemMovement : EntityMovementBase
 {
         
 }

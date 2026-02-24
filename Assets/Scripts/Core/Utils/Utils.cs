@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public static class Utils
@@ -82,5 +83,18 @@ public static class Utils
         }
         
         return appropriateObjects.ToArray();
+    }
+    
+    public static Action GetActionByName(object caller, string methodName)
+    {
+        var method = caller.GetType().GetMethod(
+            methodName,
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+        );
+
+        if (method == null)
+            return null;
+
+        return (Action)Delegate.CreateDelegate(typeof(Action), caller, method);
     }
 }

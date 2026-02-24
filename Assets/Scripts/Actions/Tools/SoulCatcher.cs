@@ -21,11 +21,13 @@ public class SoulCatcher : ToolBase
         // Base Damage
         baseWeaponDamage = weapon.hitEssentials.damageAmount;
         
+        /*
         // Cancel Tool Call Condition
         actionModules["Tool"].cancelCallOverride = () =>
         {
             return weapon.enemiesKilled == killedEnemiesUsed;
         };
+        */
 
     }
 

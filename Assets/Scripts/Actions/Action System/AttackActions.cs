@@ -1,3 +1,6 @@
+using UnityEngine;
+
+[RequireComponent(typeof(HitEssentials))]
 public class AttackActions : ActionHandler
 {
     public HitEssentials hitEssentials;
@@ -18,16 +21,15 @@ public class AttackActions : ActionHandler
     protected override void Awake()
     {
         base.Awake();
-        
-        hitEssentials = GetComponent<HitEssentials>();
+        SetupComponents();
     }
     
-    protected override void RegisterActions()
+    protected virtual void SetupComponents()
     {
-        actions["Attack"] = Attack;
+        // Hit Essentials
+        if(hitEssentials  == null)
+            hitEssentials = GetComponent<HitEssentials>();
     }
-
-    protected virtual void Attack() {}
     
     // Virtual Method, called Upon Killing Enemy, to be Defined in Derived Class
     public virtual void OnKilledEnemy() {}

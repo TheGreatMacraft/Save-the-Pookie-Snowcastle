@@ -34,7 +34,7 @@ public class PlayerWeaponController : MonoBehaviour
     private void SubscribeButtonsToEvents()
     {
         // Match Input Buttons to Action Calls
-        playerInput.actions["AttackButton"].performed += ctx => attack.actionModules["Attack"].ActionCall();
+        playerInput.actions["MainActionButton"].performed += ctx => attack.ActionExecutionOrder();
         playerInput.actions["ReloadButton"].performed += ctx => attack.actionModules["Reload"].ActionCall();
         playerInput.actions["AbilityButton"].performed += ctx => attack.actionModules["Ability"].ActionCall();
         playerInput.actions["ToolButton"].performed += ctx => tool.actionModules["Tool"].ActionCall();

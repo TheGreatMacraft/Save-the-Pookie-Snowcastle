@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : MovementBase
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Ski Movement")]
     public float pushForce = 5f;
@@ -14,7 +14,11 @@ public class PlayerMovement : MovementBase
     public float lateralDamping = 0.9f;      // How much sideways sliding is reduced (0–1)
     public float minSteerSpeed = 0.2f;       // No steering if nearly stopped
     
+    // Variables to be Assigned in Inspector
+    public float moveSpeed;
+    
     // Used in Script
+    public Rigidbody2D entityRb;
     public Vector2 movementVector;
     public bool isSliding;
 

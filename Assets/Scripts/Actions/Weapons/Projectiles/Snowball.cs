@@ -23,7 +23,7 @@ public class Snowball : ProjectileEssentials
             var angle = i * (360f / subSnowballsCount) + randomAngleShift;
             var rotation = Quaternion.Euler(0f, 0f, angle);
             
-            ShootingComponent.SpawnProjectile(
+            RangedComponent.SpawnProjectile(
                 subSnowballPrefab,
                 rotation,
                 transform.position,

@@ -1,7 +1,7 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
-public static class WeaponComponent
+public static class MeleeComponent
 {
     public static void HitTarget(
         GameObject target,
@@ -16,7 +16,7 @@ public static class WeaponComponent
         // Decrease Target Health
         target.GetComponent<HealthBase>().DecreaseHealth(hitEssentials.damageAmount, attackingAttack);
         
-        if (hitEssentials.targetTag != "Enemy") {return;}
+        if (hitEssentials.affectedObjectsTag != "Enemy") {return;}
         
         // If Target is Enemy:
         
@@ -26,7 +26,7 @@ public static class WeaponComponent
         var knockbackDirection = (targetPos - hitOrigin2D).normalized;
             
         // Apply Knockback Velocity
-        target.GetComponent<EnemyMovementBase>().
+        target.GetComponent<EntityMovementBase>().
             ApplyKnockback(hitEssentials.knockbackStrength, knockbackDirection);
     }
 }

@@ -1,26 +1,32 @@
 using UnityEngine;
 
- public abstract class EnemyAIBase : MonoBehaviour
+public enum EntityState
+{
+    Idle,
+    Pursuing,
+    Acting,
+}
+
+ public abstract class EntityAIBase : MonoBehaviour
  {
      // External Objects Necessary
-     protected EnemyAttackBase attackScript;
-     protected EnemyMovementBase movementScript;
+     protected EntityAct actScript;
+     protected Rigidbody2D entityRb;
      
-     protected Rigidbody2D enemyRb;
      protected Collider2D currentTargetCollider;
      
      // Variables used in Script
      public string pursuingTargetTag;
      
      [field: SerializeField]
-     public EnemyState currentState { get; private set; }
+     public EntityState currentState { get; private set; }
 
      public GameObject currentTarget;
      
      // The condition under which the Current Target Should Be Replaced 
-     protected virtual bool ShouldChangeCurrentTarget(GameObject value)
+     protected virtual bool ShouldChangeCurrentTarget()
      {
-         return (value == null);
+         return (currentTarget == null);
      }
      
      protected virtual void Start()
@@ -32,35 +38,39 @@ using UnityEngine;
 
      protected virtual void Update()
      {
-         if(attackScript.attackAction.canAct)
+         // If not commited to an Attack, update State
+         if(actScript.actionHandler.actionModules[actScript.actionHandler.mainActionName].canAct)
             UpdateCurrentState();
          
-         if(ShouldChangeCurrentTarget(currentTarget))
+         if(ShouldChangeCurrentTarget())
              SetNewTarget();
      }
      
      protected virtual void SetupComponents()
      {
          // Attack Base Script
-         if (attackScript == null)
-             attackScript = GetComponent<EnemyAttackBase>();
-         
-         // Movement Base Script
-         if (movementScript == null)
-             movementScript = GetComponent<EnemyMovementBase>();
-         
+         if (actScript == null)
+             actScript = GetComponent<EntityAct>();
+
          // Rigidbody
-         if (enemyRb == null)
-             enemyRb = GetComponent<Rigidbody2D>();
+         if (entityRb == null)
+             entityRb = GetComponent<Rigidbody2D>();
      }
 
      public void UpdateCurrentState()
      {
-         // Set Current State to Attacking if Near Enemy, or Pursuing if Not
-         currentState = NearbyTarget() ? EnemyState.Attacking : EnemyState.Pursuing;
+         // If no target exists, stay Idle
+         if (currentTarget == null)
+         {
+             currentState = EntityState.Idle;
+             return;
+         }
+         
+         // Set Current State to Acting if Near Enemy, or Pursuing if Not
+         currentState = NearbyTarget() ? EntityState.Acting : EntityState.Pursuing;
      }
      
-     // Replace Current Target
+     // Replace Current Target (Given or Find a New Target)
      public virtual void SetNewTarget(GameObject target = null)
      {
          currentTarget = target != null ? target : FindNewTarget();
@@ -78,7 +88,10 @@ using UnityEngine;
      // Check if Current Target is within Attack Distance
      public bool NearbyTarget()
      {
+         if (currentTarget == null)
+             return false;
+             
          var distanceToTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
-         return  distanceToTarget <= attackScript.actionHandler.actionRange || enemyRb.IsTouching(currentTargetCollider);
+         return  distanceToTarget <= actScript.actionHandler.actionRange || entityRb.IsTouching(currentTargetCollider);
      }
  }

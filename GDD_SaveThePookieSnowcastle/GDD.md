@@ -144,6 +144,17 @@ Upgrade ideas:
 1. **White Fox** - moves quickly towards the toughest enemy and alters the players of its presence
 2. **Polar Bear** - moves slowly towards the closes enemy it can catch and attacks them
 3. **Black Kitty** - scares the monsters away, prolonging their destruction
+
+## Villagers
+Unlocked through completion of levels. Their "stats" (speed, strength, ...) as well as traits (scared/ferocious, ...) and preferences (combat, books, ...) will vary and will be an important factor when the players will be managing them.
+
+# Entity Behavior
+All entities (enemies, pets, villagers, etc.) will share the same **base** logic. Of course swift support enemy, like gnome will have a different move set than a slow heavy hitter, like golem, but their classes will be derived from the same base.
+
+Broken down into bare bones, every entity will:
+- **move** towards certain point with a certain goal in mind
+- upon *completion* of said goal or an *interruption*, the **goal will change** and the entity will begin moving again.
+
 # Artstyle
 Winter-Christmas pixel art theme, inspired by Snowdin from Undertale and old minecraft christmas maps.
 

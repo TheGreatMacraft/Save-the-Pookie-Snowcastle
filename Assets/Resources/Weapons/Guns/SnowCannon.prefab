@@ -158,6 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8231787786894213209}
   - component: {fileID: 2985401089645344844}
+  - component: {fileID: 5775782966654075756}
   m_Layer: 6
   m_Name: SnowCannon
   m_TagString: Untagged
@@ -193,13 +194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ae53a6b7715ba41a335c845faf892c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
-  knockbackStrength: 2
-  knockbackDuration: 1
-  targetTag: Enemy
-  weaponRange: 5
+  actionRange: 2
   moduleConfigs:
-  - name: Attack
+  - name: Shoot
     cooldown: 0.2
     callAfterCooldown: 0
   - name: Reload
@@ -208,6 +205,9 @@ MonoBehaviour:
   - name: Ability
     cooldown: 2
     callAfterCooldown: 0
+  mainAction: Shoot
+  hitEssentials: {fileID: 5775782966654075756}
+  _enemiesKilled: 0
   projectilesBeforeReload: 4
   projectilesPerShoot: 1
   projectileSpeed: 12
@@ -215,3 +215,18 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8889201001007404881, guid: dc38d6179cf4eb0499d65899d7431c4f, type: 3}
   gunRotationAnchor: {fileID: 5595582209515003903}
   projectileSpawnPoint: {fileID: 4248916098150275468}
+--- !u!114 &5775782966654075756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595582209515003903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b80bf2f0a73f4051a28a9366354589a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 15
+  knockbackStrength: 5
+  affectedObjectsTag: Enemy

@@ -1,4 +1,4 @@
-public class GnomeMovement : EnemyMovementBase
+public class GnomeMovement : EntityMovementBase
 {
     
 }

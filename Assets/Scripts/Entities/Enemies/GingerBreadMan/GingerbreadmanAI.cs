@@ -1,4 +1,4 @@
-public class GingerbreadmanAI : EnemyAIBase
+public class GingerbreadmanAI : EntityAIBase
 {
     
 }

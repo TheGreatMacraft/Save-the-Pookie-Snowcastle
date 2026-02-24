@@ -4,7 +4,7 @@ using UnityEngine;
 public class RotateToFaceTarget : MonoBehaviour
 {
     public AttackActions attack;
-    public EnemyAIBase enemyAI;
+    public EntityAIBase entityAI;
 
     private void Awake()
     {
@@ -17,16 +17,16 @@ public class RotateToFaceTarget : MonoBehaviour
         attack = GetComponentInChildren<AttackActions>();
         
         // AI Script
-        enemyAI = GetComponentInParent<EnemyAIBase>();
+        entityAI = GetComponentInParent<EntityAIBase>();
     }
 
     private void Update()
     {
         // Rotate Weapon to Face Target if It Exists
-        if (enemyAI.currentTarget == null) {return;}
+        if (entityAI.currentTarget == null) {return;}
         
-        attack.transform.rotation = ShootingComponent.GetAimRotation(
+        attack.transform.rotation = RangedComponent.GetAimRotation(
             attack.transform.position,
-            enemyAI.currentTarget.transform.position);
+            entityAI.currentTarget.transform.position);
     }
 }

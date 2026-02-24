@@ -8,43 +8,38 @@ public class ActionModuleConfig
     public string name;
     public float cooldown;
     public bool callAfterCooldown;
-    public bool cancelWithButton;
+    public ActionModuleConfig(string name)
+    {
+        this.name = name;
+    }
 }
 
 // Main Module Class
+[System.Serializable]
 public class ActionModule
 {
-    public bool canAct = true;
+    // Assigned in Inspector
     public float cooldown;
     public bool callActionAfterCooldown;
-    public bool cancelWithButton;
-
-    public Coroutine actionCoroutine;
     
-    public Action action;
-    public Action onFinished = null;
+    // Used in Script
+    [NonSerialized] public bool canAct = true;
+    [NonSerialized] public Action action;
+    
+    [NonSerialized] public Coroutine actionCoroutine;
 
-    public Func<bool> cancelCallOverride;
-    public Action cancelCallAftermath;
-
-    public ActionModule( float cooldown, bool callActionAfterCooldown, bool cancelWithButton, Action action)
+    public ActionModule(ActionModuleConfig config, Action action)
     {
-        this.cooldown = cooldown;
-        this.callActionAfterCooldown = callActionAfterCooldown;
-        this.cancelWithButton = cancelWithButton;
+        this.cooldown = config.cooldown;
+        this.callActionAfterCooldown = config.callAfterCooldown;
         this.action = action;
     }
     
     public void ActionCall()
     {
-        if (cancelWithButton && !canAct)
-            CancelCall();
-            
         // Cancel If Can't Act
-        if(!canAct
-           || CheckIfCancelCall()
-           ) {return;}
-        
+        if(!canAct) {return;}
+
         // Toggle Act bool after Cooldown and call Action
         if (callActionAfterCooldown)
         {
@@ -56,37 +51,20 @@ public class ActionModule
                 () =>
                 {
                     action?.Invoke();
-                    onFinished?.Invoke();
                 }
                 );
-            
-            return;
         }
+        else
+        {
+            // Call Action
+            action?.Invoke();
         
-        // Call Action
-        action?.Invoke();
-        
-        // Optional Action, called at the end of Attack
-        onFinished?.Invoke();
-        
-        // Toggle Act bool in Cooldown
-        actionCoroutine = Utils.ToggleValueInTime(
-            v => canAct = v,
-            canAct,
-            false,
-            cooldown);
-    }
-
-    protected virtual bool CheckIfCancelCall()
-    {
-        if (cancelCallOverride != null)
-            return cancelCallOverride.Invoke();
-        
-        return false;
-    }
-
-    protected virtual void CancelCall()
-    {
-        cancelCallAftermath?.Invoke();
+            // Toggle Act bool in Cooldown
+            actionCoroutine = Utils.ToggleValueInTime(
+                v => canAct = v,
+                canAct,
+                false,
+                cooldown);
+        }
     }
 }
