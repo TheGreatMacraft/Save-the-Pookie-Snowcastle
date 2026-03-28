@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Skis : ToolBase
 {
+    /*
+    
     // Assigned in Inspector
     public float baseSpeedMultiplier = 1.5f;
     
@@ -44,7 +46,7 @@ public class Skis : ToolBase
         {
             StopTool();
         };
-        */
+        *//*
     }
 
     protected override void Tool()
@@ -62,4 +64,5 @@ public class Skis : ToolBase
         toolActive = false;
         //movementScript.moveSpeed = baseSpeed;
     }
+    */
 }

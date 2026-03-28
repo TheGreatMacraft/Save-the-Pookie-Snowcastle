@@ -6,7 +6,7 @@
             "id": "195d935c-6e6f-4772-bc47-ad72eac7a486",
             "actions": [
                 {
-                    "name": "MainActionButton",
+                    "name": "Primary",
                     "type": "Button",
                     "id": "74d58d73-ac55-46e1-929f-0d3577e8b1d3",
                     "expectedControlType": "Button",
@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ReloadButton",
+                    "name": "Secondary",
                     "type": "Button",
                     "id": "09464350-417d-451c-b1ed-e61fe3b7890c",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AbilityButton",
+                    "name": "Ability",
                     "type": "Button",
                     "id": "ead2d7fe-6d76-4457-9795-cc4c3134ff1b",
                     "expectedControlType": "Button",
@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToolButton",
+                    "name": "Tool",
                     "type": "Button",
                     "id": "a6aeee40-2557-46ea-9402-0ad01829d320",
                     "expectedControlType": "Button",
@@ -50,7 +50,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MainActionButton",
+                    "action": "Primary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -61,7 +61,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MainActionButton",
+                    "action": "Primary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -72,7 +72,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ReloadButton",
+                    "action": "Secondary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -83,7 +83,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AbilityButton",
+                    "action": "Ability",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -94,7 +94,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToolButton",
+                    "action": "Tool",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -17,10 +17,12 @@ public class EgoTripper : GunActionsBase
         SetupComponents();
     }
 
-    private void SetupComponents()
+    protected override void SetupComponents()
     {
+        base.SetupComponents();
+        
         // Set Max Health to New Max Health
-        transform.parent.GetComponent<PlayerHealth>().maxHealth = newMaxHealth;
+        //transform.parent.GetComponent<PlayerHealth>().maxHealth = newMaxHealth;
         
         // Set the Base Damage
         baseDamage = hitEssentials.damageAmount;

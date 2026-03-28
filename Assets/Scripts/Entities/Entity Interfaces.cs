@@ -1,0 +1,48 @@
+
+
+// Manipulators  -  usually called in MonoBehaviours 
+
+public interface Movement
+{
+    void Move();
+}
+
+public interface Placement
+{
+    void Place();
+}
+
+public interface Orientation
+{
+    void Orient();
+}
+
+
+// Tag
+
+public interface Tagged
+{
+    bool IsTaggedAs(string Tag);
+}
+
+public interface Filter<T>
+{
+    T Value();
+    bool Passed();
+}
+
+
+// Target
+
+public interface Target : 
+    Location, Tagged
+{
+    void Hit(Impact impact, Terminable disposableHitter);
+}
+
+public interface TargetScouter
+{
+    void FindNewTarget();
+    Target CurrentTarget();
+}
+

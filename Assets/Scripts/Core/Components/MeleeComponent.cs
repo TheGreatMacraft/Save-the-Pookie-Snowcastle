@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 public static class MeleeComponent
@@ -14,7 +13,7 @@ public static class MeleeComponent
         if(target == null) {return;}
         
         // Decrease Target Health
-        target.GetComponent<HealthBase>().DecreaseHealth(hitEssentials.damageAmount, attackingAttack);
+        target.GetComponent<Damageable>().TakeDamage(hitEssentials.damageAmount);
         
         if (hitEssentials.affectedObjectsTag != "Enemy") {return;}
         
@@ -26,7 +25,7 @@ public static class MeleeComponent
         var knockbackDirection = (targetPos - hitOrigin2D).normalized;
             
         // Apply Knockback Velocity
-        target.GetComponent<EntityMovementBase>().
+        target.GetComponent<EntityBasicMovement>().
             ApplyKnockback(hitEssentials.knockbackStrength, knockbackDirection);
     }
 }

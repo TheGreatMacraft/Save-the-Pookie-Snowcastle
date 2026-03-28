@@ -37,7 +37,7 @@ public class EnemyGroup
         while (spawnedEnemies < groupCount)
         {
             yield return new WaitForSeconds(GetSpawnTime());
-            Spawner.instance.Spawn(enemyPrefab);
+            SpawnerTMP.instance.Spawn(enemyPrefab);
             spawnedEnemies++;
         }
 

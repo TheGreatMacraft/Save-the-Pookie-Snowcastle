@@ -95,10 +95,11 @@ GameObject:
   - component: {fileID: 1178918657511593997}
   - component: {fileID: 1420041755196969143}
   - component: {fileID: 6594727842966281435}
-  - component: {fileID: 1890682114547886997}
+  - component: {fileID: 6651044445379145919}
   - component: {fileID: 8259829382549930585}
-  - component: {fileID: 7943939316022822752}
-  - component: {fileID: 7809430600219051998}
+  - component: {fileID: 3100517179936875731}
+  - component: {fileID: 7272120939001164012}
+  - component: {fileID: 5846396541048175860}
   m_Layer: 7
   m_Name: Gingerbreadman
   m_TagString: Enemy
@@ -195,7 +196,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1890682114547886997
+--- !u!114 &6651044445379145919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,12 +205,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4873204914999720090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567f50bf943de9245932cf61742b3945, type: 3}
+  m_Script: {fileID: 11500000, guid: d45a7cda0fd96fd4da161736ce12f16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarSlider: {fileID: 0}
-  _currentHealth: 0
-  maxHealth: 60
+  moveSpeed: 1.5
+  isKnockedback: 0
 --- !u!114 &8259829382549930585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,9 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pursuingTargetTag: Player
   <currentState>k__BackingField: 0
-  stateLocked: 0
   currentTarget: {fileID: 0}
---- !u!114 &7943939316022822752
+--- !u!114 &3100517179936875731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,12 +234,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4873204914999720090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fd7c66713fa4d57a2683269bebf6f8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 267fbea04b2634d4f9b8ea0b4754b5a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AIBaseScript: {fileID: 8259829382549930585}
-  actionHandler: {fileID: 0}
---- !u!114 &7809430600219051998
+  actionHandler: {fileID: 4435446528413303604}
+--- !u!114 &7272120939001164012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,13 +248,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 4873204914999720090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b9d8a4297d7477a9e3b0916445b56f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 400de6281c624ac4a39ff259a6cd1d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.75
-  enemyRb: {fileID: 6594727842966281435}
-  AIBaseScript: {fileID: 8259829382549930585}
-  isKnockedback: 0
+  maxHealth: 80
+  slider: {fileID: 0}
+  deathProvider: {fileID: 5846396541048175860}
+--- !u!114 &5846396541048175860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873204914999720090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783daac3a62746bba108d05ce3534c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9210147235071247901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -264,6 +274,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1178918657511593997}
     m_Modifications:
+    - target: {fileID: 847912664208045022, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: damageAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 847912664208045022, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: knockbackStrength
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -305,18 +323,41 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4781937710177142057, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
-      propertyPath: moduleConfigs.Array.data[0].callAfterCooldown
-      value: 1
+      propertyPath: mainActionName
+      value: Slash
+      objectReference: {fileID: 0}
+    - target: {fileID: 4781937710177142057, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: moduleConfigs.Array.data[0].name
+      value: Slash
+      objectReference: {fileID: 0}
+    - target: {fileID: 4781937710177142057, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: moduleConfigs.Array.data[0].cooldown
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5348855082122606246, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
       propertyPath: m_Name
       value: MeleeEnemyAttackHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 8794606219315755943, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+      propertyPath: entityAI
+      value: 
+      objectReference: {fileID: 8259829382549930585}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+--- !u!114 &4435446528413303604 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4781937710177142057, guid: 15605260bd2d923479e2287da6e347a9, type: 3}
+  m_PrefabInstance: {fileID: 9210147235071247901}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a80f2ba86d0cee43ac47d7fbee1e3d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7817443755137863059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1417551627633642382, guid: 15605260bd2d923479e2287da6e347a9, type: 3}

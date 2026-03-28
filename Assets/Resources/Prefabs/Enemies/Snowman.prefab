@@ -97,8 +97,8 @@ GameObject:
   - component: {fileID: 1328569110755257250}
   - component: {fileID: 2640389048886354279}
   - component: {fileID: 7649237832972566542}
-  - component: {fileID: 737752835568331972}
   - component: {fileID: 5083999118660356588}
+  - component: {fileID: 1144273662048537624}
   m_Layer: 7
   m_Name: Snowman
   m_TagString: Enemy
@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarSlider: {fileID: 0}
-  _currentHealth: 0
   maxHealth: 150
+  _currentHealth: 0
 --- !u!114 &7649237832972566542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,20 +225,6 @@ MonoBehaviour:
   pursuingTargetTag: Player
   <currentState>k__BackingField: 0
   currentTarget: {fileID: 0}
---- !u!114 &737752835568331972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4873204914999720090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0f505f60802455a8b7c8aadbb4f5336, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AIBaseScript: {fileID: 0}
-  actionHandler: {fileID: 0}
 --- !u!114 &5083999118660356588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,9 +238,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  enemyRb: {fileID: 0}
-  AIBaseScript: {fileID: 0}
   isKnockedback: 0
+--- !u!114 &1144273662048537624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873204914999720090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267fbea04b2634d4f9b8ea0b4754b5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AIBaseScript: {fileID: 7649237832972566542}
+  actionHandler: {fileID: 8251797023502037045}
 --- !u!1001 &3280551426220102220
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -270,6 +268,14 @@ PrefabInstance:
     - target: {fileID: 6846203194347283065, guid: 4d5a26a67377d8c48915fd9a3532310a, type: 3}
       propertyPath: actionRange
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846203194347283065, guid: 4d5a26a67377d8c48915fd9a3532310a, type: 3}
+      propertyPath: mainActionName
+      value: Shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846203194347283065, guid: 4d5a26a67377d8c48915fd9a3532310a, type: 3}
+      propertyPath: moduleConfigs.Array.data[0].name
+      value: Shoot
       objectReference: {fileID: 0}
     - target: {fileID: 6846203194347283065, guid: 4d5a26a67377d8c48915fd9a3532310a, type: 3}
       propertyPath: moduleConfigs.Array.data[0].cooldown
@@ -319,6 +325,10 @@ PrefabInstance:
       propertyPath: targetTag
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8388793267373217617, guid: 4d5a26a67377d8c48915fd9a3532310a, type: 3}
+      propertyPath: affectedObjectsTag
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -349,5 +359,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e4c433d71147d095371bfe456f85bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: {fileID: 0}
-  enemyAI: {fileID: 0}
+  attack: {fileID: 8251797023502037045}
+  entityAI: {fileID: 7649237832972566542}
+--- !u!114 &8251797023502037045 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6846203194347283065, guid: 4d5a26a67377d8c48915fd9a3532310a, type: 3}
+  m_PrefabInstance: {fileID: 3280551426220102220}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926919387083640243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09977c68b4c2ce4b8ac499d225a1f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

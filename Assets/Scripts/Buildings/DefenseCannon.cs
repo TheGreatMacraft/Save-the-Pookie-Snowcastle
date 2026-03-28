@@ -81,9 +81,6 @@ public class DefenseCannon : BuildingBase
     //Shoot the Projectile
     private void Shoot(Vector2 shootDirection)
     {
-        // Decrease the Currency
-        HealthCastle.Instance.DecreaseHealth(shootCost);
-
         Quaternion shootRotation = Quaternion.FromToRotation(Vector2.right, shootDirection);
         
         // Spawn Projectile

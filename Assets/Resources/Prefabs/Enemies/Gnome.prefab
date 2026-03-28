@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 3028987207936498410}
   - component: {fileID: 1860496625541450898}
   - component: {fileID: 6675106830472511}
+  - component: {fileID: 5314910863084932964}
   m_Layer: 7
   m_Name: Gnome
   m_TagString: Enemy
@@ -238,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   AIBaseScript: {fileID: 0}
-  entityRb: {fileID: 0}
+  entityRb: {fileID: 737456926014989670}
   isKnockedback: 0
 --- !u!114 &6675106830472511
 MonoBehaviour:
@@ -255,9 +256,21 @@ MonoBehaviour:
   actionRange: 1
   moduleConfigs:
   - name: Disarm
-    cooldown: 0
+    cooldown: 5
     callAfterCooldown: 1
-    cancelWithButton: 0
-  mainAction: 
-  gnomeAI: {fileID: 0}
-  targetBuilding: {fileID: 0}
+  mainActionName: Disarm
+  gnomeAI: {fileID: 3028987207936498410}
+--- !u!114 &5314910863084932964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067078596725065261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267fbea04b2634d4f9b8ea0b4754b5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AIBaseScript: {fileID: 3028987207936498410}
+  actionHandler: {fileID: 6675106830472511}

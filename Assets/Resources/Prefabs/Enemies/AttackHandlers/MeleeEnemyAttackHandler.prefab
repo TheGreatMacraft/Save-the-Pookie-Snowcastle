@@ -82,8 +82,10 @@ MonoBehaviour:
   moduleConfigs:
   - name: Attack
     cooldown: 2
-    callAfterCooldown: 0
-  hitEssentials: {fileID: 0}
+    callAfterCooldown: 1
+  mainActionName: Attack
+  hitEssentials: {fileID: 847912664208045022}
+  _enemiesKilled: 0
   attackPoint: {fileID: 3975438125274172968}
 --- !u!114 &847912664208045022
 MonoBehaviour:
@@ -98,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 2
-  knockbackStrength: 0
-  targetTag: Player
+  knockbackStrength: 1
+  affectedObjectsTag: Player
 --- !u!114 &8794606219315755943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,5 +114,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e4c433d71147d095371bfe456f85bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: {fileID: 0}
-  enemyAI: {fileID: 0}
+  attack: {fileID: 4781937710177142057}
+  entityAI: {fileID: 0}
