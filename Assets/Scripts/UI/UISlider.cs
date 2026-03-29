@@ -1,6 +1,6 @@
 using UnityEngine.UI;
 
-public class UISlider : Media
+public sealed class UISlider : Media
 {
     private Slider slider;
     
@@ -15,9 +15,4 @@ public class UISlider : Media
     {
         slider.value = current / max;
     }
-}
-
-public class NullUISlider : Media
-{
-    public void Update(float current, float max) { }
 }

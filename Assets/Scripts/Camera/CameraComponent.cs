@@ -27,7 +27,7 @@ public class CameraComponent :
         Location playerLocation = playerBodyComponent;
         Location mouseLocation = new ScreenPositionAsWorldPosition(
             camera,
-            new MouseCursorScreenPosition()
+            new MouseCursorSCREENPosition()
         );
 
         cameraPlacement = new SimplePlacement(

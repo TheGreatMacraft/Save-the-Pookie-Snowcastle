@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 
 // Instantiate
@@ -61,3 +62,16 @@ public interface PhysicalBody :
 public interface PhysicalMovement:
     Force
 {}
+
+// Trigger-Collider Object-Detection
+public interface ColliderSensor
+{
+    void Connect(ColliderListener listener);
+    void Disconnect(ColliderListener listener);
+    ReadOnlyCollection<GameObject> ObjectsInCollider();
+}
+
+public interface ColliderListener
+{
+    void OnEnter(GameObject other);
+}
