@@ -1,11 +1,8 @@
-using UnityEngine;
-
 public sealed class SlashCall : 
     ActionCall
 {
     private readonly ColliderSensor sensor;
     private readonly Payload slashPayload;
-
     
     public SlashCall(
         ColliderSensor sensor,

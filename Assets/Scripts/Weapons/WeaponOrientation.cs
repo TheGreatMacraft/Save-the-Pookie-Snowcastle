@@ -27,7 +27,7 @@ public sealed class WeaponOrientationComponent :
                 new Vector(
                     new PointToPointVectorDefinition(
                         weaponHandle,
-                        new MouseCursorSCREENPosition()
+                        new MouseCursorWORLDPosition(camera)
                     )
                 )
             )

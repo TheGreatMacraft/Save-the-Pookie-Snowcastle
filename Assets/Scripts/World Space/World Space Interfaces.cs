@@ -47,4 +47,5 @@ public interface Force
     void AddImpulse(Vector direction, float amount);
     
     void SetForce(Vector direction, float amount);
+    void Stun(float duration);
 }

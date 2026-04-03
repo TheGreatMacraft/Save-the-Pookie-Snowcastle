@@ -21,6 +21,9 @@ public interface Spawner
 public interface ReadOnlyCollection<T>
 {
     IEnumerable<T> AllElements();
+
+    List<T> Copy()
+        => new List<T>(AllElements());
     
     public int Count()
     {

@@ -2,7 +2,19 @@ using System.Collections.Generic;
 
 public sealed class SimpleCollection<T> : Collection<T>
 {
-    List<T> elements = new();
+    List<T> elements;
+
+    public SimpleCollection()
+        : this(new List<T>()) {}
+    
+    public SimpleCollection(
+        ReadOnlyCollection<T> collection)
+        : this(collection.Copy()) {}
+
+    private SimpleCollection(List<T> list)
+    {
+        elements = list;
+    }
 
     
     public void Register(T newElement)

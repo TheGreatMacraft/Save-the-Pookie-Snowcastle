@@ -15,7 +15,7 @@ public interface ActionCall
 
 public interface ActionInterpreter
 {
-    void ExecuteActionCalls();
+    void ExecuteActionCall();
 }
 
 

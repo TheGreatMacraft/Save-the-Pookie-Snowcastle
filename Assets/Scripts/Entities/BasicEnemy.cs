@@ -9,6 +9,8 @@ public sealed class BasicEnemy :
 {
     [SerializeField] private float speed;
     [SerializeField] private String targetTag;
+    [Tooltip("The minimum proximity required to engage a target.")]
+    [SerializeField] private float range;
     
     private TargetScouter entityInstinct;
     private Movement entityMovement;
@@ -36,7 +38,8 @@ public sealed class BasicEnemy :
             entityMovementForce,
             entityLocation,
             entityInstinct,
-            speed
+            speed,
+            range
             );
         
         entityInstinct.FindNewTarget();

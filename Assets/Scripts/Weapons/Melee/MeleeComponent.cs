@@ -8,13 +8,15 @@ public abstract class MeleeComponent:
     [Header("Attack Properties")]
     [SerializeField] private float slashCooldown;
     [SerializeField] private ColliderSensorComponent slashCollider;
-    [SerializeField] private PhysicalBodyComponent slashSource;
-    
+    [SerializeField] private PhysicalBodyComponent slashSourceBody;
+
+    private ActionInterpreter meleeInterpreter;
     private ActionExecution slashAction;
-    
     
     protected virtual void Awake()
     {
+        base.Awake();
+        
         Impact allImpact = new ActionImpacts(
             new AllComponentsInObject<Impact>(
                 gameObject,
@@ -34,16 +36,25 @@ public abstract class MeleeComponent:
             coroutineClock
         );
 
-        actionInterpreter = new InputInterpreter(
-            slashAction,
-            nullActionExecution,
-            abilityAction,
-            inputSystem
+        meleeInterpreter = new AllActionsInterpreter(
+            new SimpleReadOnlyCollection<ActionInterpreter>(
+                new InputActionLink(
+                    slashAction,
+                    new OnPressed(
+                        new InputActionState(
+                            playerInput,
+                            new PrimaryInputAction()
+                            )
+                        )
+                    )
+                )
             );
     }
 
-    private void Update()
+    protected override void Update()
     {
-        actionInterpreter.ExecuteActionCalls();
+        base.Update();
+        
+        meleeInterpreter.ExecuteActionCall();
     } 
 }

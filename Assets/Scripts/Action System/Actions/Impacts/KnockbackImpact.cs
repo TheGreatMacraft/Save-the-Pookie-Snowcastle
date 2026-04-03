@@ -20,11 +20,15 @@ public sealed class KnockbackImpact :
 
     public void ApplyOn(GameObject targetGameObject)
     {
-        new ComponentInObject<Force>(
+        Force targetForce = new ComponentInObject<Force>(
                 targetGameObject,
                 new NullForce()
-            ).Value()
-            .AddImpulse(
+            ).Value();
+            
+        targetForce.Stun(
+            knockbackAmount/15
+            );
+        targetForce.AddImpulse(
                 new Vector(
                     new ConstantVectorDefinition(
                         body,

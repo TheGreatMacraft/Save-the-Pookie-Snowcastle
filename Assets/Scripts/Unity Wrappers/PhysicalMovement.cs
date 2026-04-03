@@ -7,7 +7,11 @@ public sealed class PhysicalMovementComponent :
     PhysicalMovement
 {
     private Rigidbody2D movement;
-    private float speedMultiplier = 10;
+    private readonly float speedMultiplier = 10;
+    private bool isStunned = false;
+    private Clock coroutineClock;
+    private readonly Vector nullVector 
+        = new Vector(new NullVectorDefiniton());
 
     private void Awake()
     {
@@ -15,10 +19,14 @@ public sealed class PhysicalMovementComponent :
             gameObject,
             null
             ).Value();
+
+        coroutineClock = new CoroutineClock(this);
     }
 
     public void AddConstant(Vector direction, float speed)
     {
+        if (isStunned) return;
+        
         movement.AddForce(
             direction.Direction() * (speed * speedMultiplier)
             , ForceMode2D.Force);
@@ -34,5 +42,18 @@ public sealed class PhysicalMovementComponent :
     public void SetForce(Vector direction, float amount)
     {
         movement.velocity = direction.Direction() * amount;
+    }
+
+    public void Stun(float duration)
+    {
+        isStunned = true;
+        SetForce(nullVector,0);
+        
+        coroutineClock.Schedule(() =>
+            {
+                isStunned = false;
+            },
+            duration
+            );
     }
 }

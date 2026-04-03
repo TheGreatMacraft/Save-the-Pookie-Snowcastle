@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.PlayerLoop;
+
 [RequireComponent(typeof(WeaponOrientationComponent))]
 [DisallowMultipleComponent]
 
@@ -19,9 +21,11 @@ public abstract class GunComponent :
     [SerializeField] private float projectileDamage;
     [SerializeField] private PhysicalBodyComponent projectileSpawnPoint;
     [SerializeField] private ProjectileComponent projectilePrefab;
-        
-    
-    protected Collection<Projectile> firedProjectiles;
+
+    private ActionInterpreter gunInterpreter;
+
+    protected Collection<Projectile> firedProjectiles
+        = new SimpleCollection<Projectile>();
     
     private ActionExecution shootAction;
     private ActionExecution reloadAction;
@@ -30,8 +34,6 @@ public abstract class GunComponent :
     {
         base.Awake();
         
-        
-        firedProjectiles = new SimpleCollection<Projectile>();
         Magazine magazine = new BasicMagazine(magazineSize);
             
         shootAction = new InstantAction(
@@ -56,11 +58,36 @@ public abstract class GunComponent :
             coroutineClock
         );
 
-        actionInterpreter = new InputInterpreter(
-            shootAction,
-            reloadAction,
-            abilityAction,
-            inputSystem
-            );
+        gunInterpreter = new AllActionsInterpreter(
+            new SimpleReadOnlyCollection<ActionInterpreter>(
+                
+                new InputActionLink(
+                    shootAction,
+                    new OnPressed(
+                        new InputActionState(
+                            playerInput,
+                            new PrimaryInputAction()
+                            )
+                        )
+                    ),
+                
+                new InputActionLink(
+                    reloadAction,
+                    new OnPressed(
+                        new InputActionState(
+                            playerInput,
+                            new SecondaryInputAction()
+                            )
+                        )
+                    )
+                )
+        );
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        
+        gunInterpreter.ExecuteActionCall();
     }
 }

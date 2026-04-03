@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 [DisallowMultipleComponent]
@@ -10,7 +9,8 @@ public sealed class ColliderSensorComponent :
     private Collection<ColliderListener> listeners 
         = new SimpleCollection<ColliderListener>();
     
-    private Collection<GameObject> objectsInCollider;
+    private Collection<GameObject> objectsInCollider 
+        = new SimpleCollection<GameObject>();
 
     
     public void Connect(ColliderListener listener)
@@ -26,7 +26,7 @@ public sealed class ColliderSensorComponent :
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        foreach (var listener in listeners.AllElements())
+        foreach (var listener in listeners.Copy())
             listener.OnEnter(other.gameObject);
         
         objectsInCollider.Register(other.gameObject);

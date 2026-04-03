@@ -5,14 +5,14 @@ public abstract class WeaponComponent :
     MonoBehaviour
 {
     [Header("Input System")]
-    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] protected PlayerInput playerInput;
     
     [Header("Target Tag")]
     [SerializeField] protected string targetTag;
     
     protected Clock coroutineClock;
-    protected InputSystem inputSystem;
-    protected ActionInterpreter actionInterpreter;
+    protected InputActionState inputActionState;
+    private ActionInterpreter abilityInterpreter;
     
     protected ActionExecution abilityAction;
     protected readonly ActionExecution nullActionExecution 
@@ -21,18 +21,26 @@ public abstract class WeaponComponent :
     
     protected virtual ActionExecution AddAbility() 
         => new NullActionExecution();
-
+    
     
     protected virtual void Awake()
     {
         coroutineClock = new CoroutineClock(this);
-        inputSystem = new InputSystem(playerInput);
-        
         abilityAction = AddAbility();
+        
+        abilityInterpreter = new InputActionLink(
+            abilityAction,
+            new OnPressed(
+                new InputActionState(
+                    playerInput,
+                    new AbilityInputAction()
+                    )
+                )
+        );
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        actionInterpreter.ExecuteActionCalls();
+        abilityInterpreter.ExecuteActionCall();
     }
 }

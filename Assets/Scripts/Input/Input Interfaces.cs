@@ -1,11 +1,11 @@
-public interface IInputAction
+public interface InputAction
 {
-    bool PressedThisFrame(InputAction inputAction);
+    string ToString();
 }
 
-public interface IInputActionMap
+public interface InputTrigger
 {
-    string GetStringOf(InputAction inputAction);
+    bool IsActive();
 }
 
 public interface Visibility
