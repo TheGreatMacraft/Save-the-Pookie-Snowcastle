@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+[RequireComponent(typeof(PhysicalBodyComponent))]
+[DisallowMultipleComponent]
 
 public abstract class WeaponComponent :
     MonoBehaviour
@@ -11,13 +13,13 @@ public abstract class WeaponComponent :
     [SerializeField] protected string targetTag;
     
     protected Clock coroutineClock;
-    protected InputActionState inputActionState;
     private ActionInterpreter abilityInterpreter;
     
     protected ActionExecution abilityAction;
     protected readonly ActionExecution nullActionExecution 
         = new NullActionExecution();
-    
+
+    private Orientation weaponOrientation;
     
     protected virtual ActionExecution AddAbility() 
         => new NullActionExecution();
@@ -37,10 +39,22 @@ public abstract class WeaponComponent :
                     )
                 )
         );
+
+        weaponOrientation = new WeaponOrientation(
+            new ComponentInObject<PhysicalBody>(
+                gameObject,
+                new NullPhysicalBody()
+                ).Value(),
+            new ComponentInObject<TargetLocationSource>(
+                new ParentOfGameObject(gameObject).Parent(),
+                new NullTargetLocationSource()
+                ).Value()
+        );
     }
 
     protected virtual void Update()
     {
+        weaponOrientation.Orient();
         abilityInterpreter.ExecuteActionCall();
     }
 }

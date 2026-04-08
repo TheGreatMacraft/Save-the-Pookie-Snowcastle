@@ -4,7 +4,7 @@ public class EntityDeath : MonoBehaviour, Mortal
 {
     public void Die()
     {
-        Debug.Log("Killing " + this.gameObject.name);
+        Debug.Log("Killing entity: " + gameObject.name);
         
         Destroy(gameObject);
     }

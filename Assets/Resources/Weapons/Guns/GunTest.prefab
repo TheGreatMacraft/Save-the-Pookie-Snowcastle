@@ -143,22 +143,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f3792b2dda4fbba99e5a96351152e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootCooldown: 0.5
+  playerInput: {fileID: 0}
+  targetTag: Enemy
+  shootCooldown: 0.2
   magazineSize: 8
   ammoPerShot: 1
   rotationAnchor: {fileID: 5362818711097360322}
-  targetTag: Enemy
   reloadCooldown: 2
-  projectileSpeed: 10
-  projectileDamage: 0
+  projectileSpeed: 80
+  projectileDamage: 10
   projectileSpawnPoint: {fileID: 6049364281767135172}
-  projectilePrefab: {fileID: 6443550074613388771, guid: 6d97ad4114c4d9b498c49bfa78391528, type: 3}
-  camera: {fileID: 0}
-  playerInput: {fileID: 0}
+  projectilePrefab: {fileID: 6136037682117187594, guid: 6d97ad4114c4d9b498c49bfa78391528, type: 3}
   abilityCooldown: 5
-  subProjectileSpeed: 15
-  subProjectileDamage: 0
-  subProjectilePrefab: {fileID: 6443550074613388771, guid: 6d97ad4114c4d9b498c49bfa78391528, type: 3}
+  subProjectileSpeed: 120
+  subProjectileDamage: 5
+  subProjectilePrefab: {fileID: 6136037682117187594, guid: 6d97ad4114c4d9b498c49bfa78391528, type: 3}
   numberOfProjectiles: 5
 --- !u!1 &7917477559206038531
 GameObject:

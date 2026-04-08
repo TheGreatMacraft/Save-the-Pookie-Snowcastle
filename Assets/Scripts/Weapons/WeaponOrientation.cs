@@ -1,41 +1,38 @@
-using UnityEngine;
-[RequireComponent(typeof(PhysicalBodyComponent))]
-[DisallowMultipleComponent]
-
-public sealed class WeaponOrientationComponent : 
-    MonoBehaviour
+public sealed class WeaponOrientation : 
+    Orientation
 {
-    [SerializeField] private Camera camera;
-    
-    private Rotatable weaponRotatable;
-    private Rotation rotation;
+    private readonly Rotatable weaponRotatable;
+    private readonly Rotation rotation;
 
-    private void Awake()
-    {
-        weaponRotatable = new ComponentInObject<Rotatable>(
-            gameObject,
-            new NullRotatable()
-            ).Value();
-        
-        Location weaponHandle = new ComponentInObject<Location>(
-            gameObject,
-            new NullLocation()
-        ).Value();
-
-        rotation = new Rotation(
-            new VectorRotationDefinition(
-                new Vector(
-                    new PointToPointVectorDefinition(
-                        weaponHandle,
-                        new MouseCursorWORLDPosition(camera)
+    public WeaponOrientation(
+        PhysicalBody weaponAnchor,
+        Location targetLocation
+        )
+        : this(
+            weaponAnchor,
+            new Rotation(
+                new VectorRotationDefinition(
+                    new Vector(
+                        new PointToPointVectorDefinition(
+                            weaponAnchor,
+                            targetLocation
+                            )
+                        )
                     )
                 )
-            )
-        );
+            ){}
+    
+    private WeaponOrientation(
+        Rotatable weaponRotatable,
+        Rotation rotation
+    )
+    {
+        this.weaponRotatable = weaponRotatable;
+        this.rotation = rotation;
     }
     
     
-    public void Update()
+    public void Orient()
     {
         weaponRotatable.RotateAs(rotation);
     }

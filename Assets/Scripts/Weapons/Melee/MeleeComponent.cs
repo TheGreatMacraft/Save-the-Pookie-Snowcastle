@@ -1,6 +1,4 @@
 using UnityEngine;
-[RequireComponent(typeof(WeaponOrientationComponent))]
-[DisallowMultipleComponent]
 
 public abstract class MeleeComponent:
     WeaponComponent

@@ -40,9 +40,14 @@ public interface Target :
     void Hit(Impact impact, Terminable disposableHitter);
 }
 
-public interface TargetScouter
+public interface TargetSource
 {
-    void FindNewTarget();
     Target CurrentTarget();
 }
 
+public interface TargetLocationSource : Location {}
+
+public interface TargetScouter : TargetSource
+{
+    void FindNewTarget();
+}

@@ -6,7 +6,6 @@ public sealed class HealthComponent : MonoBehaviour, Health
 {
     [SerializeField] private float maxHealth;
     [SerializeField] private Slider slider; 
-    [SerializeField] private MonoBehaviour deathProvider;
     
     private Health health;
     private HealthReporter reporter;
@@ -17,20 +16,20 @@ public sealed class HealthComponent : MonoBehaviour, Health
 
     private void Awake()
     {
-        if (deathProvider is Mortal death)
-        {
-            var healthValue = new HealthValue(maxHealth);
-            health = healthValue;
-            reporter = healthValue;
+        Mortal death = new ComponentInObject<Mortal>(
+            gameObject,
+            new NullMortal()
+            ).Value();
+        
+        HealthValue healthValue = new HealthValue(maxHealth);
+        health = healthValue;
+        reporter = healthValue;
             
-            UISlider = slider != null
-                ? new UISlider(slider)
-                : new NullUISlider();
+        UISlider = slider != null
+            ? new UISlider(slider)
+            : new NullUISlider();
             
-            vitals = new Vitals(death);
-        }
-        else
-            throw new Exception("Death Provider doesn't implement Mortal");
+        vitals = new Vitals(death);
     }
 
     private void Update()

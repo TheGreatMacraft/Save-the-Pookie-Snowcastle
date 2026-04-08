@@ -5,17 +5,18 @@ using UnityEngine;
 [DisallowMultipleComponent]
 
 public sealed class BasicEnemy : 
-    MonoBehaviour
+    MonoBehaviour,
+    TargetLocationSource
 {
     [SerializeField] private float speed;
     [SerializeField] private String targetTag;
     [Tooltip("The minimum proximity required to engage a target.")]
     [SerializeField] private float range;
-    
-    private TargetScouter entityInstinct;
+
+    private TargetScouter entityInstinct = new NullTargetScouter();
     private Movement entityMovement;
     
-
+    
     private void Awake()
     {
         Force entityMovementForce = new ComponentInObject<Force>(
@@ -33,7 +34,6 @@ public sealed class BasicEnemy :
             targetTag
         );
 
-
         entityMovement = new TargetFollower(
             entityMovementForce,
             entityLocation,
@@ -49,4 +49,8 @@ public sealed class BasicEnemy :
     {
         entityMovement.Move();
     }
+    
+    // Proxy
+    public Vector3 Coordinates()
+        => entityInstinct.CurrentTarget().Coordinates();
 }

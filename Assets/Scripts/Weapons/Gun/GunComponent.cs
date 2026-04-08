@@ -1,8 +1,4 @@
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-
-[RequireComponent(typeof(WeaponOrientationComponent))]
-[DisallowMultipleComponent]
 
 public abstract class GunComponent : 
     WeaponComponent
