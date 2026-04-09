@@ -6,6 +6,7 @@ using UnityEngine;
 public interface ActionExecution
 {
     void Execute();
+    bool Concluded();
 }
 
 public interface ActionCall

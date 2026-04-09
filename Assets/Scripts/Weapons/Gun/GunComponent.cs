@@ -72,7 +72,7 @@ public abstract class GunComponent :
                     new OnPressed(
                         new InputActionState(
                             playerInput,
-                            new SecondaryInputAction()
+                            new SupportInputAction()
                             )
                         )
                     )

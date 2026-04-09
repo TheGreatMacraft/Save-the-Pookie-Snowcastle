@@ -1,4 +1,5 @@
-public sealed class ReloadCall : ActionCall
+public sealed class ReloadCall 
+    : ActionCall
 {
     private readonly Magazine magazine;
 

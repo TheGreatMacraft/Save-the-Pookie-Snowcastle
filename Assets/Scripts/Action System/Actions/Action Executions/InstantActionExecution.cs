@@ -30,4 +30,6 @@ public sealed class InstantAction : ActionExecution
             }
             , cooldown);
     }
+    
+    public bool Concluded() => canAct;
 }

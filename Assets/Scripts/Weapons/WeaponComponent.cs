@@ -35,7 +35,7 @@ public abstract class WeaponComponent :
             new OnPressed(
                 new InputActionState(
                     playerInput,
-                    new AbilityInputAction()
+                    new SpecialInputAction()
                     )
                 )
         );

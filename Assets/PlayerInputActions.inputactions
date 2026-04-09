@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Secondary",
+                    "name": "Support",
                     "type": "Button",
                     "id": "09464350-417d-451c-b1ed-e61fe3b7890c",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Ability",
+                    "name": "Roll",
                     "type": "Button",
                     "id": "ead2d7fe-6d76-4457-9795-cc4c3134ff1b",
                     "expectedControlType": "Button",
@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Tool",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "a6aeee40-2557-46ea-9402-0ad01829d320",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Roll",
+                    "name": "Special",
                     "type": "Button",
                     "id": "b5cd247b-502f-4431-ba7a-6da32a7763f1",
                     "expectedControlType": "Button",
@@ -81,7 +81,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Secondary",
+                    "action": "Support",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -92,7 +92,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Ability",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -103,7 +103,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Tool",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -114,7 +114,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Roll",
+                    "action": "Special",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

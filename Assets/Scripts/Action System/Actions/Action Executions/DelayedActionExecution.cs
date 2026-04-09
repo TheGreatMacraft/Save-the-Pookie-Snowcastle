@@ -30,4 +30,6 @@ public sealed class DelayedAction : ActionExecution
             }
             , cooldown);
     }
+    
+    public bool Concluded() => canAct;
 }
