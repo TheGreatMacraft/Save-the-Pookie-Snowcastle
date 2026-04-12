@@ -7,6 +7,11 @@ public interface Movement
     void Move();
 }
 
+public interface ComplexMovement : Movement
+{
+    bool isMoving();
+}
+
 public interface Placement
 {
     void Place();

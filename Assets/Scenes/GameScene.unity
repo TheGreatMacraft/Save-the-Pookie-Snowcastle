@@ -396,6 +396,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &183163928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183163921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd9c8e388c84e8da33300c664cef841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &232337036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,6 +1496,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6346218454370972620, guid: 649e8ff27aa3cae4aad82aaf897072e0, type: 3}
   m_PrefabInstance: {fileID: 1477868301275014815}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1041312500 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 273886901426734247, guid: 649e8ff27aa3cae4aad82aaf897072e0, type: 3}
+  m_PrefabInstance: {fileID: 1477868301275014815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f3792b2dda4fbba99e5a96351152e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1044371858
 GameObject:
   m_ObjectHideFlags: 0
@@ -3251,28 +3274,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 10
-  rollForce: 5
-  rollCooldown: 0.3
-  playerInput: {fileID: 1928404793}
-  playerAnimator: {fileID: 183163925}
---- !u!114 &1976157330
+  rollForce: 30
+  rollDuration: 0.35
+  rollCooldown: 0.4
+  playerAnimationMessenger: {fileID: 183163928}
+--- !u!114 &1976157319
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976157316}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d4bfc96b6ea4bd3bf971b311401f549, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ae7bee2e7a34f50bb0a5426965ae665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollSpeed: 12
-  rollDuration: 0.35
-  rollCooldown: 0.6
-  rollDeceleration: 18
-  isRolling: 0
-  canRoll: 1
+  playerInput: {fileID: 1928404793}
+  weapon: {fileID: 1041312500}
 --- !u!1 &1983168793
 GameObject:
   m_ObjectHideFlags: 0
@@ -4266,7 +4285,8 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 389778344}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4241883027347597595, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
     m_RemovedGameObjects:
     - {fileID: 9207015983641275532, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
     m_AddedGameObjects:
@@ -4282,13 +4302,16 @@ PrefabInstance:
       addedObject: {fileID: 1976157317}
     - targetCorrespondingSourceObject: {fileID: 5501339659546405418, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1976157330}
+      addedObject: {fileID: 1976157319}
     - targetCorrespondingSourceObject: {fileID: 23659312415225892, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
       insertIndex: -1
       addedObject: {fileID: 183163925}
     - targetCorrespondingSourceObject: {fileID: 23659312415225892, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
       insertIndex: -1
       addedObject: {fileID: 183163924}
+    - targetCorrespondingSourceObject: {fileID: 23659312415225892, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 183163928}
   m_SourcePrefab: {fileID: 100100000, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
 --- !u!1001 &8657722034899003478
 PrefabInstance:

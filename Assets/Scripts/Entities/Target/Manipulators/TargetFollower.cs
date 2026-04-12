@@ -1,5 +1,5 @@
 public sealed class TargetFollower : 
-    Movement
+    ComplexMovement
 {
     private readonly Movement legs;
     private readonly DistanceBetweenLocations distanceToTarget;
@@ -40,11 +40,14 @@ public sealed class TargetFollower :
         this.distanceToTarget = distanceToTarget;
         this.range = range;
     }
-    
+
+    public bool isMoving()
+        => distanceToTarget.Value() > range;
+
     public void Move()
     {
-        if (distanceToTarget.Value() <= range) return;
-            
+        if (!isMoving()) return;
+        
         legs.Move();
     }
 }

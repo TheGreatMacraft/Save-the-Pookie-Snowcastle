@@ -2,6 +2,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 [DisallowMultipleComponent]
 
+// Used by Unity's Animation Event System (don't change method names)
 public sealed class PlayerAnimationsComponent
     : MonoBehaviour
 {

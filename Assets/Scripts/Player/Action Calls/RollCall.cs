@@ -6,26 +6,53 @@ public sealed class RollCall
     private readonly Force movement;
     private readonly Vector movementDirection;
     private readonly float rollForce;
-    private readonly Animator playerAnimator;
+    
+    private readonly AnimatedRoll animator;
+    
+    private readonly Clock coroutineClock;
+    private readonly float rollDuration;
 
 
     public RollCall(
         Force movement,
         Vector movementDirection,
         float rollForce,
-        Animator playerAnimator
+        AnimatedRoll animator,
+        Clock coroutineClock,
+        float rollDuration
     )
     {
         this.movement = movement;
         this.movementDirection = movementDirection;
         this.rollForce = rollForce;
-        this.playerAnimator = playerAnimator;
+        this.animator = animator;
+        this.coroutineClock = coroutineClock;
+        this.rollDuration = rollDuration;
     }
     
     
     public void Call()
     {
-        playerAnimator.SetTrigger("triggerRoll");
-        movement.AddImpulse(movementDirection, rollForce);
+        Vector currentMovementDirection = new Vector(
+            new ConstantVectorDefinition(
+                movementDirection.RawVector()
+            )
+        );
+        
+        movement.SetForce(currentMovementDirection, rollForce);
+        
+        coroutineClock.DoUntil((progression) =>
+            {
+                float currentSpeed = Mathf.Lerp(rollForce, 0f, progression);
+                movement.SetForce(currentMovementDirection, currentSpeed);
+            },
+            rollDuration,
+            () =>
+            {
+                movement.ResetForce();
+            }
+            );
+        
+        animator.TriggerRolling();
     }
 }
