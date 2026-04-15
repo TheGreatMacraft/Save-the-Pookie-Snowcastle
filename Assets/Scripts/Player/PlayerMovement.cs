@@ -1,26 +1,36 @@
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+[RequireComponent(typeof(PhysicalBody))]
 [RequireComponent(typeof(PhysicalMovement))]
 [DisallowMultipleComponent]
 
-public sealed class PlayerMovement
-    : MonoBehaviour
+public sealed class PlayerMovementComponent
+    : MonoBehaviour, PlayerMovement
 {
     [Header("Basic Movement")]
     [SerializeField] private float baseSpeed;
     
+    private ComplexMovement playerLegs;
+    
+    
     [Header("Roll Properties")]
     [SerializeField] private float rollForce;
+    [SerializeField] private float rollDuration;
     [SerializeField] private float rollCooldown;
     
-    [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private Animator playerAnimator;
-
-    private Vector movementDirection;
-    private ActionInterpreter allMoves;
-    private Movement legs;
-
     private ActionExecution rollAction;
+    
+    
+    [Header("Other")]
+    [SerializeField] private PlayerAnimationMessengerComponent playerAnimationMessenger;
+    
+    
+    public ActionExecution RollAction()
+        => rollAction;
+
+    public bool IsMoving()
+        => playerLegs.isMoving();
+    
     
     private void Awake()
     {
@@ -30,53 +40,31 @@ public sealed class PlayerMovement
             gameObject,
             new NullForce()
         ).Value();
-        
-        movementDirection = new Vector(
-            new InputAxisVectorDefinition()
-        );
-        
-        legs = new Legs(
+
+        playerLegs = new InputAxisFollower(
             playerMovement,
-            movementDirection,
             baseSpeed
         );
 
         rollAction = new InstantAction(
             new RollCall(
                 playerMovement,
-                movementDirection,
+                new Vector(new InputAxisVectorDefinition()),
                 rollForce,
-                playerAnimator
+                playerAnimationMessenger,
+                coroutineClock,
+                rollDuration
                 ),
             rollCooldown,
             coroutineClock
-        );
-        
-        allMoves = new AllActionsInterpreter(
-            new SimpleReadOnlyCollection<ActionInterpreter>(
-                
-                new InputActionLink(
-                    rollAction,
-                    new OnPressed(
-                        new InputActionState(
-                            playerInput,
-                            new  RollInputAction()
-                            )
-                        )
-                    )
-                )
         );
     }
     
     private void FixedUpdate()
     {
-        playerAnimator.SetBool("isRunning",
-            movementDirection.RawVector() != Vector3.zero
-            );
+        playerAnimationMessenger.ToggleWalking(playerLegs.isMoving());
         
         if(rollAction.Concluded())
-            legs.Move();
-        
-        allMoves.ExecuteActionCall();
+            playerLegs.Move();
     }
 }

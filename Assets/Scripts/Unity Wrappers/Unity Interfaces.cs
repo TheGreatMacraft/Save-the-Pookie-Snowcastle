@@ -78,3 +78,9 @@ public interface ColliderListener
 {
     void OnEnter(GameObject other);
 }
+
+// Sprite Renderer
+public interface Perspective
+{
+    public void SetDepth();
+}

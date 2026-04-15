@@ -7,20 +7,29 @@ public sealed class WeaponOrientation :
     public WeaponOrientation(
         PhysicalBody weaponAnchor,
         Location targetLocation
+    )
+        : this(
+            weaponAnchor,
+            new Vector(
+                new PointToPointVectorDefinition(
+                    weaponAnchor,
+                    targetLocation
+                )
+            )
+        ) {}
+    
+    public WeaponOrientation(
+        Rotatable weaponAnchor,
+        Vector orientationVector
         )
         : this(
             weaponAnchor,
             new Rotation(
                 new VectorRotationDefinition(
-                    new Vector(
-                        new PointToPointVectorDefinition(
-                            weaponAnchor,
-                            targetLocation
-                            )
-                        )
+                    orientationVector
                     )
                 )
-            ){}
+            ) {}
     
     private WeaponOrientation(
         Rotatable weaponRotatable,

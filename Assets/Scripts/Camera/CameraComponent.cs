@@ -1,15 +1,17 @@
 using UnityEngine;
-[RequireComponent(typeof(PhysicalBodyComponent))]
 [RequireComponent(typeof(Camera))]
+[RequireComponent(typeof(PhysicalBodyComponent))]
 [DisallowMultipleComponent]
 
 public class CameraComponent : 
     MonoBehaviour
 {
+    [Header("Mouse Cursor Follower")]
     [SerializeField] private float fraction;
     [SerializeField] private PhysicalBodyComponent playerBodyComponent;
     
     private Placement cameraPlacement;
+    private Offset shakeOffset;
     
     
     private void Awake()
@@ -17,8 +19,8 @@ public class CameraComponent :
         Camera camera = new ComponentInObject<Camera>(
             gameObject,
             null
-            ).Value();
-
+        ).Value();
+        
         Movable cameraBody = new ComponentInObject<Movable>(
             gameObject,
             new NullMovable()
@@ -30,7 +32,12 @@ public class CameraComponent :
             new MouseCursorSCREENPosition()
         );
 
-        cameraPlacement = new SimplePlacement(
+        shakeOffset = new ComponentInObject<Offset>(
+            gameObject,
+            new NullOffset()
+        ).Value();
+
+        cameraPlacement = new OffSetPlacement(
             cameraBody,
             new CameraDestination(
                 new PointToPointVectorDefinition(
@@ -38,6 +45,9 @@ public class CameraComponent :
                     mouseLocation
                     ),
                 fraction
+                ),
+            new SimpleReadOnlyCollection<Offset>(
+                shakeOffset
                 )
             );
     }
