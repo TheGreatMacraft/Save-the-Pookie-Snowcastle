@@ -1,9 +1,8 @@
-public sealed class Legs 
-    : Movement
+public class Legs : Movement
 {
-    private readonly Force force;
-    private readonly Vector movementDirection;
-    private readonly float speed;
+    private Force force;
+    private Vector movementDirection;
+    private float speed;
 
 
     public Legs(
@@ -16,7 +15,7 @@ public sealed class Legs
         this.movementDirection = movementDirection;
         this.speed = speed;
     }
-    
+
 
     public void Move()
     {

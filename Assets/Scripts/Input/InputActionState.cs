@@ -24,10 +24,7 @@ public sealed class InputActionState
     
     public bool WasReleasedThisFrame()
         => playerInput.actions[action.ToString()].WasReleasedThisFrame();
-
-    public bool IsReleased()
-        => !IsPressed();
-
+    
     // Room for more, when necesarry
-
+    
 }

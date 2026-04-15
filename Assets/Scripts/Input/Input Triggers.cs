@@ -47,21 +47,6 @@ public sealed class OnBeingPressed :
         => inputActionState.IsPressed();
 }
 
-public sealed class OnBeingReleased : 
-    InputTrigger
-{
-    private readonly InputActionState inputActionState;
-
-    
-    public OnBeingReleased(InputActionState inputActionState)
-    {
-        this.inputActionState = inputActionState;
-    }
-
-
-    public bool IsActive()
-        => inputActionState.IsReleased();
-}
 
 public sealed class InputTriggerCombo :
     InputTrigger

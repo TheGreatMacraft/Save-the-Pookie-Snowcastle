@@ -1,5 +1,0 @@
-- combat:
-	- weapons
-- buildings
-- enemies in waves
-- classes

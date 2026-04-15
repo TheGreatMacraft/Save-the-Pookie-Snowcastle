@@ -18,9 +18,13 @@ public abstract class GunComponent :
     [SerializeField] private PhysicalBodyComponent projectileSpawnPoint;
     [SerializeField] private ProjectileComponent projectilePrefab;
 
+    private ActionInterpreter gunInterpreter;
+
     protected Collection<Projectile> firedProjectiles
         = new SimpleCollection<Projectile>();
     
+    private ActionExecution shootAction;
+    private ActionExecution reloadAction;
     
     protected virtual void Awake()
     {
@@ -28,7 +32,7 @@ public abstract class GunComponent :
         
         Magazine magazine = new BasicMagazine(magazineSize);
             
-        primaryAction = new InstantAction(
+        shootAction = new InstantAction(
             new ShootCall(
                 magazine,
                 ammoPerShot,
@@ -44,10 +48,42 @@ public abstract class GunComponent :
             coroutineClock
         );
             
-        supportAction = new DelayedAction(
+        reloadAction = new DelayedAction(
             new ReloadCall(magazine),
             reloadCooldown,
             coroutineClock
         );
+
+        gunInterpreter = new AllActionsInterpreter(
+            new SimpleReadOnlyCollection<ActionInterpreter>(
+                
+                new InputActionLink(
+                    shootAction,
+                    new OnPressed(
+                        new InputActionState(
+                            playerInput,
+                            new PrimaryInputAction()
+                            )
+                        )
+                    ),
+                
+                new InputActionLink(
+                    reloadAction,
+                    new OnPressed(
+                        new InputActionState(
+                            playerInput,
+                            new SupportInputAction()
+                            )
+                        )
+                    )
+                )
+        );
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        
+        gunInterpreter.ExecuteActionCall();
     }
 }

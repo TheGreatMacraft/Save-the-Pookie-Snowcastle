@@ -3,24 +3,21 @@ public sealed class InputActionLink
 {
     private readonly ActionExecution actionExecution;
     private readonly InputTrigger inputTrigger;
-    private readonly bool extraCondition;
-    
-    
+
+
     public InputActionLink(
         ActionExecution actionExecution,
-        InputTrigger inputTrigger,
-        bool extraCondition = true
+        InputTrigger inputTrigger
         )
     {
         this.actionExecution = actionExecution;
         this.inputTrigger = inputTrigger;
-        this.extraCondition = extraCondition;
     }
     
     
     public void ExecuteActionCall()
     {
-        if(inputTrigger.IsActive() && extraCondition)
+        if(inputTrigger.IsActive())
             actionExecution.Execute();
     }
 }

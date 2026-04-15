@@ -10,6 +10,8 @@ public sealed class PhysicalMovementComponent :
     private readonly float speedMultiplier = 10;
     private bool isStunned = false;
     private Clock coroutineClock;
+    private readonly Vector nullVector 
+        = new Vector(new NullVectorDefiniton());
 
     private void Awake()
     {
@@ -42,15 +44,10 @@ public sealed class PhysicalMovementComponent :
         movement.velocity = direction.Direction() * amount;
     }
 
-    public void ResetForce()
-    {
-        movement.velocity = Vector2.zero;
-    }
-
     public void Stun(float duration)
     {
         isStunned = true;
-        ResetForce();
+        SetForce(nullVector,0);
         
         coroutineClock.Schedule(() =>
             {

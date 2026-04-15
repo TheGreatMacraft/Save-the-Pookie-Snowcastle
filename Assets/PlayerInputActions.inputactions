@@ -15,42 +15,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Secondary",
-                    "type": "Button",
-                    "id": "ead2d7fe-6d76-4457-9795-cc4c3134ff1b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Movement",
-                    "type": "Button",
-                    "id": "b5cd247b-502f-4431-ba7a-6da32a7763f1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Power",
-                    "type": "Button",
-                    "id": "ca1025a6-e2b4-411e-8c24-b8d3c30f52c2",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Special",
-                    "type": "Button",
-                    "id": "33751676-771e-426a-bd4c-a4ec27440c28",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Support",
                     "type": "Button",
                     "id": "09464350-417d-451c-b1ed-e61fe3b7890c",
@@ -60,9 +24,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Roll",
+                    "type": "Button",
+                    "id": "ead2d7fe-6d76-4457-9795-cc4c3134ff1b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "a6aeee40-2557-46ea-9402-0ad01829d320",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Special",
+                    "type": "Button",
+                    "id": "b5cd247b-502f-4431-ba7a-6da32a7763f1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -105,6 +87,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2de128ce-d940-46c2-ae10-25307dd2f3e2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "dd3a6421-a7cc-4af6-a995-0e96ff21920e",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -116,41 +109,8 @@
                 },
                 {
                     "name": "",
-                    "id": "2de128ce-d940-46c2-ae10-25307dd2f3e2",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Secondary",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d3aafe1a-718a-407f-b217-94768aeacd19",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "381e143f-eb05-45f4-bc02-34dc10386ab9",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Power",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2f45f958-b805-4d63-a8c6-b66636250fa5",
-                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

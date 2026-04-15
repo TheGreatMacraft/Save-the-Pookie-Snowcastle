@@ -14,25 +14,23 @@ public sealed class ScatterCannonComponent :
     
     private readonly Spawner scatteredProjectiles;
 
-    protected override void Awake()
+    protected override ActionExecution AddAbility()
     {
-        base.Awake();
-        
-        abilityAction = new InstantAction(
+        return new InstantAction(
             new ScatterCall(
                 new ScatterProjectileSpawner(
                     new StandardProjectileSpawner(
                         subProjectileSpeed,
                         new GameObjectBuilder<ProjectileComponent>(
                             subProjectilePrefab
-                        ),
+                            ),
                         new NullCollection<Projectile>(),
                         targetTag
-                    ),
+                        ),
                     numberOfProjectiles
-                ),
+                    ),
                 firedProjectiles
-            ),
+                ),
             abilityCooldown,
             coroutineClock
         );
