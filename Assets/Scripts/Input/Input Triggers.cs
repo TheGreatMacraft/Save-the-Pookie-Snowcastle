@@ -1,5 +1,5 @@
 public sealed class OnPressed : 
-    InputTrigger
+    Condition
 {
     private readonly InputActionState inputActionState;
     
@@ -10,13 +10,13 @@ public sealed class OnPressed :
     }
 
 
-    public bool IsActive()
+    public bool IsMet()
         => inputActionState.WasPressedThisFrame();
 }
 
 
 public sealed class OnReleased : 
-    InputTrigger
+    Condition
 {
     private readonly InputActionState inputActionState;
     
@@ -27,12 +27,12 @@ public sealed class OnReleased :
     }
 
 
-    public bool IsActive()
+    public bool IsMet()
         => inputActionState.WasReleasedThisFrame();
 }
 
 public sealed class OnBeingPressed : 
-    InputTrigger
+    Condition
 {
     private readonly InputActionState inputActionState;
 
@@ -43,51 +43,22 @@ public sealed class OnBeingPressed :
     }
 
 
-    public bool IsActive()
+    public bool IsMet()
         => inputActionState.IsPressed();
 }
 
-public sealed class OnBeingReleased : 
-    InputTrigger
+public sealed class OnBeingReleased :
+    Condition
 {
     private readonly InputActionState inputActionState;
 
-    
+
     public OnBeingReleased(InputActionState inputActionState)
     {
         this.inputActionState = inputActionState;
     }
 
 
-    public bool IsActive()
+    public bool IsMet()
         => inputActionState.IsReleased();
-}
-
-public sealed class InputTriggerCombo :
-    InputTrigger
-{
-    private readonly ReadOnlyCollection<InputTrigger>  inputTriggers;
-
-
-    public InputTriggerCombo(
-        ReadOnlyCollection<InputTrigger> inputTriggers
-    )
-    {
-        this.inputTriggers = inputTriggers;
-    }
-
-
-    public bool IsActive()
-    {
-        foreach (
-            InputTrigger trigger 
-            in inputTriggers.AllElements()
-            )
-        {
-            if(!trigger.IsActive())
-                return false;
-        }
-        
-        return true;
-    }
 }

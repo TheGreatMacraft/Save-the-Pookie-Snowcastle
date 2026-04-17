@@ -26,7 +26,7 @@ kanban-plugin: board
 
 - [ ] [[Enemy]]
 - [ ] [[Player]]
-- [ ] [[Weapons]]
+- [ ] [[Progress Boards/Weapons]]
 
 
 

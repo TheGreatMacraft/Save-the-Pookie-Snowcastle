@@ -41,12 +41,12 @@ public sealed class TargetFollower :
         this.range = range;
     }
 
-    public bool isMoving()
+    public bool IsMet()
         => distanceToTarget.Value() > range;
 
     public void Move()
     {
-        if (!isMoving()) return;
+        if (!IsMet()) return;
         
         legs.Move();
     }

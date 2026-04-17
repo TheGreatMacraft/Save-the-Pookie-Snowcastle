@@ -84,3 +84,9 @@ public interface Perspective
 {
     public void SetDepth();
 }
+
+// Condition
+public interface Condition
+{
+    public bool IsMet();
+}

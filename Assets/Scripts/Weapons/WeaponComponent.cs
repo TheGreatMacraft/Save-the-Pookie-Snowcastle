@@ -1,17 +1,26 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 [RequireComponent(typeof(PhysicalBodyComponent))]
 [DisallowMultipleComponent]
 
 public abstract class WeaponComponent :
-    MonoBehaviour, WeaponActions
+    MonoBehaviour
 {
     [Header("Target Tag")]
     [SerializeField] protected string targetTag;
     
+    [Header("Player Movement")]
+    [SerializeField] protected PlayerMovementComponent playerMovement;
+    
+    [Header("Player Input")]
+    [SerializeField] private PlayerInput playerInput;
+    
     [Header("Sprite Renderer")]
     [SerializeField] private SpriteRenderer spriteRenderer;
-
+    
     protected Clock coroutineClock;
+    protected InputActionStates inputActionStates;
+    
     private Orientation weaponOrientation;
     private Perspective weaponPerspective;
     
@@ -19,6 +28,7 @@ public abstract class WeaponComponent :
     protected virtual void Awake()
     {
         coroutineClock = new CoroutineClock(this);
+        inputActionStates = new InputActionStates(playerInput);
 
         PhysicalBody weaponAnchor = new ComponentInObject<PhysicalBody>(
             gameObject,
@@ -52,20 +62,16 @@ public abstract class WeaponComponent :
     {
         weaponOrientation.Orient();
         weaponPerspective.SetDepth();
+        
+        defaultAttackAction.Execute();
+        heavyAttackAction.Execute();
+        supportAction.Execute();
+        abilityAction.Execute();
     }
     
     
-    protected ActionExecution primaryAction = new NullActionExecution();
-    protected ActionExecution secondaryAction = new NullActionExecution();
+    protected ActionExecution defaultAttackAction = new NullActionExecution();
+    protected ActionExecution heavyAttackAction = new NullActionExecution();
     protected ActionExecution supportAction = new NullActionExecution();
     protected ActionExecution abilityAction = new NullActionExecution();
-    
-    public ActionExecution PrimaryAction()
-        => primaryAction;
-    public ActionExecution SecondaryAction()
-        => secondaryAction;
-    public ActionExecution SupportAction()
-        => supportAction;
-    public ActionExecution AbilityAction()
-        => abilityAction;
 }

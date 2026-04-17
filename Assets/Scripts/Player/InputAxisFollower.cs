@@ -18,12 +18,12 @@ public sealed class InputAxisFollower
         );
     }
 
-    public bool isMoving()
+    public bool IsMet()
         => !inputAxisVector.Equals(nullVector);
 
     public void Move()
     {
-        if (!isMoving()) return;
+        if (!IsMet()) return;
 
         legs.Move();
     }

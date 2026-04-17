@@ -1,5 +1,6 @@
 public interface PlayerMovement
 {
-    public bool IsMoving();
+    public Condition IsMoving();
+    public Condition RollConcluded();
     public ActionExecution RollAction();
 }

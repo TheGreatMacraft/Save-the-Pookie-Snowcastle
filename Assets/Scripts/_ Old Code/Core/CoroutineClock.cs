@@ -17,6 +17,31 @@ public class CoroutineClock : Clock
     {
         caller.StartCoroutine(CallInTime(task, delay));
     }
+    
+    public void Schedule(
+        Action task,
+        float delay,
+        Condition extraCondition,
+        Action onCanceled
+        )
+    {
+        bool aborted = false;
+        DoUntil((progress) =>
+            {
+                if (!aborted && !extraCondition.IsMet())
+                {
+                    aborted = true;
+                    onCanceled?.Invoke();
+                }
+            },
+            delay,
+            () =>
+            {
+                if(!aborted)
+                    task?.Invoke();
+            }
+        );
+    }
 
     public void DoUntil(Action<float> task, float duration, Action onFinished = null)
     {

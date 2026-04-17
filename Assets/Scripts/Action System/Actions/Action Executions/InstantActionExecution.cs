@@ -1,25 +1,31 @@
-using System;
-
-public sealed class InstantAction : ActionExecution
+public sealed class InstantAction 
+    : ActionExecution
 {
     private readonly ActionCall actionCall;
     private readonly float cooldown;
+    private readonly Condition condition;
     private readonly Clock coroutineClock;
 
     private bool canAct = true;
 
 
-    public InstantAction(ActionCall actionCall, float cooldown,  Clock coroutineClock)
+    public InstantAction(
+        ActionCall actionCall,
+        float cooldown,
+        Condition condition,
+        Clock coroutineClock
+        )
     {
         this.actionCall = actionCall;
         this.cooldown = cooldown;
+        this.condition = condition;
         this.coroutineClock = coroutineClock;
     }
     
     
     public void Execute()
     {
-        if(!canAct) return;
+        if(!canAct || !condition.IsMet()) return;
         
         canAct = false;
         
@@ -30,6 +36,7 @@ public sealed class InstantAction : ActionExecution
             }
             , cooldown);
     }
-    
-    public bool Concluded() => canAct;
+
+    public bool IsMet()
+        => canAct;
 }

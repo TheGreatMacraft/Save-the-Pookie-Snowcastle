@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class GunComponent : 
@@ -25,15 +26,12 @@ public abstract class GunComponent :
 
     protected Collection<Projectile> firedProjectiles
         = new SimpleCollection<Projectile>();
-    
-    
-    protected virtual void Awake()
+
+    private void Start()
     {
-        base.Awake();
-        
         Magazine magazine = new BasicMagazine(magazineSize);
-            
-        primaryAction = new InstantAction(
+        
+        defaultAttackAction = new InstantAction(
             new ShootCall(
                 magazine,
                 ammoPerShot,
@@ -47,15 +45,28 @@ public abstract class GunComponent :
                 cameraShake,
                 shakeMagnitude,
                 shakeDuration
-                ),
+            ),
             shootCooldown,
+            new MultipleConditions(
+                new DefaultAttackInputCondition(inputActionStates),
+                playerMovement.RollConcluded()
+            ),
             coroutineClock
         );
             
         supportAction = new DelayedAction(
             new ReloadCall(magazine),
             reloadCooldown,
+            new SupportActionInputCondition(inputActionStates),
             coroutineClock
+        );
+
+        heavyAttackAction = new ChargedActionExecution(
+            new NullActionCall(),
+            new NullActionExecution(),
+            2f,
+            coroutineClock,
+            new HeavyAttackInputCondition(inputActionStates)
         );
     }
 }

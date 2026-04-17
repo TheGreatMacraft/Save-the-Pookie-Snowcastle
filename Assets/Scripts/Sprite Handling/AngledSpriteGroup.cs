@@ -22,6 +22,7 @@ public sealed class AngledSpriteGroup
     public void SetSprite(int frameIndex)
     {
         float angle =  facingDirection.AngleInDegrees();
+        
         Sprite newPick;
         
         
@@ -31,7 +32,6 @@ public sealed class AngledSpriteGroup
             angle += (angle > 0)
                 ? -2 * (Math.Abs(angle) - 90)
                 : 2 * (Math.Abs(angle) - 90);
-        
         
         if (angle >= -90f && angle < -60f)
             newPick = directionalFrames.FrontFrameAt(frameIndex);

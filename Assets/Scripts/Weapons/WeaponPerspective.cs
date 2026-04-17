@@ -21,7 +21,7 @@ public sealed class WeaponPerspective
     {
         float angle = weaponOrientation.AngleInDegrees();
 
-        spriteRenderer.sortingOrder = angle > 15 && angle < 165
+        spriteRenderer.sortingOrder = angle > 0
             ? 2
             : 3;
     }

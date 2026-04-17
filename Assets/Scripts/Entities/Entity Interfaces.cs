@@ -7,9 +7,10 @@ public interface Movement
     void Move();
 }
 
-public interface ComplexMovement : Movement
+public interface ComplexMovement 
+    : Movement, Condition
 {
-    bool isMoving();
+    public Condition IsMoving() => this;
 }
 
 public interface Placement

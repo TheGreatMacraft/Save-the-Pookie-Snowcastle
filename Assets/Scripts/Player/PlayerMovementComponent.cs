@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 [RequireComponent(typeof(PhysicalBody))]
 [RequireComponent(typeof(PhysicalMovement))]
 [DisallowMultipleComponent]
@@ -18,6 +19,9 @@ public sealed class PlayerMovementComponent
     [SerializeField] private float rollDuration;
     [SerializeField] private float rollCooldown;
     
+    [Header("Player Input")]
+    [SerializeField] private PlayerInput playerInput;
+    
     private ActionExecution rollAction;
     
     
@@ -28,8 +32,11 @@ public sealed class PlayerMovementComponent
     public ActionExecution RollAction()
         => rollAction;
 
-    public bool IsMoving()
-        => playerLegs.isMoving();
+    public Condition IsMoving()
+        => playerLegs.IsMoving();
+    
+    public Condition RollConcluded()
+        => rollAction.Concluded();
     
     
     private void Awake()
@@ -56,15 +63,24 @@ public sealed class PlayerMovementComponent
                 rollDuration
                 ),
             rollCooldown,
+            new MultipleConditions(
+                new RollInputCondition(new InputActionStates(playerInput))
+                ),
             coroutineClock
         );
     }
-    
+
+
+    private void Update()
+    {
+        rollAction.Execute();
+    }
+
     private void FixedUpdate()
     {
-        playerAnimationMessenger.ToggleWalking(playerLegs.isMoving());
+        playerAnimationMessenger.ToggleWalking(playerLegs.IsMoving().IsMet());
         
-        if(rollAction.Concluded())
+        if(rollAction.Concluded().IsMet())
             playerLegs.Move();
     }
 }

@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Moveset.md",
+                "file": "Weapons.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Moveset"
+              "title": "Weapons"
             }
           }
         ],
@@ -203,7 +203,7 @@
   "active": "5432f0f4e62eb9f3",
   "lastOpenFiles": [
     "GDD.md",
-    "Moveset.md",
+    "Weapons.md",
     "Base Board.md",
     "Media/ActionSystem.bpmn",
     "Code Documentation.md",

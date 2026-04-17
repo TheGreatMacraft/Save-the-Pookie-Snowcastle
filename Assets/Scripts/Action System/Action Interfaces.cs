@@ -3,22 +3,16 @@ using UnityEngine;
 
 // Action System
 
-public interface ActionExecution
+public interface ActionExecution : Condition
 {
     void Execute();
-    bool Concluded();
+    Condition Concluded() => this;
 }
 
 public interface ActionCall
 {
     void Call();
 }
-
-public interface ActionInterpreter
-{
-    void ExecuteActionCall();
-}
-
 
 // Impact on Enemy(Target)
 

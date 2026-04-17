@@ -8,17 +8,15 @@ public abstract class MeleeComponent:
     [SerializeField] private ColliderSensorComponent slashCollider;
     [SerializeField] private PhysicalBodyComponent slashSourceBody;
     
-    protected virtual void Awake()
+    protected void Start()
     {
-        base.Awake();
-        
         Impact allImpact = new ActionImpacts(
             new AllComponentsInObject<Impact>(
                 gameObject,
                 new NullImpact()
             ).Value());
         
-        primaryAction = new InstantAction(
+        defaultAttackAction = new InstantAction(
             new SlashCall(
                 slashCollider,
                 new WeaponPayload(
@@ -28,6 +26,10 @@ public abstract class MeleeComponent:
                     )
                 ),
             slashCooldown,
+            new MultipleConditions(
+                new DefaultAttackInputCondition(inputActionStates),
+                playerMovement.RollConcluded()
+                ),
             coroutineClock
         );
     }

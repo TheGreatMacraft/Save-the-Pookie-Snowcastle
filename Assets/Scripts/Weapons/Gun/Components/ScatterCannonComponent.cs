@@ -34,6 +34,7 @@ public sealed class ScatterCannonComponent :
                 firedProjectiles
             ),
             abilityCooldown,
+            new AbilityInputCondition(inputActionStates),
             coroutineClock
         );
     }
