@@ -1,77 +1,34 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-[RequireComponent(typeof(PhysicalBodyComponent))]
-[DisallowMultipleComponent]
 
-public abstract class WeaponComponent :
-    MonoBehaviour
+public abstract class WeaponComponent
+    : MonoBehaviour, Weapon
 {
-    [Header("Target Tag")]
+    [Header("Target")]
     [SerializeField] protected string targetTag;
     
-    [Header("Player Movement")]
-    [SerializeField] protected PlayerMovementComponent playerMovement;
+    [Header("Camera Shake")]
+    [SerializeField] private bool shakeCamera;
+    [SerializeField] protected CameraShakeComponent cameraShake;
+    [SerializeField] protected float shakeMagnitude;
+    [SerializeField] protected float shakeDuration;
     
-    [Header("Player Input")]
-    [SerializeField] private PlayerInput playerInput;
-    
-    [Header("Sprite Renderer")]
-    [SerializeField] private SpriteRenderer spriteRenderer;
     
     protected Clock coroutineClock;
-    protected InputActionStates inputActionStates;
+
+    protected ActionExecution defaultAttack = new NullActionExecution();
+    protected ActionExecution supportAction = new NullActionExecution();
+    protected ActionExecution heavyAttack = new NullActionExecution();
+    protected ActionExecution abilityAction = new NullActionExecution();
     
-    private Orientation weaponOrientation;
-    private Perspective weaponPerspective;
-    
-    
+
     protected virtual void Awake()
     {
         coroutineClock = new CoroutineClock(this);
-        inputActionStates = new InputActionStates(playerInput);
-
-        PhysicalBody weaponAnchor = new ComponentInObject<PhysicalBody>(
-            gameObject,
-            new NullPhysicalBody()
-        ).Value();
-
-        TargetLocationSource targetLocation = new ComponentInObject<TargetLocationSource>(
-            new ParentOfGameObject(gameObject).Parent(),
-            new NullTargetLocationSource()
-        ).Value();
-        
-        Vector orientationVector = new Vector(
-            new PointToPointVectorDefinition(
-                weaponAnchor,
-                targetLocation
-            )
-        );
-        
-        weaponOrientation = new WeaponOrientation(
-            weaponAnchor,
-            orientationVector
-        );
-
-        weaponPerspective = new WeaponPerspective(
-            spriteRenderer,
-            orientationVector
-        );
-    }
-
-    private void Update()
-    {
-        weaponOrientation.Orient();
-        weaponPerspective.SetDepth();
-        
-        defaultAttackAction.Execute();
-        heavyAttackAction.Execute();
-        supportAction.Execute();
-        abilityAction.Execute();
     }
     
     
-    protected ActionExecution defaultAttackAction = new NullActionExecution();
-    protected ActionExecution heavyAttackAction = new NullActionExecution();
-    protected ActionExecution supportAction = new NullActionExecution();
-    protected ActionExecution abilityAction = new NullActionExecution();
+    public ActionExecution DefaultAttack() => defaultAttack;
+    public ActionExecution SupportAction() => supportAction;
+    public ActionExecution HeavyAttack() => heavyAttack;
+    public ActionExecution Ability() => abilityAction;
 }

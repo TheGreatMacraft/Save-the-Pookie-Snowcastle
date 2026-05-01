@@ -9,7 +9,7 @@ public sealed class TargetFollower :
         Force movementForce,
         Location originLocation,
         TargetScouter targetScouter,
-        float speed,
+        Speed speed,
         float range
     ) 
         : this(

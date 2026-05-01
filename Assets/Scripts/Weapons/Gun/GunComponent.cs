@@ -1,72 +1,82 @@
-using System;
 using UnityEngine;
+[DisallowMultipleComponent]
 
-public abstract class GunComponent : 
-    WeaponComponent
+
+public abstract class GunComponent
+    : WeaponComponent
 {
-    [Header("Shooting Properties")]
-    [SerializeField] private float shootCooldown;
+    [Header("Magazine")]
+    [SerializeField] private bool infiniteMagazineSize;
     [SerializeField] private int magazineSize;
-    [SerializeField] private int ammoPerShot;
-    [SerializeField] private PhysicalBodyComponent rotationAnchor;
     
-    [Header("Reload Properties")]
+    [Header("Reload")]
     [SerializeField] private float reloadCooldown;
+    
+    [Header("Shoot")]
+    [SerializeField] private float shootCooldown;
+    [SerializeField] private int ammoPerShot;
+    [SerializeField] private float ammoSpreadAngle;
+    [SerializeField] private PhysicalBodyComponent rotationAnchor;
 
-    [Header("Projectile Properties")]
+    [Header("Projectile")]
     [SerializeField] private float projectileSpeed;
     [SerializeField] private float projectileDamage;
+    [SerializeField] private float projectileLifeTime;
     [SerializeField] private PhysicalBodyComponent projectileSpawnPoint;
     [SerializeField] private ProjectileComponent projectilePrefab;
     
-    [Header("Camera Shake Properties")]
-    [SerializeField] private CameraShakeComponent cameraShake;
-    [SerializeField] private float shakeMagnitude;
-    [SerializeField] private float shakeDuration;
-
+    
+    protected Magazine magazine; 
+    
     protected Collection<Projectile> firedProjectiles
         = new SimpleCollection<Projectile>();
+    
 
-    private void Start()
+    protected override void Awake()
     {
-        Magazine magazine = new BasicMagazine(magazineSize);
+        base.Awake();
         
-        defaultAttackAction = new InstantAction(
-            new ShootCall(
-                magazine,
-                ammoPerShot,
-                new StandardProjectileSpawner(
-                    projectileSpeed,
-                    new GameObjectBuilder<ProjectileComponent>(projectilePrefab),
-                    firedProjectiles,
-                    targetTag),
-                projectileSpawnPoint,
-                new Rotation(rotationAnchor),
-                cameraShake,
-                shakeMagnitude,
-                shakeDuration
+        magazine = infiniteMagazineSize
+            ? new InfiniteMagazine()
+            : new BasicMagazine(magazineSize);
+    }
+    
+    protected virtual void Start()
+    {
+        ActionExecution reloadAction = new ExecutionWithCooldown(
+            new ConstantExecution(new ReloadCall(magazine)),
+            reloadCooldown,
+            coroutineClock,
+            true
+        );
+        
+        ActionExecution shootAction = new ExecutionWithCooldown(
+            new ConstantExecution(
+                new ShootCall(
+                    magazine,
+                    ammoPerShot,
+                    ammoSpreadAngle,
+                    reloadAction,
+                    new StandardProjectileSpawner(
+                        projectileSpeed,
+                        projectileLifeTime,
+                        new GameObjectBuilder<ProjectileComponent>
+                            (projectilePrefab),
+                        firedProjectiles,
+                        targetTag),
+                    projectileSpawnPoint,
+                    new Rotation(rotationAnchor),
+                    cameraShake,
+                    shakeMagnitude,
+                    shakeDuration
+                )
             ),
             shootCooldown,
-            new MultipleConditions(
-                new DefaultAttackInputCondition(inputActionStates),
-                playerMovement.RollConcluded()
-            ),
-            coroutineClock
-        );
-            
-        supportAction = new DelayedAction(
-            new ReloadCall(magazine),
-            reloadCooldown,
-            new SupportActionInputCondition(inputActionStates),
-            coroutineClock
+            coroutineClock,
+            false
         );
 
-        heavyAttackAction = new ChargedActionExecution(
-            new NullActionCall(),
-            new NullActionExecution(),
-            2f,
-            coroutineClock,
-            new HeavyAttackInputCondition(inputActionStates)
-        );
+        defaultAttack = shootAction;
+        supportAction = reloadAction;
     }
 }

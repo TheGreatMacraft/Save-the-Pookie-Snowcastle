@@ -9,11 +9,14 @@ public sealed class InputActionStates
     private List<InputActionState> secondaryActionState = new(1);
     
     private List<InputActionState> movementActionState = new(1);
+    private List<InputActionState> movementSpecialActionState = new(1);
     private List<InputActionState> powerActionState = new(1);
     
     private List<InputActionState> specialActionState = new(1);
     private List<InputActionState> supportActionState = new(1);
     private List<InputActionState> interactActionState = new(1);
+    
+    private List<InputActionState> buildMenuActionState = new(1);
 
     
     public InputActionStates(PlayerInput playerInput)
@@ -65,6 +68,21 @@ public sealed class InputActionStates
         }
 
         return movementActionState[0];
+    }
+    
+    public InputActionState MovementSpecialActionState()
+    {
+        if (movementSpecialActionState.Count == 0)
+        {
+            movementSpecialActionState.Add(
+                new InputActionState(
+                    playerInput,
+                    new MovementSpecialInputAction()
+                )
+            );
+        }
+
+        return movementSpecialActionState[0];
     }
 
     public InputActionState PowerActionState()
@@ -125,5 +143,20 @@ public sealed class InputActionStates
         }
 
         return interactActionState[0];
+    }
+    
+    public InputActionState BuildMenuActionState()
+    {
+        if (buildMenuActionState.Count == 0)
+        {
+            buildMenuActionState.Add(
+                new InputActionState(
+                    playerInput,
+                    new BuildMenuInputAction()
+                )
+            );
+        }
+
+        return buildMenuActionState[0];
     }
 }

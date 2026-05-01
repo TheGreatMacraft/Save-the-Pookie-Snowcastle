@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class ComponentInObject<T>
+    : Scalar<T>
 {
     private readonly GameObject origin;
     private readonly T nullObject;

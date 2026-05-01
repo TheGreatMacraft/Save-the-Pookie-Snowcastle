@@ -40,12 +40,6 @@ public interface Collection<T> :  ReadOnlyCollection<T>
     void Unregister(T element);
 }
 
-public interface Index
-{
-    int Value();
-}
-
-
 // OnDestroy
 
 public interface Terminable
@@ -54,7 +48,7 @@ public interface Terminable
 }
 
 
-// Transform & Rigidbody2D
+// Transform, Rigidbody2D
 
 public interface PhysicalBody :
     Location, Movable,
@@ -62,10 +56,10 @@ public interface PhysicalBody :
     VectorDefinition
 {}
 
-public interface PhysicalMovement:
+public interface PhysicalMovement :
     Force
 {}
-
+    
 // Trigger-Collider Object-Detection
 public interface ColliderSensor
 {
@@ -89,4 +83,12 @@ public interface Perspective
 public interface Condition
 {
     public bool IsMet();
+}
+
+// Disablable
+public interface Disablable
+{
+    public bool IsEnabled();
+    public void Disable();
+    public void Enable();
 }

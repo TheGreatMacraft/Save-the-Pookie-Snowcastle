@@ -3,8 +3,11 @@ public sealed class ShootCall : ActionCall
     private readonly Magazine magazine;
     
     private readonly int ammoPerShot;
-    private readonly Spawner projectileSpawner;
+    private readonly float spreadAngle;
     
+    private readonly ActionExecution reloadAction;
+    
+    private readonly Spawner projectileSpawner;
     private readonly Location projectileSpawnPoint;
     private readonly Rotation projectileSpawnRotation;
 
@@ -16,6 +19,8 @@ public sealed class ShootCall : ActionCall
     public ShootCall(
         Magazine magazine,
         int ammoPerShot,
+        float spreadAngle,
+        ActionExecution reloadAction,
         Spawner projectileSpawner,
         Location projectileSpawnPoint,
         Rotation projectileSpawnRotation,
@@ -26,6 +31,8 @@ public sealed class ShootCall : ActionCall
     {
         this.magazine = magazine;
         this.ammoPerShot = ammoPerShot;
+        this.spreadAngle = spreadAngle;
+        this.reloadAction = reloadAction;
         this.projectileSpawner = projectileSpawner;
         this.projectileSpawnPoint = projectileSpawnPoint;
         this.projectileSpawnRotation = projectileSpawnRotation;
@@ -37,13 +44,19 @@ public sealed class ShootCall : ActionCall
     
     public void Call()
     {
-        if (magazine.IsEmpty()) return;
-
+        if (magazine.IsEmpty())
+        {
+            reloadAction.Execute();
+            return;
+        }
+        
         for (int i = 0; i < ammoPerShot; i++)
         {
+            float angle = UnityEngine.Random.Range(-spreadAngle/2, spreadAngle/2);
+            
             projectileSpawner.SpawnAt(
                 projectileSpawnPoint,
-                projectileSpawnRotation
+                projectileSpawnRotation.AddDegrees(angle)
                 );
         }
         

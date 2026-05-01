@@ -14,7 +14,7 @@ public interface Projectile :
     ColliderListener,
     Terminable
 {
-    void Launch(float speed);
+    void Launch(float speed, float lifeTime);
 }
 
 public interface ProjectileInitializazion

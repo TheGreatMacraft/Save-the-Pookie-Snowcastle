@@ -2,9 +2,11 @@
 
 // Manipulators  -  usually called in MonoBehaviours 
 
-public interface Movement
+public interface Movement : ActionCall
 {
-    void Move();
+    public void Move();
+    
+    void ActionCall.Call() { Move(); }
 }
 
 public interface ComplexMovement 
@@ -13,14 +15,18 @@ public interface ComplexMovement
     public Condition IsMoving() => this;
 }
 
-public interface Placement
+public interface Placement : ActionCall
 {
     void Place();
+    
+    void ActionCall.Call() { Place(); }
 }
 
-public interface Orientation
+public interface Orientation : ActionCall
 {
     void Orient();
+    
+    void ActionCall.Call() { Orient(); }
 }
 
 
@@ -46,14 +52,9 @@ public interface Target :
     void Hit(Impact impact, Terminable disposableHitter);
 }
 
-public interface TargetSource
-{
-    Target CurrentTarget();
-}
+public interface TargetPicker : Scalar<Target> {}
 
 public interface TargetLocationSource : Location {}
 
-public interface TargetScouter : TargetSource
-{
-    void FindNewTarget();
-}
+// Speed
+public interface Speed : Scalar<float> {}

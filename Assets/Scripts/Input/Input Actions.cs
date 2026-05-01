@@ -12,6 +12,10 @@ public sealed class MovementInputAction : InputAction {
     public string ToString() => "Movement";
 }
 
+public sealed class MovementSpecialInputAction : InputAction {
+    public string ToString() => "Movement Special";
+}
+
 public sealed class PowerInputAction : InputAction {
     public string ToString() => "Power";
 }
@@ -26,4 +30,8 @@ public sealed class SupportInputAction : InputAction {
 
 public sealed class InteractInputAction : InputAction {
     public string ToString() => "Interact";
+}
+
+public sealed class BuildMenuInputAction : InputAction {
+    public string ToString() => "Build Menu";
 }

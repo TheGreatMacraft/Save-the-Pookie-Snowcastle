@@ -11,8 +11,8 @@ public sealed class RollCall
     
     private readonly Clock coroutineClock;
     private readonly float rollDuration;
-
-
+    
+    
     public RollCall(
         Force movement,
         Vector movementDirection,
@@ -40,6 +40,7 @@ public sealed class RollCall
         );
         
         movement.SetForce(currentMovementDirection, rollForce);
+        animator.TriggerRolling();
         
         coroutineClock.DoUntil((progression) =>
             {
@@ -54,7 +55,5 @@ public sealed class RollCall
                 //movement.ResetForce();
             }
             );
-        
-        animator.TriggerRolling();
     }
 }

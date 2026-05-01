@@ -95,7 +95,12 @@ GameObject:
   - component: {fileID: 5513713966368744810}
   - component: {fileID: 3138058918060456074}
   - component: {fileID: 8930262150441636147}
-  - component: {fileID: 5453302095923526702}
+  - component: {fileID: 242264731594272038}
+  - component: {fileID: 7860553141850215006}
+  - component: {fileID: 1781605465377847191}
+  - component: {fileID: 7075100572068852357}
+  - component: {fileID: 3156249010775117642}
+  - component: {fileID: 5093089948323345224}
   m_Layer: 11
   m_Name: LittleSnowball
   m_TagString: Untagged
@@ -181,7 +186,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5453302095923526702
+--- !u!114 &242264731594272038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,7 +195,68 @@ MonoBehaviour:
   m_GameObject: {fileID: 8889201001007404881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f3d39c74f7f067488ecb14e0bf00aeb, type: 3}
+  m_Script: {fileID: 11500000, guid: 13e672697b8448058ed1d4d76cddcd92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownerGun: {fileID: 0}
+--- !u!114 &7860553141850215006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889201001007404881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aff544421954ac5b0eaff66ea7f40e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1781605465377847191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889201001007404881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c904199969ad48ca9eea57757fe1eb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7075100572068852357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889201001007404881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45483d6694247cbb99a83e84707e54d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3156249010775117642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889201001007404881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9699b55ca8d44fe6b94aaebd15a51027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 10
+--- !u!114 &5093089948323345224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889201001007404881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d2ab3be49d4d0f942eea28d56bd61c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackAmount: 3

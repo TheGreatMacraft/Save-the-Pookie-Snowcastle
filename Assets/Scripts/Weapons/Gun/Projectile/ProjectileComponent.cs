@@ -8,6 +8,8 @@ public sealed class ProjectileComponent :
     MonoBehaviour, 
     Projectile
 {
+    private Clock coroutineClock;
+    
     private PhysicalBody body;
     private PhysicalMovement movement;
     private ColliderSensor sensor;
@@ -20,6 +22,8 @@ public sealed class ProjectileComponent :
 
     private void Awake()
     {
+        coroutineClock = new CoroutineClock(this);
+        
         body = new ComponentInObject<PhysicalBody>(
             gameObject,
             null
@@ -36,6 +40,12 @@ public sealed class ProjectileComponent :
         ).Value();
         
         sensor.Connect(this);
+        
+        allImpacts = new ActionImpacts(
+            new AllComponentsInObject<Impact>(
+                gameObject,
+                new NullImpact()).Value()
+        );
     }
 
     
@@ -47,17 +57,12 @@ public sealed class ProjectileComponent :
         this.firedProjectiles = projectileRegistry;
         this.targetTag = targetTag;
         
-        allImpacts = new ActionImpacts(
-            new AllComponentsInObject<Impact>(
-                gameObject,
-                new NullImpact()).Value()
-        );
     }
 
     public Vector3 Coordinates()
         => body.Coordinates();
 
-    public void Launch(float speed)
+    public void Launch(float speed, float lifeTime)
     {
         firedProjectiles.Register(this);
         
@@ -65,6 +70,11 @@ public sealed class ProjectileComponent :
             new Vector(body),
             speed
             );
+        
+        coroutineClock.Schedule(
+            Terminate,
+            lifeTime
+        );
     }
     
     

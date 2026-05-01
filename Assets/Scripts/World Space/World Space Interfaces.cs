@@ -16,6 +16,7 @@ public interface Movable
     void MoveTo(Location newLocation);
 }
 
+public interface ZCoordinate : Scalar<float> {}
 
 // Rotation
 

@@ -29,7 +29,7 @@ public class CameraComponent :
         Location playerLocation = playerBodyComponent;
         Location mouseLocation = new ScreenPositionAsWorldPosition(
             camera,
-            new MouseCursorSCREENPosition()
+            new MouseCursorSCREENPosition(new ZCoordinateUI())
         );
 
         shakeOffset = new ComponentInObject<Offset>(

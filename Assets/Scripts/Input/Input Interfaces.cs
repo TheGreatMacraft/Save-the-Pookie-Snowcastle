@@ -3,8 +3,22 @@ public interface InputAction
     string ToString();
 }
 
-public interface Visibility
+public interface Visibility : Condition, Togglable
 {
-    void Hide();
-    void Show();
+    public void Hide();
+    public void Show();
+    public Condition IsVisible() => this;
+    
+    void Togglable.Toggle()
+    {
+        if(IsVisible().IsMet())
+            Hide();
+        else
+            Show();
+    }
+}
+
+public interface Togglable
+{
+    public void Toggle();
 }

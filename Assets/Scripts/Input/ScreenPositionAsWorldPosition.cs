@@ -16,7 +16,5 @@ public sealed class ScreenPositionAsWorldPosition : Location
     }
 
     public Vector3 Coordinates()
-        => camera.ScreenToWorldPoint(
-            screenLocation.Coordinates()
-        );
+        => camera.ScreenToWorldPoint(screenLocation.Coordinates());
 }

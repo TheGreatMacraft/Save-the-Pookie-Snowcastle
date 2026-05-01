@@ -19,7 +19,7 @@ public sealed class CrosshairComponent :
         
         crosshairPlacement = new SimplePlacement(
             movableCrosshair,
-            new MouseCursorSCREENPosition()
+            new MouseCursorSCREENPosition(new ZCoordinateUI())
             );
     }
     

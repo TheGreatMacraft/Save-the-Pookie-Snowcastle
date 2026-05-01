@@ -1,8 +1,8 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class HealthComponent : MonoBehaviour, Health
+public sealed class HealthComponent
+    : MonoBehaviour, Health
 {
     [SerializeField] private float maxHealth;
     [SerializeField] private Slider slider; 
@@ -19,7 +19,7 @@ public sealed class HealthComponent : MonoBehaviour, Health
         Mortal death = new ComponentInObject<Mortal>(
             gameObject,
             new NullMortal()
-            ).Value();
+        ).Value();
         
         HealthValue healthValue = new HealthValue(maxHealth);
         health = healthValue;

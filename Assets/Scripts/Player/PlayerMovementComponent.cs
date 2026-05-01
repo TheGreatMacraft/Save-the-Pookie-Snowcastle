@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 [RequireComponent(typeof(PhysicalBody))]
@@ -8,12 +7,6 @@ using UnityEngine.InputSystem;
 public sealed class PlayerMovementComponent
     : MonoBehaviour, PlayerMovement
 {
-    [Header("Basic Movement")]
-    [SerializeField] private float baseSpeed;
-    
-    private ComplexMovement playerLegs;
-    
-    
     [Header("Roll Properties")]
     [SerializeField] private float rollForce;
     [SerializeField] private float rollDuration;
@@ -29,19 +22,31 @@ public sealed class PlayerMovementComponent
     [SerializeField] private PlayerAnimationMessengerComponent playerAnimationMessenger;
     
     
+    private ComplexMovement playerLegs;
+    
     public ActionExecution RollAction()
         => rollAction;
 
     public Condition IsMoving()
         => playerLegs.IsMoving();
     
-    public Condition RollConcluded()
-        => rollAction.Concluded();
-    
     
     private void Awake()
     {
         Clock coroutineClock = new CoroutineClock(this);
+        
+        SpeedProvider speedProvider = new ComponentInObject<SpeedProvider>(
+            gameObject,
+            new NullSpeedProvider()
+        ).Value();
+        
+        Speed playerSpeed = new ComplexSpeed(
+            speedProvider.DefaultSpeedMultiplier(),
+            new AttributeModifier(
+                speedProvider.SprintSpeedMultiplier(),
+                new FalseCondition()
+                )
+        );
         
         Force playerMovement = new ComponentInObject<Force>(
             gameObject,
@@ -50,23 +55,26 @@ public sealed class PlayerMovementComponent
 
         playerLegs = new InputAxisFollower(
             playerMovement,
-            baseSpeed
+            playerSpeed
         );
 
-        rollAction = new InstantAction(
-            new RollCall(
-                playerMovement,
-                new Vector(new InputAxisVectorDefinition()),
-                rollForce,
-                playerAnimationMessenger,
+        rollAction = new ConditionalExecution(
+            new ExecutionWithCooldown(
+                new ConstantExecution(
+                    new RollCall(
+                        playerMovement,
+                        new Vector(new InputAxisVectorDefinition()),
+                        rollForce,
+                        playerAnimationMessenger,
+                        coroutineClock,
+                        rollDuration
+                    )
+                ),
+                rollCooldown,
                 coroutineClock,
-                rollDuration
-                ),
-            rollCooldown,
-            new MultipleConditions(
-                new RollInputCondition(new InputActionStates(playerInput))
-                ),
-            coroutineClock
+                false
+            ),
+            new RollInputCondition(new InputActionStates(playerInput))
         );
     }
 

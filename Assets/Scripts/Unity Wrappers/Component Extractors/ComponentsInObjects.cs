@@ -4,12 +4,12 @@ using UnityEngine;
 public sealed class ComponentsInObjects<T> : 
     ReadOnlyCollection<T>
 {
-    private readonly IEnumerable<GameObject> objects;
+    private readonly ReadOnlyCollection<GameObject> objects;
     private readonly T nullObject;
     
     
     public  ComponentsInObjects(
-        IEnumerable<GameObject> objects,
+        ReadOnlyCollection<GameObject> objects,
         T nullObject
         )
     {
@@ -18,9 +18,11 @@ public sealed class ComponentsInObjects<T> :
     }
 
 
+    
+
     public IEnumerable<T> AllElements()
     {
-        foreach (GameObject obj in objects)
+        foreach (GameObject obj in objects.AllElements())
         {
             yield return new ComponentInObject<T>(
                 obj,

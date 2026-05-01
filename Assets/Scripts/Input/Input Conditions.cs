@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public abstract class InputCondition 
     : Condition
 {
@@ -31,42 +29,34 @@ public sealed class DefaultAttackInputCondition : InputCondition
 }
 
 // Heavy Attack
-public sealed class HeavyAttackInputCondition : Condition
+public sealed class StartHeavyAttackInputCondition : InputCondition
 {
-    private readonly Condition start;
-    private readonly Condition running;
-    private bool isHolding;
+    public StartHeavyAttackInputCondition(InputActionStates allStates)
+        : base(
+            new MultipleConditions(
+                new OnPressed(
+                    allStates.PrimaryActionState()
+                ),
+                new OnBeingPressed(
+                    allStates.PowerActionState()
+                )
+            )
+        ) {}
+}
 
-    public HeavyAttackInputCondition(InputActionStates states)
-    {
-        start = new MultipleConditions
-        (
-            new OnPressed(states.PrimaryActionState()),
-            new OnBeingPressed(states.PowerActionState())
-        );
-        
-        running = new MultipleConditions
-        (
-            new OnBeingPressed(states.PrimaryActionState()),
-            new OnBeingPressed(states.PowerActionState())
-        );
-    }
-
-    public bool IsMet()
-    {
-        if (!isHolding)
-        {
-            if (start.IsMet())
-            {
-                isHolding = true;
-            }
-            return isHolding;
-        }
-        
-        isHolding = running.IsMet();
-        
-        return isHolding;
-    }
+public sealed class ChargeHeavyAttackInputCondition : InputCondition
+{
+    public ChargeHeavyAttackInputCondition(InputActionStates allStates)
+        : base(
+            new MultipleConditions(
+                new OnBeingPressed(
+                    allStates.PrimaryActionState()
+                ),
+                new OnBeingPressed(
+                    allStates.PowerActionState()
+                )
+            )
+        ) {}
 }
 
 // Support Action
@@ -102,5 +92,23 @@ public sealed class RollInputCondition : InputCondition
     public RollInputCondition(InputActionStates allStates)
         : base(
             new OnPressed(allStates.MovementActionState())
+        ) {}
+}
+
+// Toggle Build Menu
+public sealed class BuildMenuInputCondition : InputCondition
+{
+    public BuildMenuInputCondition(InputActionStates allStates)
+        : base(
+            new OnPressed(allStates.BuildMenuActionState())
+        ) {}
+}
+
+// Jump
+public sealed class JumpInputCondition : InputCondition
+{
+    public JumpInputCondition(InputActionStates allStates)
+        : base(
+            new OnPressed(allStates.MovementSpecialActionState())
         ) {}
 }

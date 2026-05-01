@@ -6,25 +6,25 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] [[Art]]
-- [ ] [[SFX]]
-- [ ] [[Music]]
+- [ ] [[Building System]]
+- [ ] [[Pets]]
 - [ ] Controller Support
 - [ ] Settings
 - [ ] [[Multiplayer]]
+- [ ] [[Art]]
+- [ ] [[SFX]]
+- [ ] [[Music]]
 - [ ] Tweaking Variables
 - [ ] Polish
 
 
 ## Doing
 
-- [ ] [[Building System]]
-- [ ] [[Pets]]
+- [ ] [[Enemy]]
 
 
 ## Done
 
-- [ ] [[Enemy]]
 - [ ] [[Player]]
 - [ ] [[Progress Boards/Weapons]]
 

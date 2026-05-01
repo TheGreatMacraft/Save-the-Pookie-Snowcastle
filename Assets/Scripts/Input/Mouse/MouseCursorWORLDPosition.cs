@@ -1,15 +1,15 @@
-using System;
 using UnityEngine;
 
 public class MouseCursorWORLDPosition : Location
 {
     private readonly Location location;
     
-    
-    public MouseCursorWORLDPosition(Camera camera)
+    public MouseCursorWORLDPosition(
+        Camera camera
+    )
         : this(new ScreenPositionAsWorldPosition(
             camera,
-            new MouseCursorSCREENPosition()
+            new MouseCursorSCREENPosition(new ZCoordinateWorld())
             )) {}
     
     private MouseCursorWORLDPosition(Location location)

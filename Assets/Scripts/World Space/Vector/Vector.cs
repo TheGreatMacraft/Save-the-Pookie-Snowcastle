@@ -28,6 +28,17 @@ public sealed class Vector
             RawVector().y,
             RawVector().x
         ) * Mathf.Rad2Deg;
+
+    public Vector Reverse()
+        => new Vector(
+            new PointToPointVectorDefinition(
+                new Position(
+                    StartLocation().Coordinates()
+                    + RawVector()
+                ),
+                StartLocation()
+            )
+        );
     
     public bool Equals(Vector other)
         => RawVector().Equals(other.RawVector());

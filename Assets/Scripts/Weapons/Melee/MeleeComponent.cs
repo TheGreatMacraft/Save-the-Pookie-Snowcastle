@@ -1,36 +1,53 @@
 using UnityEngine;
 
-public abstract class MeleeComponent:
-    WeaponComponent
+public abstract class MeleeComponent
+    : MonoBehaviour, Weapon
 {
+    [Header("Target")]
+    [SerializeField] protected string targetTag;
+    
     [Header("Attack Properties")]
     [SerializeField] private float slashCooldown;
     [SerializeField] private ColliderSensorComponent slashCollider;
     [SerializeField] private PhysicalBodyComponent slashSourceBody;
     
-    protected void Start()
+    protected Clock coroutineClock;
+    
+    private ActionExecution defaultAttack = new NullActionExecution();
+    private ActionExecution heavyAttack = new NullActionExecution();
+    private ActionExecution supportAction = new NullActionExecution();
+    private ActionExecution ability = new NullActionExecution();
+    
+    
+    protected virtual void Start()
     {
+        coroutineClock = new CoroutineClock(this);
+        
         Impact allImpact = new ActionImpacts(
             new AllComponentsInObject<Impact>(
                 gameObject,
                 new NullImpact()
             ).Value());
-        
-        defaultAttackAction = new InstantAction(
-            new SlashCall(
-                slashCollider,
-                new WeaponPayload(
-                    targetTag,
-                    allImpact,
-                    new NullTerminable()
+
+        defaultAttack = new ExecutionWithCooldown(
+            new ConstantExecution(
+                new SlashCall(
+                    slashCollider,
+                    new WeaponPayload(
+                        targetTag,
+                        allImpact,
+                        new NullTerminable()
                     )
-                ),
+                )
+            ),
             slashCooldown,
-            new MultipleConditions(
-                new DefaultAttackInputCondition(inputActionStates),
-                playerMovement.RollConcluded()
-                ),
-            coroutineClock
+            coroutineClock,
+            false
         );
     }
+
+    public ActionExecution DefaultAttack() => defaultAttack;
+    public ActionExecution SupportAction() => supportAction;
+    public ActionExecution HeavyAttack() => heavyAttack;
+    public ActionExecution Ability() => ability;
 }

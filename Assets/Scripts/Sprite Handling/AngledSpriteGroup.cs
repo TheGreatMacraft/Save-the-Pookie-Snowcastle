@@ -7,26 +7,40 @@ public sealed class AngledSpriteGroup
     
     private readonly SpriteRenderer spriteRenderer;
     private readonly Vector facingDirection;
+    private readonly Orientation spriteOrientation;
 
+    
     public AngledSpriteGroup(
         DirectionalAnimationFrames directionalFrames,
         SpriteRenderer spriteRenderer,
         Vector facingDirection
         )
+        : this(
+            directionalFrames,
+            spriteRenderer,
+            facingDirection, 
+            new SpriteXOrientation(spriteRenderer, facingDirection)
+            ) {}
+    
+    private AngledSpriteGroup(
+        DirectionalAnimationFrames directionalFrames,
+        SpriteRenderer spriteRenderer,
+        Vector facingDirection,
+        Orientation spriteOrientation
+    )
     {
         this.directionalFrames =  directionalFrames;
         this.spriteRenderer = spriteRenderer;
         this.facingDirection = facingDirection;
+        this.spriteOrientation = spriteOrientation;
     }
 
     public void SetSprite(int frameIndex)
     {
+        spriteOrientation.Orient();
         float angle =  facingDirection.AngleInDegrees();
         
         Sprite newPick;
-        
-        
-        spriteRenderer.flipX = Mathf.Abs(angle) > 90f;
         
         if (Mathf.Abs(angle) > 90f)
             angle += (angle > 0)

@@ -1,23 +1,113 @@
 *Save the Pookie Snowcastle* is coop 2D pixel-art game about building and expending the snow castle whilst evil *winter-themed* enemies attack the castle in waves. The concept is similar to [ResevanjePragozda](https://github.com/Gulcar/ResevanjePragozda/releases).
 
-
 | ![[Pasted image 20251207183120.png\|300]] | ![[Pasted image 20251207183351.png\|300]] |
 | ----------------------------------------- | ----------------------------------------- |
 
-# Gameplay
-The goal is to make the gameplay as orthogonal as possible. As players progress through the levels, which will seem the same, they will have to adapt new strategies and overall play differently.
-
-An example of such approach can be seen in a horror co-op game *R.E.P.O*. Players in earlier stages don't have an effective way to deal with monsters, besides hiding and checking corners. However, as they earn money and purchase weapons, they now have an actual way to fight the monsters. **The game stays the same, but player's abilities and capabilities change and in term changing the gameplay completely.**
-
-The goal is to progressively keep the game *interesting*, by adding variety and *familiar* by keeping the **core gameplay loop** roughly the same.
-
-## Gameplay Loops
-
-```bpmn
-url: [[CoreGameplayLoop.bpmn]]
-height: 300
-opendiagram: false
+# Table of Contents
+```table-of-contents
 ```
+
+# Gameplay
+Gameplay must be [[Orthogonal|orthoganal]] - as players complete the waves, they will have to utilize new unlocks and *adapt different playstyles* to win.
+An example of such approach can be seen in a horror co-op game [[Orthogonal#R.E.P.O.|R.E.P.O]]. 
+
+## Basic Gameplay Overview
+Players will begin the game by picking a [[#Classes|Class]]. Together they will *protect the village/settlement* by fighting off the enemies *themselves*, while simultaneously *using/managing buildings* to help them out.
+Buildings won't just target enemies, but also provide upgrades of different sorts to the players.
+After each wave, players will receive some downtime, which will let them expand their base and achieve new unlocks.
+
+Variety will come from different classes, buildings, weapons, upgrades, etc. 
+The goal is to not only provide many unique combat styles (tank, flanker, wizard, etc.), but also offer the possibility to lean more into "mange towers" play-style.
+
+### Player
+Depending on the selected *class* and the state of the *upgrades tree*, the players will have access to different weapons, tools and abilities, but they will be part of the same system.
+
+1. **Loadout** - loadout will consist of a primary weapon and a secondary weapon - player will only be able to have 1 equipped at once
+2. **Tools** - player will be able to chose a tool, that will grant some passive boost/effect
+3. **Abilities** - player will be able to perform number of abilities (rolling), depending on the class
+
+## Genre Breakdown
+Main two genres present are [[#Action Combat]] and [[#Tower Defense]].
+
+Players will strategize:
+- during combat on where and how to push back the attackers
+- during downtime on what upgrades to get and how to prepare
+
+## Classes
+Classes give the player ability to chose a class that aligns with *their desired playstyle* and is equal in *importance and value* with the rest.
+At the same time, there must me *many different combinations of classes*, that together *fill all the required roles* - offence & defense.
+*What playstyles  will my players want?* - [[#Selection]]
+
+Classes must provide *variety* in playstyles, but *not lock* the player out of experiencing parts of other styles. It's important to provide *variety within a certain class* - [[#Cross-Class Evolution]]
+
+### Selection
+Each class needs to *support a broader playstyle* (specific archetypes will come with [[#Cross-Class Evolution]])
+
+1. **Aggressor**
+	What do the players want?
+	- Constant action  - ADHD like (*high tempo of play*)
+	- Progress onward
+	- Feeling *powerful through intensity*
+	How do they play?
+	- Always moving and engaging
+2. **Strategist**
+	What do the players want?
+	- Outsmarting enemies
+	- Planning ahead
+	- Controlling space
+	How do they play?
+	- Zone control
+
+#### Flanker
+Goal:
+- **speed** - flanker must always **feel** like the *fastest* thing in their game view and in *control* of the *engagement distance*
+- **positioning** - attacks from sides, back or blind spots - where he is *unexpected*
+- **disruption** - breaks enemy formation, picks off isolated targets
+- **quick escape** - *disappears quickly* before he can be punished
+
+Mentality: 
+"I *hit first*, I hit *where you don’t expect*, and *I leave* before you can punish me."
+
+| Buffs             | Debuffs          |
+| ----------------- | ---------------- |
+| faster base speed | below average HP |
+| more stamina      |                  |
+
+Loadout:
+- 
+
+#### Area Denier
+Goal:
+- **control** - define *where* the opponents can be
+- **hold ground** - they are *strongest in their area*
+
+Mentality: 
+"I decide where the fight happens."
+
+
+| Buffs | Debuffs |
+| ----- | ------- |
+|       |         |
+
+Tools:
+- movable cannon - *variety* in bullet effects
+
+#### Cross-Class Evolution
+Whenever the player gains an upgrade, they may choose to **progress toward any class**. The upgrade they receive is a hybrid ability that combines their current class with the class they selected.
+
+### Tank
+
+## Action Combat
+
+
+## Buildings
+
+
+## Settlement
+How 
+
+---
+## Gameplay Loops
 
 All players will be doing in the game will be fighting monsters and reinforcing their defenses to fight off more monsters. The primary goal will always be the same: *Don't let the monsters destroy the snowcastle*.
 

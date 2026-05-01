@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [DisallowMultipleComponent]
@@ -5,23 +6,32 @@ using UnityEngine;
 public sealed class PlayerAnimationMessengerComponent
     : MonoBehaviour, PlayerAnimationMessenger
 {
-    private Animator playerAnimator;
+    private List<Animator> playerAnimator = new(1);
     
-    private void Awake()
+    
+    private Animator PlayerAnimator()
     {
-        playerAnimator = new ComponentInObject<Animator>(
-            gameObject,
-            null
-        ).Value();
+        if (playerAnimator.Count == 0)
+        {
+            playerAnimator.Add(
+                new ComponentInObject<Animator>(
+                    gameObject,
+                    null
+                ).Value()
+            );
+        }
+        
+        return playerAnimator[0];
     }
 
+    
     public void ToggleWalking(bool value)
     {
-        playerAnimator.SetBool("isRunning", value);
+        PlayerAnimator().SetBool("isRunning", value);
     }
 
     public void TriggerRolling()
     {
-        playerAnimator.SetTrigger("triggerRoll");
+        PlayerAnimator().SetTrigger("triggerRoll");
     }
 }

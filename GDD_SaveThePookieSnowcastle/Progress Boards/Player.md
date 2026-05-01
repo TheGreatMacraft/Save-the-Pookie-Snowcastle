@@ -6,7 +6,6 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] Add Rolling
 
 
 ## Doing
@@ -15,6 +14,7 @@ kanban-plugin: board
 
 ## Done
 
+- [ ] Add Rolling
 
 
 

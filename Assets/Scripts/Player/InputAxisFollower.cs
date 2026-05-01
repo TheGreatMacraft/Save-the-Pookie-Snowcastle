@@ -6,7 +6,7 @@ public sealed class InputAxisFollower
     private readonly Vector nullVector;
 
     
-    public InputAxisFollower(Force movement, float speed)
+    public InputAxisFollower(Force movement, Speed speed)
     {
         this.inputAxisVector = new Vector(new InputAxisVectorDefinition());
         this.nullVector = new Vector(new NullVectorDefiniton());

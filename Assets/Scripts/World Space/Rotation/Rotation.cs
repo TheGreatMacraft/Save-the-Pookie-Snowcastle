@@ -16,6 +16,11 @@ public sealed class Rotation
     
     public float Degrees()
         => Quaternion().eulerAngles.z;
+
+    public Rotation AddDegrees(float degrees)
+        => new Rotation(
+            new ConstantRotationDefinition(Degrees() + degrees)
+        );
     
     public bool Equals(Rotation other)
         => Quaternion().Equals(other.Quaternion());

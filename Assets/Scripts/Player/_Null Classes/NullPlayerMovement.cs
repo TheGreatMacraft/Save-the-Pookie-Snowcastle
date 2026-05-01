@@ -6,5 +6,5 @@ public sealed class NullPlayerMovement : PlayerMovement
 
     public ActionExecution RollAction() => nullActionExecution;
     public Condition IsMoving() => falseCondition;
-    public Condition RollConcluded() => trueCondition;
+    public Condition IsRolling() => trueCondition;
 }

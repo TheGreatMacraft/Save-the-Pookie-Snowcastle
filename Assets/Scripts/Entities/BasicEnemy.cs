@@ -13,7 +13,10 @@ public sealed class BasicEnemy :
     [Tooltip("The minimum proximity required to engage a target.")]
     [SerializeField] private float range;
 
-    private TargetScouter entityInstinct = new NullTargetScouter();
+    private TargetScouter targetScouter = new TargetScouter(
+        new NullTargetPicker()
+    );
+    
     private Movement entityMovement;
     
     
@@ -29,20 +32,22 @@ public sealed class BasicEnemy :
             new NullLocation()
         ).Value();
 
-        entityInstinct = new EntityInstinct(
-            entityLocation,
-            targetTag
+        targetScouter = new TargetScouter(
+            new ClosestTarget(
+                entityLocation,
+                targetTag
+            )
         );
 
         entityMovement = new TargetFollower(
             entityMovementForce,
             entityLocation,
-            entityInstinct,
-            speed,
+            targetScouter,
+            new SimpleSpeed(speed),
             range
             );
         
-        entityInstinct.FindNewTarget();
+        targetScouter.FindNewTarget();
     }
 
     private void FixedUpdate()
@@ -52,5 +57,5 @@ public sealed class BasicEnemy :
     
     // Proxy
     public Vector3 Coordinates()
-        => entityInstinct.CurrentTarget().Coordinates();
+        => targetScouter.CurrentTarget().Coordinates();
 }
