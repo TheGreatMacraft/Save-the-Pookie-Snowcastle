@@ -19,6 +19,6 @@ public sealed class ConstantExecution
         call.Call();
     }
     
-    public Condition Concluded() => falseCondition;
-    public Condition InProgress() => trueCondition;
+    public Condition Concluded() => trueCondition;
+    public Condition InProgress() => falseCondition;
 }

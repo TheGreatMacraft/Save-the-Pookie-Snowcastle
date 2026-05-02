@@ -7,8 +7,6 @@ public sealed class RollCall
     private readonly Vector movementDirection;
     private readonly float rollForce;
     
-    private readonly AnimatedRoll animator;
-    
     private readonly Clock coroutineClock;
     private readonly float rollDuration;
     
@@ -17,7 +15,6 @@ public sealed class RollCall
         Force movement,
         Vector movementDirection,
         float rollForce,
-        AnimatedRoll animator,
         Clock coroutineClock,
         float rollDuration
     )
@@ -25,7 +22,6 @@ public sealed class RollCall
         this.movement = movement;
         this.movementDirection = movementDirection;
         this.rollForce = rollForce;
-        this.animator = animator;
         this.coroutineClock = coroutineClock;
         this.rollDuration = rollDuration;
     }
@@ -40,7 +36,6 @@ public sealed class RollCall
         );
         
         movement.SetForce(currentMovementDirection, rollForce);
-        animator.TriggerRolling();
         
         coroutineClock.DoUntil((progression) =>
             {

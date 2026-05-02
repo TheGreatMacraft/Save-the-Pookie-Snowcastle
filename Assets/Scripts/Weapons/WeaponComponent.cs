@@ -7,28 +7,22 @@ public abstract class WeaponComponent
     [SerializeField] protected string targetTag;
     
     [Header("Camera Shake")]
-    [SerializeField] private bool shakeCamera;
+    [SerializeField] protected bool shakeCamera;
     [SerializeField] protected CameraShakeComponent cameraShake;
     [SerializeField] protected float shakeMagnitude;
     [SerializeField] protected float shakeDuration;
     
     
-    protected Clock coroutineClock;
+    private ActionExecution nullAction = new NullActionExecution();
+    private Clock coroutineClock;
 
-    protected ActionExecution defaultAttack = new NullActionExecution();
-    protected ActionExecution supportAction = new NullActionExecution();
-    protected ActionExecution heavyAttack = new NullActionExecution();
-    protected ActionExecution abilityAction = new NullActionExecution();
-    
 
-    protected virtual void Awake()
-    {
-        coroutineClock = new CoroutineClock(this);
-    }
+    protected Clock CoroutineClock()
+        => coroutineClock ??=
+            new CoroutineClock(this);
     
-    
-    public ActionExecution DefaultAttack() => defaultAttack;
-    public ActionExecution SupportAction() => supportAction;
-    public ActionExecution HeavyAttack() => heavyAttack;
-    public ActionExecution Ability() => abilityAction;
+    public virtual ActionExecution DefaultAttack() => nullAction;
+    public virtual ActionExecution SupportAction() => nullAction;
+    public virtual ActionExecution HeavyAttack() => nullAction;
+    public virtual ActionExecution Ability() => nullAction;
 }

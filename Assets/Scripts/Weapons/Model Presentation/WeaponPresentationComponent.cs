@@ -1,4 +1,5 @@
 using UnityEngine;
+
 [RequireComponent(typeof(PhysicalBodyComponent))]
 [DisallowMultipleComponent]
 
@@ -7,63 +8,71 @@ public sealed class WeaponPresentationComponent :
 {
     [Header("Sprite Renderer")]
     [SerializeField] private SpriteRenderer spriteRenderer;
-    
+
+
+    private GameObject parent;
     private PlayerMovement playerMovement;
+    private PhysicalBody weaponAnchor;
+    private TargetLocationSource targetLocation;
+    private Vector orientationVector;
+    
     private Presentation modelPresentation;
-    
     private Orientation weaponOrientation;
-    
-    
-    private void Awake()
-    {
-        // Player Movement - Works even for Entity (NullPlayerMovement)
-        playerMovement = new ComponentInObject<PlayerMovement>(
-            new ParentOfGameObject(gameObject).Parent(),
-            new NullPlayerMovement()
-        ).Value();
-        
-        
-        // Target facing Vector
-        PhysicalBody weaponAnchor = new ComponentInObject<PhysicalBody>(
-            gameObject,
-            new NullPhysicalBody()
-        ).Value();
 
-        TargetLocationSource targetLocation = new ComponentInObject<TargetLocationSource>(
-            new ParentOfGameObject(gameObject).Parent(),
-            new NullTargetLocationSource()
-        ).Value();
-        
-        Vector orientationVector = new Vector(
-            new PointToPointVectorDefinition(
-                weaponAnchor,
-                targetLocation
-            )
-        );
-        
-        
-        // Orientation
-        weaponOrientation = new WeaponOrientation(
-            weaponAnchor,
-            orientationVector,
-            spriteRenderer
-        );
-    }
 
+    private GameObject Parent()
+        => parent ??=
+            new ParentOfGameObject(gameObject).Value();
+
+    private PlayerMovement PlayerMovement()
+        => playerMovement ??=
+            new ComponentInObject<PlayerMovement>(
+                Parent(),
+                new NullPlayerMovement()
+            ).Value();
+
+    private PhysicalBody WeaponAnchor()
+        => weaponAnchor ??=
+            new ComponentInObject<PhysicalBody>(
+                gameObject,
+                new NullPhysicalBody()
+            ).Value();
+
+    private TargetLocationSource TargetLocation()
+        => targetLocation ??=
+            new ComponentInObject<TargetLocationSource>(
+                Parent(),
+                new NullTargetLocationSource()
+            ).Value();
     
-    private void Start()
-    {
-        // Presentation - Hide if Player Rolls
-        modelPresentation = new ConditionalVisibility(
-            new SpriteVisibility(spriteRenderer),
-            playerMovement.RollAction().Concluded()
-        );
-    }
+    private Vector OrientationVector()
+        => orientationVector ??=
+            new Vector(
+                new PointToPointVectorDefinition(
+                    WeaponAnchor(),
+                    TargetLocation()
+                )
+            );
+
+    private Orientation WeaponOrientation()
+        => weaponOrientation ??=
+            new WeaponOrientation(
+                WeaponAnchor(),
+                OrientationVector(),
+                spriteRenderer
+            );
+    
+    private Presentation ModelPresentation()
+        => modelPresentation ??=
+            new ConditionalVisibility(
+                new SpriteVisibility(spriteRenderer),
+                PlayerMovement().RollAction().Concluded()
+            );
 
     
     private void Update()
     {
-        weaponOrientation.Orient();
-        modelPresentation.Present();
+        WeaponOrientation().Orient();
+        ModelPresentation().Present();
     }
 }

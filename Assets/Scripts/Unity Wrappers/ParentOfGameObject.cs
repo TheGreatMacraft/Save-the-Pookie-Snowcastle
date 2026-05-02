@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class ParentOfGameObject
+    : Scalar<GameObject>
 {
     private readonly Transform gameObject;
 
@@ -15,7 +16,7 @@ public sealed class ParentOfGameObject
         this.gameObject = gameObject;
     }
 
-    public GameObject Parent()
+    public GameObject Value()
     {
         if (parentObject.Count == 0)
         {

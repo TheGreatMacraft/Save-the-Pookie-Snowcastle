@@ -1,13 +1,13 @@
-public sealed class MultipleConditions
+public sealed class OrConditions
     : Condition
 {
     private readonly ReadOnlyCollection<Condition> conditions;
     
     
-    public MultipleConditions(params Condition[] elements)
+    public OrConditions(params Condition[] elements)
         : this(new SimpleReadOnlyCollection<Condition>(elements)) {}
 
-    private MultipleConditions(ReadOnlyCollection<Condition> conditions)
+    private OrConditions(ReadOnlyCollection<Condition> conditions)
     {
         this.conditions = conditions;
     }
@@ -15,9 +15,9 @@ public sealed class MultipleConditions
     public bool IsMet()
     {
         foreach (Condition condition in conditions.AllElements())
-            if (!condition.IsMet())
-                return false;
+            if (condition.IsMet())
+                return true;
 
-        return true;
+        return false;
     }
 }

@@ -72,7 +72,7 @@ public sealed class ChargedActionExecution
         if (concludedCondition.Count == 0)
         {
             concludedCondition.Add(
-                new MultipleConditions(
+                new AndConditions(
                     new IsTrue(() => !isCharging),
                     finalAction.Concluded()
                 )

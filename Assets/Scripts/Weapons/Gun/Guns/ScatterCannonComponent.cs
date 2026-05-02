@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class ScatterCannonComponent : 
@@ -12,33 +13,41 @@ public sealed class ScatterCannonComponent :
     [SerializeField] private float subProjectileLifeTime;
     [SerializeField] private ProjectileComponent subProjectilePrefab;
     [SerializeField] private int numberOfProjectiles;
-    
 
-    protected override void Start()
+
+    private readonly List<ActionExecution> abilityAction = new(1);
+
+
+    public override ActionExecution Ability()
     {
-        base.Start();
-
-        abilityAction = new ExecutionWithCooldown(
-            new ConstantExecution(
-                new ScatterCall(
-                    new ScatterProjectileSpawner(
-                        new StandardProjectileSpawner(
-                            subProjectileSpeed,
-                            subProjectileLifeTime,
-                            new GameObjectBuilder<ProjectileComponent>(
-                                subProjectilePrefab
+        if (abilityAction.Count == 0)
+        {
+            abilityAction.Add(
+                new ExecutionWithCooldown(
+                    new ConstantExecution(
+                        new ScatterCall(
+                            new ScatterProjectileSpawner(
+                                new StandardProjectileSpawner(
+                                    subProjectileSpeed,
+                                    subProjectileLifeTime,
+                                    new GameObjectBuilder<ProjectileComponent>(
+                                        subProjectilePrefab
+                                    ),
+                                    new NullCollection<Projectile>(),
+                                    targetTag
+                                ),
+                                numberOfProjectiles
                             ),
-                            new NullCollection<Projectile>(),
-                            targetTag
-                        ),
-                        numberOfProjectiles
+                            firedProjectiles
+                        )
                     ),
-                    firedProjectiles
+                    abilityCooldown,
+                    CoroutineClock(),
+                    false
                 )
-            ),
-            abilityCooldown,
-            coroutineClock,
-            false
-        );
+            );
+        }
+        
+        return abilityAction[0];
     }
 }

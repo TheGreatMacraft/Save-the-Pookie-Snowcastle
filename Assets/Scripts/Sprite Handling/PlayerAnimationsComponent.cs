@@ -14,7 +14,7 @@ public sealed class PlayerAnimationsComponent
     
     private void Awake()
     {
-        GameObject parent = new ParentOfGameObject(gameObject).Parent();
+        GameObject parent = new ParentOfGameObject(gameObject).Value();
         
         Location thisEntityLocation = new ComponentInObject<Location>(
             parent,

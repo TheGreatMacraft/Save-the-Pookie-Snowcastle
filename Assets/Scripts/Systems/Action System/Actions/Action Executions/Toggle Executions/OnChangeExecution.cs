@@ -38,7 +38,7 @@ public sealed class OnChangeExecution
         if (inProgressCondition.Count == 0)
         {
             inProgressCondition.Add(
-                new MultipleConditions(
+                new AndConditions(
                     condition,
                     new IsTrue(() => !lastState)
                 )

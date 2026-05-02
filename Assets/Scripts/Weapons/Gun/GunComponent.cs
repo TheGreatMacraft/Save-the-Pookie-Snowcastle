@@ -26,57 +26,55 @@ public abstract class GunComponent
     [SerializeField] private ProjectileComponent projectilePrefab;
     
     
-    protected Magazine magazine; 
-    
     protected Collection<Projectile> firedProjectiles
         = new SimpleCollection<Projectile>();
-    
 
-    protected override void Awake()
-    {
-        base.Awake();
-        
-        magazine = infiniteMagazineSize
-            ? new InfiniteMagazine()
-            : new BasicMagazine(magazineSize);
-    }
+    private Magazine magazine;
     
-    protected virtual void Start()
-    {
-        ActionExecution reloadAction = new ExecutionWithCooldown(
-            new ConstantExecution(new ReloadCall(magazine)),
-            reloadCooldown,
-            coroutineClock,
-            true
-        );
-        
-        ActionExecution shootAction = new ExecutionWithCooldown(
-            new ConstantExecution(
-                new ShootCall(
-                    magazine,
-                    ammoPerShot,
-                    ammoSpreadAngle,
-                    reloadAction,
-                    new StandardProjectileSpawner(
-                        projectileSpeed,
-                        projectileLifeTime,
-                        new GameObjectBuilder<ProjectileComponent>
-                            (projectilePrefab),
-                        firedProjectiles,
-                        targetTag),
-                    projectileSpawnPoint,
-                    new Rotation(rotationAnchor),
-                    cameraShake,
-                    shakeMagnitude,
-                    shakeDuration
-                )
-            ),
-            shootCooldown,
-            coroutineClock,
-            false
-        );
+    private ActionExecution reloadAction;
+    private ActionExecution shootAction;
 
-        defaultAttack = shootAction;
-        supportAction = reloadAction;
-    }
+
+    protected Magazine Magazine()
+        => magazine ??=
+            infiniteMagazineSize
+                ? new InfiniteMagazine()
+                : new BasicMagazine(magazineSize);
+
+    public override ActionExecution SupportAction()
+        => reloadAction ??=
+            new ExecutionWithCooldown(
+                new ConstantExecution(new ReloadCall(Magazine())),
+                reloadCooldown,
+                CoroutineClock(),
+                true
+            );
+
+    public override ActionExecution DefaultAttack()
+        => shootAction ??=
+            new ExecutionWithCooldown(
+                new ConstantExecution(
+                    new ShootCall(
+                        Magazine(),
+                        ammoPerShot,
+                        ammoSpreadAngle,
+                        SupportAction(),
+                        new StandardProjectileSpawner(
+                            projectileSpeed,
+                            projectileLifeTime,
+                            new GameObjectBuilder<ProjectileComponent>
+                                (projectilePrefab),
+                            firedProjectiles,
+                            targetTag),
+                        projectileSpawnPoint,
+                        new Rotation(rotationAnchor),
+                        cameraShake,
+                        shakeMagnitude,
+                        shakeDuration
+                    )
+                ),
+                shootCooldown,
+                CoroutineClock(),
+                false
+            );
 }

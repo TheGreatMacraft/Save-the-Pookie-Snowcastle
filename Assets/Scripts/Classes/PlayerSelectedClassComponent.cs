@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 [RequireComponent(typeof(PhysicalBodyComponent))]
 [RequireComponent(typeof(PhysicalMovementComponent))]
@@ -7,42 +7,51 @@ using UnityEngine;
 
 
 public sealed class PlayerSelectedClassComponent
-    : MonoBehaviour, Class, Scalar<Class>
+    : MonoBehaviour,Class
 {
     [SerializeField] private HologramComponent hologram;
-
     [SerializeField] private ClassType selectedClassType;
-    private List<Scalar<Class>> selectedClass = new(1);
+    
+    private PlayerState playerState;
+    
+    private Class selectedClass;
 
 
-    public Class Value()
+    private PlayerState PlayerState()
+        => playerState ??=
+            new ComponentInObject<PlayerState>(
+                gameObject,
+                new NullPlayerState()
+            ).Value();
+    
+    private Class SelectClass()
     {
-        if (selectedClass.Count == 0)
+        switch (selectedClassType)
         {
-            selectedClass.Add(
-                new SelectedClass(
-                    selectedClassType,
-                    new ComponentInObject<PlayerState>(
-                        gameObject,
-                        new NullPlayerState()
-                    ).Value(),
-                    hologram
-                )
-            );
+            case ClassType.Flanker:
+                return new FlankerClass();
+            
+            case ClassType.Engineer:
+                return new EngineerClass(hologram, PlayerState());
+            
+            default:
+                return new NullClass();
         }
-
-        return selectedClass[0].Value();
     }
+
+    private Class SelectedClass()
+        => selectedClass ??= 
+            SelectClass();
 
     
     // Proxy
     public ReadOnlyCollection<ActionExecution> Abilities()
-        => Value().Abilities();
+        => SelectedClass().Abilities();
 
     public float DefaultSpeedMultiplier()
-        => Value().DefaultSpeedMultiplier();
+        => SelectedClass().DefaultSpeedMultiplier();
     public float SprintSpeedMultiplier()
-        => Value().SprintSpeedMultiplier();
+        => SelectedClass().SprintSpeedMultiplier();
 }
 
 public enum ClassType

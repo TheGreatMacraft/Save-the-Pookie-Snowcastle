@@ -9,18 +9,19 @@ public sealed class TargetComponent :
     private Tagged taggedObject;
     private Location targetLocation;
 
-
-    private void Awake()
-    {
-        taggedObject = new TaggedObject(
-            gameObject.tag
+    
+    private Tagged TaggedObject()
+        => taggedObject ??=
+            new TaggedObject(
+                gameObject.tag
             );
-
-        targetLocation = new ComponentInObject<Location>(
-            gameObject,
-            new NullLocation()
-        ).Value();
-    }
+    
+    private Location TargetLocation()
+        => targetLocation ??=
+            new ComponentInObject<Location>(
+                gameObject,
+                new NullLocation()
+            ).Value();
 
 
     public void Hit(Impact impact, Terminable disposableHitter)
@@ -30,8 +31,8 @@ public sealed class TargetComponent :
     }
     
     public Vector3 Coordinates()
-        => targetLocation.Coordinates();
+        => TargetLocation().Coordinates();
     
     public bool IsTaggedAs(string checkTag)
-        => taggedObject.IsTaggedAs(checkTag);
+        => TaggedObject().IsTaggedAs(checkTag);
 }

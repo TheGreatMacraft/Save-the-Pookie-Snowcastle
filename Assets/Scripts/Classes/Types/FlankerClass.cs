@@ -3,7 +3,9 @@ public sealed class FlankerClass
 {
     public FlankerClass()
         : base(
-            new SimpleReadOnlyCollection<ActionExecution>(),
+            new SimpleReadOnlyCollection<ActionExecution>(
+                
+            ),
             1.5f,
             1.5f
         ) {}

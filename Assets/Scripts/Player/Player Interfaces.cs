@@ -1,6 +1,6 @@
 public interface PlayerMovement
 {
-    public Condition IsMoving();
+    public ActionExecution Movement();
     public ActionExecution RollAction();
 }
 

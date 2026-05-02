@@ -21,7 +21,7 @@ public sealed class UnityGameObject
     public GameObject Parent()
     {
         if (parent.Count == 0)
-            parent.Add(new ParentOfGameObject(gameObject).Parent());
+            parent.Add(new ParentOfGameObject(gameObject).Value());
 
         return parent[0];
     }

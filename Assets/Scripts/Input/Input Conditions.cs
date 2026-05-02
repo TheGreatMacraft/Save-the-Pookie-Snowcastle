@@ -17,7 +17,7 @@ public sealed class DefaultAttackInputCondition : InputCondition
 {
     public DefaultAttackInputCondition(InputActionStates allStates)
         : base(
-            new MultipleConditions(
+            new AndConditions(
                 new OnPressed(
                     allStates.PrimaryActionState()
                 ),
@@ -33,7 +33,7 @@ public sealed class StartHeavyAttackInputCondition : InputCondition
 {
     public StartHeavyAttackInputCondition(InputActionStates allStates)
         : base(
-            new MultipleConditions(
+            new AndConditions(
                 new OnPressed(
                     allStates.PrimaryActionState()
                 ),
@@ -48,7 +48,7 @@ public sealed class ChargeHeavyAttackInputCondition : InputCondition
 {
     public ChargeHeavyAttackInputCondition(InputActionStates allStates)
         : base(
-            new MultipleConditions(
+            new AndConditions(
                 new OnBeingPressed(
                     allStates.PrimaryActionState()
                 ),

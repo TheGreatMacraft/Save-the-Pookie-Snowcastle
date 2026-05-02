@@ -5,30 +5,41 @@ using UnityEngine;
 public sealed class PlayerAnimationControler
     : MonoBehaviour
 {
-    [SerializeField] private PlayerMovementComponent playerMovement;
-    
+    private PlayerMovement playerMovement;
     private PlayerAnimationMessenger playerAnimationMessenger;
     private ActionExecution triggerRolling;
 
+
+    private PlayerMovement PlayerMovement()
+        => playerMovement ??=
+            new ComponentInObject<PlayerMovement>(
+                new ParentOfGameObject(gameObject).Value(),
+                new NullPlayerMovement()
+            ).Value();
     
-    private void Awake()
-    {
-        playerAnimationMessenger = new ComponentInObject<PlayerAnimationMessenger>(
-            gameObject,
-            new NullPlayerAnimationMessenger()
-        ).Value();
-
-        triggerRolling = new OnTrueExecution(
-            new SimpleActionCall(
-                () => playerAnimationMessenger.TriggerRolling()
+    private PlayerAnimationMessenger PlayerAnimationMessenger()
+        => playerAnimationMessenger ??=
+            new ComponentInObject<PlayerAnimationMessenger>(
+                gameObject,
+                new NullPlayerAnimationMessenger()
+            ).Value();
+    
+    private ActionExecution TriggerRolling()
+        => triggerRolling ??=
+            new OnTrueExecution(
+                new SimpleActionCall(
+                    () => PlayerAnimationMessenger().TriggerRolling()
                 ),
-            playerMovement.RollAction().InProgress()
-        );
-    }
+                PlayerMovement().RollAction().InProgress()
+            );
+    
 
-    private void FixedUpdate()
+    private void Update()
     {
-        playerAnimationMessenger.ToggleWalking(playerMovement.IsMoving().IsMet());
-        triggerRolling.Execute();
+        PlayerAnimationMessenger().ToggleWalking(
+            PlayerMovement().Movement().InProgress().IsMet()
+        );
+        
+        TriggerRolling().Execute();
     }
 }

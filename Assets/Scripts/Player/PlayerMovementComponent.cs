@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PhysicalMovement))]
 [DisallowMultipleComponent]
 
+
 public sealed class PlayerMovementComponent
     : MonoBehaviour, PlayerMovement
 {
@@ -15,80 +16,98 @@ public sealed class PlayerMovementComponent
     [Header("Player Input")]
     [SerializeField] private PlayerInput playerInput;
     
+    
+    private Clock coroutineClock;
+    private Force playerForce;
+
+    private SpeedProvider speedProvider;
+    private Speed speed;
+    private ComplexMovement legs;
+    
     private ActionExecution rollAction;
+    private ActionExecution playerMovement;
+
+
+    private Clock CoroutineClock()
+        => coroutineClock ??=
+            new CoroutineClock(this);
+
+    private Force PlayerForce()
+        => playerForce ??=
+            new ComponentInObject<Force>(
+                gameObject,
+                new NullForce()
+            ).Value();
+
+    private SpeedProvider SpeedProvider()
+        => speedProvider ??=
+            new ComponentInObject<SpeedProvider>(
+                gameObject,
+                new NullSpeedProvider()
+            ).Value();
     
+    private Speed Speed()
+        => speed ??=
+            new ComplexSpeed(
+                SpeedProvider().DefaultSpeedMultiplier(),
+                new AttributeModifier(
+                    SpeedProvider().SprintSpeedMultiplier(),
+                    new FalseCondition()
+                )
+            );
     
-    [Header("Other")]
-    [SerializeField] private PlayerAnimationMessengerComponent playerAnimationMessenger;
+    private ComplexMovement Legs()
+        => legs ??=
+            new InputAxisFollower(
+                new ComponentInObject<Force>(
+                    gameObject,
+                    new NullForce()
+                ).Value(),
+                Speed()
+            );
     
-    
-    private ComplexMovement playerLegs;
     
     public ActionExecution RollAction()
-        => rollAction;
-
-    public Condition IsMoving()
-        => playerLegs.IsMoving();
-    
-    
-    private void Awake()
-    {
-        Clock coroutineClock = new CoroutineClock(this);
-        
-        SpeedProvider speedProvider = new ComponentInObject<SpeedProvider>(
-            gameObject,
-            new NullSpeedProvider()
-        ).Value();
-        
-        Speed playerSpeed = new ComplexSpeed(
-            speedProvider.DefaultSpeedMultiplier(),
-            new AttributeModifier(
-                speedProvider.SprintSpeedMultiplier(),
-                new FalseCondition()
-                )
-        );
-        
-        Force playerMovement = new ComponentInObject<Force>(
-            gameObject,
-            new NullForce()
-        ).Value();
-
-        playerLegs = new InputAxisFollower(
-            playerMovement,
-            playerSpeed
-        );
-
-        rollAction = new ConditionalExecution(
-            new ExecutionWithCooldown(
-                new ConstantExecution(
-                    new RollCall(
-                        playerMovement,
-                        new Vector(new InputAxisVectorDefinition()),
-                        rollForce,
-                        playerAnimationMessenger,
-                        coroutineClock,
-                        rollDuration
-                    )
+        => rollAction ??=
+            new ConditionalExecution(
+                new ExecutionWithCooldown(
+                    new ConstantExecution(
+                        new RollCall(
+                            PlayerForce(),
+                            new Vector(new InputAxisVectorDefinition()),
+                            rollForce,
+                            CoroutineClock(),
+                            rollDuration
+                        )
+                    ),
+                    rollCooldown,
+                    CoroutineClock(),
+                    false
                 ),
-                rollCooldown,
-                coroutineClock,
-                false
-            ),
-            new RollInputCondition(new InputActionStates(playerInput))
-        );
-    }
+                new RollInputCondition(new InputActionStates(playerInput))
+            );
+    
+
+    public ActionExecution Movement()
+        => playerMovement ??=
+            new ConditionalExecution(
+                new ConstantExecution(
+                    new SimpleActionCall(() => Legs().Move())
+                ),
+                new AndConditions(
+                    RollAction().Concluded(),
+                    Legs().IsMoving()
+                )
+            );
 
 
     private void Update()
     {
-        rollAction.Execute();
+        RollAction().Execute();
     }
 
     private void FixedUpdate()
     {
-        playerAnimationMessenger.ToggleWalking(playerLegs.IsMoving().IsMet());
-        
-        if(rollAction.Concluded().IsMet())
-            playerLegs.Move();
+        Movement().Execute();
     }
 }
