@@ -3,29 +3,34 @@ using UnityEngine;
 [DisallowMultipleComponent]
 
 public sealed class BuildingComponent
-    : MonoBehaviour, TargetLocationSource
+    : MonoBehaviour, Building
 {
     [SerializeField] private string targetTag;
-    
+
+    private Location buildingLocation;
     private TargetScouter targetScouter;
-    private Target currentTarget;
+
+
+    private Location BuildingLocation()
+        => buildingLocation ??=
+            new ComponentInObject<PhysicalBody>(
+                gameObject,
+                new NullPhysicalBody()
+            ).Value();
+
+    private TargetScouter TargetScouter()
+        => targetScouter ??=
+            new TargetScouter(
+                new ClosestTarget(
+                    BuildingLocation(),
+                    targetTag
+                )
+            );
 
     
     private void Awake()
     {
-        Location buildingLocation = new ComponentInObject<PhysicalBody>(
-            gameObject,
-            new NullPhysicalBody()
-        ).Value();
-
-        targetScouter = new TargetScouter(
-            new ClosestTarget(
-                buildingLocation,
-                targetTag
-            )
-        );
-        
-        targetScouter.FindNewTarget();
+        TargetScouter().FindNewTarget();
     }
     
     // Proxy

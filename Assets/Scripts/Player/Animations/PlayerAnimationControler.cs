@@ -27,8 +27,10 @@ public sealed class PlayerAnimationControler
     private ActionExecution TriggerRolling()
         => triggerRolling ??=
             new OnTrueExecution(
-                new SimpleActionCall(
-                    () => PlayerAnimationMessenger().TriggerRolling()
+                new ConstantExecution(
+                    new SimpleActionCall(
+                        () => PlayerAnimationMessenger().TriggerRolling()
+                    )
                 ),
                 PlayerMovement().RollAction().InProgress()
             );

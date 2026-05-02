@@ -62,13 +62,13 @@ public abstract class GunComponent
                         new StandardProjectileSpawner(
                             projectileSpeed,
                             projectileLifeTime,
-                            new GameObjectBuilder<ProjectileComponent>
+                            new AlteringGameObjectBuilder<ProjectileComponent>
                                 (projectilePrefab),
                             firedProjectiles,
                             targetTag),
                         projectileSpawnPoint,
                         new Rotation(rotationAnchor),
-                        cameraShake,
+                        CameraShake(),
                         shakeMagnitude,
                         shakeDuration
                     )

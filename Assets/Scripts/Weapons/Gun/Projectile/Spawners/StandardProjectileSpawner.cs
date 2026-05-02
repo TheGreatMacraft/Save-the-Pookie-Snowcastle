@@ -3,7 +3,7 @@ public sealed class StandardProjectileSpawner :
 {
     private readonly float speed;
     private readonly float lifeTime;
-    private readonly ObjectBuilder<ProjectileComponent> unityProjectileBuilder;
+    private readonly AlteringGameObjectBuilder<ProjectileComponent> unityProjectileBuilder;
     private readonly Collection<Projectile> firedProjectiles;
     private readonly string targetTag;
     
@@ -11,7 +11,7 @@ public sealed class StandardProjectileSpawner :
     public StandardProjectileSpawner(
         float speed,
         float lifeTime,
-        ObjectBuilder<ProjectileComponent> unityProjectileBuilder,
+        AlteringGameObjectBuilder<ProjectileComponent> unityProjectileBuilder,
         Collection<Projectile> firedProjectiles,
         string targetTag
         )

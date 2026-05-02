@@ -121,8 +121,12 @@ public sealed class PlayerActionHandler : MonoBehaviour
     {
         if (stateToggler.Count == 0)
         {
-            stateToggler.Add(new OnTrueExecution(
-                new ToggleCall(PlayerState()),
+            stateToggler.Add(
+                new OnTrueExecution(
+                    new ConstantExecution(
+                        new ToggleCall(PlayerState()
+                    )
+                ),
                 new BuildMenuInputCondition(InputActionStates())
             ));
         }

@@ -1,5 +1,6 @@
-using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 [RequireComponent(typeof(PhysicalBodyComponent))]
 [RequireComponent(typeof(PhysicalMovementComponent))]
 [RequireComponent(typeof(PlayerStateComponent))]
@@ -9,13 +10,27 @@ using UnityEngine;
 public sealed class PlayerSelectedClassComponent
     : MonoBehaviour,Class
 {
+    [Header("Overall")]
+    [SerializeField] private PlayerInput playerInput;
+    
+    [Header("Builder")]
     [SerializeField] private HologramComponent hologram;
+    [SerializeField] private BuildingComponent buildingPrefab;
+    
     [SerializeField] private ClassType selectedClassType;
     
+    private Clock coroutineClock;
+    private InputActionStates inputActionStates;
     private PlayerState playerState;
     
     private Class selectedClass;
 
+
+    private Clock CoroutineClock()
+        => coroutineClock ??= new CoroutineClock(this);
+
+    private InputActionStates InputActionStates()
+        => inputActionStates ??= new InputActionStates(playerInput);
 
     private PlayerState PlayerState()
         => playerState ??=
@@ -23,6 +38,7 @@ public sealed class PlayerSelectedClassComponent
                 gameObject,
                 new NullPlayerState()
             ).Value();
+    
     
     private Class SelectClass()
     {
@@ -32,7 +48,17 @@ public sealed class PlayerSelectedClassComponent
                 return new FlankerClass();
             
             case ClassType.Engineer:
-                return new EngineerClass(hologram, PlayerState());
+                return new EngineerClass(
+                    hologram,
+                    new ComponentInObject<PhysicalBody>(
+                        hologram,
+                        new NullPhysicalBody()
+                    ).Value(),
+                    buildingPrefab,
+                    PlayerState(),
+                    CoroutineClock(),
+                    InputActionStates()
+                );
             
             default:
                 return new NullClass();

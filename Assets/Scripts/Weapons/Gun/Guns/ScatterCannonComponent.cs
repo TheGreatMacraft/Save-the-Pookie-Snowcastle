@@ -30,7 +30,7 @@ public sealed class ScatterCannonComponent :
                                 new StandardProjectileSpawner(
                                     subProjectileSpeed,
                                     subProjectileLifeTime,
-                                    new GameObjectBuilder<ProjectileComponent>(
+                                    new AlteringGameObjectBuilder<ProjectileComponent>(
                                         subProjectilePrefab
                                     ),
                                     new NullCollection<Projectile>(),

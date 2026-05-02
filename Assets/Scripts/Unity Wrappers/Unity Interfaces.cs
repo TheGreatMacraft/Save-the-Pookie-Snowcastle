@@ -2,13 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Instantiate
-
-public interface ObjectBuilder<T>
-{
-    T Build(Location spawnLocation, Rotation spawnOrientation);
-}
-
 // -> Spawner (Adjacent to ObjectBuilder)
 public interface Spawner
 {

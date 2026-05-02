@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public sealed class ConstantExecution
     : ActionExecution
 {

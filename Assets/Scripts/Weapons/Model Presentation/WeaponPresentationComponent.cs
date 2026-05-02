@@ -12,9 +12,12 @@ public sealed class WeaponPresentationComponent :
 
     private GameObject parent;
     private PlayerMovement playerMovement;
+    
     private PhysicalBody weaponAnchor;
     private TargetLocationSource targetLocation;
     private Vector orientationVector;
+    
+    private PlayerState playerState;
     
     private Presentation modelPresentation;
     private Orientation weaponOrientation;
@@ -30,6 +33,7 @@ public sealed class WeaponPresentationComponent :
                 Parent(),
                 new NullPlayerMovement()
             ).Value();
+    
 
     private PhysicalBody WeaponAnchor()
         => weaponAnchor ??=
@@ -53,6 +57,15 @@ public sealed class WeaponPresentationComponent :
                     TargetLocation()
                 )
             );
+    
+    
+    private PlayerState PlayerState()
+        => playerState ??=
+            new ComponentInObject<PlayerState>(
+                new ParentOfGameObject(gameObject).Value(),
+                new NullPlayerState()
+            ).Value();
+    
 
     private Orientation WeaponOrientation()
         => weaponOrientation ??=
@@ -66,7 +79,10 @@ public sealed class WeaponPresentationComponent :
         => modelPresentation ??=
             new ConditionalVisibility(
                 new SpriteVisibility(spriteRenderer),
-                PlayerMovement().RollAction().Concluded()
+                new AndConditions(
+                    PlayerMovement().RollAction().Concluded(),
+                    new IsStateCondition(PlayerState(), new BattleState())
+                )
             );
 
     

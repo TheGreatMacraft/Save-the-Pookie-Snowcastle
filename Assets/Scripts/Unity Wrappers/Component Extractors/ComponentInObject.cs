@@ -9,8 +9,8 @@ public sealed class ComponentInObject<T>
     private List<T> cache = new(1);
     
     
-    public ComponentInObject(Collider2D collider, T nullObject)
-        : this(collider.gameObject, nullObject) {}
+    public ComponentInObject(MonoBehaviour origin, T nullObject)
+        : this(origin.gameObject, nullObject) {}
 
     public ComponentInObject(GameObject origin, T nullObject)
     {
