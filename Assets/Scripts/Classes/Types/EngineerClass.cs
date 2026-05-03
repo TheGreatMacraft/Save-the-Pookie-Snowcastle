@@ -33,8 +33,11 @@ public sealed class EngineerClass
                         coroutineClock,
                         false
                     ),
-                    new OnPressed(
-                        inputActionStates.PrimaryActionState()
+                    new AndConditions(
+                        new OnPressed(
+                            inputActionStates.PrimaryActionState()
+                        ),
+                        new IsStateCondition(playerState, new BuildState())
                     )
                 )
             ),
