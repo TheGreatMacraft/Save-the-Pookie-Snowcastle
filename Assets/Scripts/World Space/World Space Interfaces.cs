@@ -9,6 +9,8 @@ public interface Location
     
     bool Equals(Location other)
         => Coordinates().Equals(other.Coordinates());
+
+    bool IsSet() => true;
 }
 
 public interface Movable

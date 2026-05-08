@@ -5,18 +5,22 @@ public sealed class InputActionStates
 {
     private readonly PlayerInput playerInput;
 
-    private List<InputActionState> primaryActionState = new(1);
-    private List<InputActionState> secondaryActionState = new(1);
+    private InputActionState primaryActionState;
+    private InputActionState secondaryActionState;
     
-    private List<InputActionState> movementActionState = new(1);
-    private List<InputActionState> movementSpecialActionState = new(1);
-    private List<InputActionState> powerActionState = new(1);
+    private InputActionState movementActionState;
+    private InputActionState movementSpecialActionState;
+    private InputActionState powerActionState;
     
-    private List<InputActionState> specialActionState = new(1);
-    private List<InputActionState> supportActionState = new(1);
-    private List<InputActionState> interactActionState = new(1);
+    private InputActionState specialActionState;
+    private InputActionState supportActionState;
+    private InputActionState interactActionState;
     
-    private List<InputActionState> buildMenuActionState = new(1);
+    private InputActionState switchStateActionState;
+    
+    private InputActionState primarySlotActionState;
+    private InputActionState secondarySlotActionState;
+    private InputActionState tertiarySlotActionState;
 
     
     public InputActionStates(PlayerInput playerInput)
@@ -26,137 +30,87 @@ public sealed class InputActionStates
 
 
     public InputActionState PrimaryActionState()
-    {
-        if (primaryActionState.Count == 0)
-        {
-            primaryActionState.Add(
-                new InputActionState(
-                    playerInput,
-                    new PrimaryInputAction()
-                )
+        => primaryActionState ??=
+            new InputActionState(
+                playerInput,
+                new PrimaryInputAction()
             );
-        }
-        
-        return primaryActionState[0];
-    }
 
     public InputActionState SecondaryActionState()
-    {
-        if (secondaryActionState.Count == 0)
-        {
-            secondaryActionState.Add(
-                new InputActionState(
-                    playerInput,
-                    new SecondaryInputAction()
-                )
+        => secondaryActionState ??=
+            new InputActionState(
+                playerInput,
+                new SecondaryInputAction()
             );
-        }
-
-        return secondaryActionState[0];
-    }
 
     public InputActionState MovementActionState()
-    {
-        if (movementActionState.Count == 0)
-        {
-            movementActionState.Add(
-                new InputActionState(
-                    playerInput,
-                    new MovementInputAction()
-                )
+        => movementActionState ??=
+            new InputActionState(
+                playerInput,
+                new MovementInputAction()
             );
-        }
 
-        return movementActionState[0];
-    }
-    
     public InputActionState MovementSpecialActionState()
-    {
-        if (movementSpecialActionState.Count == 0)
-        {
-            movementSpecialActionState.Add(
-                new InputActionState(
-                    playerInput,
-                    new MovementSpecialInputAction()
-                )
+        => movementSpecialActionState ??=
+            new InputActionState(
+                playerInput,
+                new MovementSpecialInputAction()
             );
-        }
-
-        return movementSpecialActionState[0];
-    }
 
     public InputActionState PowerActionState()
-    {
-        if (powerActionState.Count == 0)
-        {
-            powerActionState.Add(
-                new InputActionState(
-                    playerInput,
-                    new PowerInputAction()
-                )
+        => powerActionState ??=
+            new InputActionState(
+                playerInput,
+                new PowerInputAction()
             );
-        }
-
-        return powerActionState[0];
-    }
 
     public InputActionState SpecialActionState()
-    {
-        if (specialActionState.Count == 0)
-        {
-            specialActionState.Add(
-                new InputActionState(
-                    playerInput,
-                    new SpecialInputAction()
-                )
+        => specialActionState ??=
+            new InputActionState(
+                playerInput,
+                new SpecialInputAction()
             );
-        }
-
-        return specialActionState[0];
-    }
 
     public InputActionState SupportActionState()
-    {
-        if (supportActionState.Count == 0)
-        {
-            supportActionState.Add(
-                new InputActionState(
-                    playerInput,
-                    new SupportInputAction()
-                )
+        => supportActionState ??=
+            new InputActionState(
+                playerInput,
+                new SupportInputAction()
             );
-        }
-
-        return supportActionState[0];
-    }
 
     public InputActionState InteractActionState()
-    {
-        if (interactActionState.Count == 0)
-        {
-            interactActionState.Add(
-                new InputActionState(
-                    playerInput,
-                    new InteractInputAction()
-                )
+        => interactActionState ??=
+            new InputActionState(
+                playerInput,
+                new InteractInputAction()
             );
-        }
 
-        return interactActionState[0];
-    }
+    public InputActionState SwitchStateActionState()
+        => switchStateActionState ??=
+            new InputActionState(
+                playerInput,
+                new SwitchStateInputAction()
+            );
     
-    public InputActionState BuildMenuActionState()
-    {
-        if (buildMenuActionState.Count == 0)
-        {
-            buildMenuActionState.Add(
-                new InputActionState(
-                    playerInput,
-                    new BuildMenuInputAction()
-                )
+    // Player Slots
+    public InputActionState PrimarySlotActionState()
+        =>  primarySlotActionState ??=
+            new InputActionState(
+                playerInput,
+                new Slot1InputAction()
             );
-        }
-
-        return buildMenuActionState[0];
-    }
+    
+    public InputActionState SecondarySlotActionState()
+        =>  secondaryActionState ??=
+            new InputActionState(
+                playerInput,
+                new Slot2InputAction()
+            );
+    
+    public InputActionState TertirarySlotActionState()
+        =>  tertiarySlotActionState ??=
+            new InputActionState(
+                playerInput,
+                new Slot3InputAction()
+            );
 }

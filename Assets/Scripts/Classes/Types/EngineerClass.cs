@@ -15,7 +15,9 @@ public sealed class EngineerClass
                 // Toggle Hologram
                 new OnChangeExecution(
                     new ConstantExecution(new ToggleCall(hologram)),
-                    new IsStateCondition(playerState, new BuildState())
+                    new IsIdentityCondition<State>(
+                        playerState, new BuildState()
+                    )
                 ),
                 
                 // Place Hologram
@@ -37,7 +39,9 @@ public sealed class EngineerClass
                         new OnPressed(
                             inputActionStates.PrimaryActionState()
                         ),
-                        new IsStateCondition(playerState, new BuildState())
+                        new IsIdentityCondition<State>(
+                            playerState, new BuildState()
+                        )
                     )
                 )
             ),

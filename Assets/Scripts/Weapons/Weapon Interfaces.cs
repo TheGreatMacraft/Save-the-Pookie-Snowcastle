@@ -6,10 +6,12 @@ public interface Payload
     void Deliver(ReadOnlyCollection<GameObject> potentialTargets);
 }
 
-public interface Weapon
+public interface WeaponActions
 {
     public ActionExecution DefaultAttack();
     public ActionExecution HeavyAttack();
     public ActionExecution SupportAction();
     public ActionExecution Ability();
 }
+
+public interface Weapon : WeaponActions, Presentation {}

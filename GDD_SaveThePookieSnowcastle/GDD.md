@@ -76,7 +76,7 @@ Mentality:
 Loadout:
 - 
 
-#### Area Denier
+#### Builder
 Goal:
 - **control** - define *where* the opponents can be
 - **hold ground** - they are *strongest in their area*

@@ -9,13 +9,13 @@ public sealed class PlayerStateComponent
     
     private void Awake()
     {
-        SetState(battleState);
+        TransitionTo(battleState);
     }
 
     
-    public State CurrentState() => currentState;
+    public State Current() => currentState;
     
-    public void SetState(State state)
+    public void TransitionTo(State state)
     {
         currentState = state;
     }
@@ -23,8 +23,8 @@ public sealed class PlayerStateComponent
     public void Toggle()
     {
         if(currentState.Equals(battleState))
-            SetState(buildState);
+            TransitionTo(buildState);
         else
-            SetState(battleState);
+            TransitionTo(battleState);
     }
 }

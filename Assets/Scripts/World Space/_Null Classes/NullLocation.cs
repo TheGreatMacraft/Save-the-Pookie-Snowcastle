@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class NullLocation : Location
+public sealed class NullLocation : Location
 {
-    public Vector3 Coordinates()
-    {
-        return Vector3.zero;
-    }
+    public Vector3 Coordinates() => Vector3.zero;
+    public bool IsSet() => false;
 }

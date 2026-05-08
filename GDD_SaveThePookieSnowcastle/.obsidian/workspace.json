@@ -41,8 +41,7 @@
               "title": "Weapons"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -193,10 +192,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "5432f0f4e62eb9f3",
+  "active": "6c96de772117463f",
   "lastOpenFiles": [
-    "GDD.md",
     "Progress Boards/Weapons.md",
+    "GDD.md",
     "Base Board.md",
     "Progress Boards/Player.md",
     "Code Documentation.md",

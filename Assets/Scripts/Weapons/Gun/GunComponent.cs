@@ -52,29 +52,32 @@ public abstract class GunComponent
 
     public override ActionExecution DefaultAttack()
         => shootAction ??=
-            new ExecutionWithCooldown(
-                new ConstantExecution(
-                    new ShootCall(
-                        Magazine(),
-                        ammoPerShot,
-                        ammoSpreadAngle,
-                        SupportAction(),
-                        new StandardProjectileSpawner(
-                            projectileSpeed,
-                            projectileLifeTime,
-                            new AlteringGameObjectBuilder<ProjectileComponent>
-                                (projectilePrefab),
-                            firedProjectiles,
-                            targetTag),
-                        projectileSpawnPoint,
-                        new Rotation(rotationAnchor),
-                        CameraShake(),
-                        shakeMagnitude,
-                        shakeDuration
-                    )
+            new ConditionalExecution(
+                new ExecutionWithCooldown(
+                    new ConstantExecution(
+                        new ShootCall(
+                            Magazine(),
+                            ammoPerShot,
+                            ammoSpreadAngle,
+                            SupportAction(),
+                            new StandardProjectileSpawner(
+                                projectileSpeed,
+                                projectileLifeTime,
+                                new AlteringGameObjectBuilder<ProjectileComponent>
+                                    (projectilePrefab),
+                                firedProjectiles,
+                                targetTag),
+                            projectileSpawnPoint,
+                            new Rotation(rotationAnchor),
+                            CameraShake(),
+                            shakeMagnitude,
+                            shakeDuration
+                        )
+                    ),
+                    shootCooldown,
+                    CoroutineClock(),
+                    false
                 ),
-                shootCooldown,
-                CoroutineClock(),
-                false
+                reloadAction.Concluded()
             );
 }

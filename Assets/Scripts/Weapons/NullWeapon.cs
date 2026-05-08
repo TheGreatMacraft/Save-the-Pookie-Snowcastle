@@ -6,4 +6,6 @@ public sealed class NullWeapon : Weapon
     public ActionExecution HeavyAttack() => nullAction;
     public ActionExecution SupportAction() => nullAction;
     public ActionExecution Ability() => nullAction;
+    
+    public void Present() {}
 }

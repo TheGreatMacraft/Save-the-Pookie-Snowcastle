@@ -100,7 +100,7 @@ public sealed class BuildMenuInputCondition : InputCondition
 {
     public BuildMenuInputCondition(InputActionStates allStates)
         : base(
-            new OnPressed(allStates.BuildMenuActionState())
+            new OnPressed(allStates.SwitchStateActionState())
         ) {}
 }
 

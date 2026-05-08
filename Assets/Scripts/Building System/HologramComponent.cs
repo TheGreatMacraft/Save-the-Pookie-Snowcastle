@@ -34,7 +34,9 @@ public sealed class HologramComponent
                     }
                 )
             ),
-            new IsStateCondition(playerState, new BuildState())
+            new IsIdentityCondition<State>(
+                playerState, new BuildState()
+            )
         );
     }
 

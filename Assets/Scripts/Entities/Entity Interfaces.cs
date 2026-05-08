@@ -54,7 +54,7 @@ public interface Target :
 
 public interface TargetPicker : Scalar<Target> {}
 
-public interface TargetLocationSource : Location {}
+public interface TargetLocationSource : Location { }
 
 // Speed
 public interface Speed : Scalar<float> {}

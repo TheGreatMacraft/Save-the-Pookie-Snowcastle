@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public abstract class MeleeComponent
-    : MonoBehaviour, Weapon
+    : MonoBehaviour, WeaponActions
 {
     [Header("Target")]
     [SerializeField] protected string targetTag;

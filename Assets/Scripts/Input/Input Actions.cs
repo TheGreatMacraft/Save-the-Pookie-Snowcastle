@@ -32,6 +32,19 @@ public sealed class InteractInputAction : InputAction {
     public string ToString() => "Interact";
 }
 
-public sealed class BuildMenuInputAction : InputAction {
+public sealed class SwitchStateInputAction : InputAction {
     public string ToString() => "Build Menu";
+}
+
+// Slot Selection
+public sealed class Slot1InputAction : InputAction {
+    public string ToString() => "Slot1";
+}
+
+public sealed class Slot2InputAction : InputAction {
+    public string ToString() => "Slot2";
+}
+
+public sealed class Slot3InputAction : InputAction {
+    public string ToString() => "Slot3";
 }

@@ -1,70 +1,82 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(PlayerMovementComponent))]
+[RequireComponent(typeof(PlayerStateComponent))]
+[RequireComponent(typeof(PlayerSelectedWeaponComponent))]
 [DisallowMultipleComponent]
 
 
 public sealed class PlayerActionHandler : MonoBehaviour
 {
-    [SerializeField] private GunComponent gun;
-
-    private readonly List<ActionExecution> weaponActions = new(1);
-    private readonly List<ActionExecution> stateToggler = new(1);
-    private readonly List<ActionExecution> classAbilities = new(1);
+    private InputActionStates inputActionStates;
+    private PlayerMovement playerMovement;
     
-    private readonly List<InputActionStates> inputActionStates = new(1);
-    private readonly List<PlayerMovement> playerMovement = new(1);
-    private readonly List<PlayerState> playerState = new(1);
+    private PlayerState playerState;
+    private Condition isBattleState;
+    
+    private Weapon selectedWeapon;
+
+    private Presentation weaponPresentation;
+    
+    private ActionExecution weaponActions;
+    private ActionExecution stateToggler;
+    private ActionExecution classAbilities;
     
 
+    // Input
     private InputActionStates InputActionStates()
-    {
-        if (inputActionStates.Count == 0)
-        {
-            inputActionStates.Add(new InputActionStates(
-                new ComponentInObject<PlayerInput>(gameObject, null).Value()
-            ));
-        }
-        return inputActionStates[0];
-    }
+        => inputActionStates ??=
+            new InputActionStates(
+                new ComponentInObject<PlayerInput>(
+                    gameObject, 
+                    null
+                ).Value()
+            );
 
+    // Movement
     private PlayerMovement PlayerMovement()
-    {
-        if (playerMovement.Count == 0)
-        {
-            playerMovement.Add(new ComponentInObject<PlayerMovement>(
-                gameObject, 
+        => playerMovement ??=
+            new ComponentInObject<PlayerMovement>(
+                gameObject,
                 new NullPlayerMovement()
-            ).Value());
-        }
-        return playerMovement[0];
-    }
+            ).Value();
 
+    // Player State
     private PlayerState PlayerState()
-    {
-        if (playerState.Count == 0)
-        {
-            playerState.Add(new ComponentInObject<PlayerState>(
-                gameObject, 
+        => playerState ??=
+            new ComponentInObject<PlayerState>(
+                gameObject,
                 new NullPlayerState()
-            ).Value());
-        }
-        return playerState[0];
-    }
+            ).Value();
 
-    private Condition IsBattleState() => new IsStateCondition(PlayerState(), new BattleState());
+    private Condition IsBattleState() 
+        => isBattleState ??=
+            new IsIdentityCondition<State>(
+            PlayerState(), 
+            new BattleState()
+        );
     
-
+    
+    
+    // Selected Weapon
+    private Weapon SelectedWeapon()
+        => selectedWeapon ??=
+            new DynamicWeapon(
+                new ComponentInObject<Scalar<Weapon>>(
+                    gameObject,
+                    new NullScalar<Weapon>(new NullWeapon())
+                ).Value()
+            );
+    
+    
+    // Actions
     private ActionExecution WeaponActions()
-    {
-        if (weaponActions.Count == 0)
-        {
-            weaponActions.Add(new MultipleActionExecutions(
+        => weaponActions ??=
+            new MultipleActionExecutions(
                 // Default Attack
                 new ConditionalExecution(
-                    gun.DefaultAttack(),
+                    SelectedWeapon().DefaultAttack(),
                     new AndConditions(
                         new DefaultAttackInputCondition(InputActionStates()),
                         PlayerMovement().RollAction().Concluded(),
@@ -74,10 +86,10 @@ public sealed class PlayerActionHandler : MonoBehaviour
                 // Heavy Attack - NOT WORKING YET 
                 new ConditionalExecution(
                     new ChargedActionExecution(
-                        new NullActionCall(), 
-                        new NullActionCall(), 
-                        gun.HeavyAttack(),
-                        0f, 
+                        new NullActionCall(),
+                        new NullActionCall(),
+                        SelectedWeapon().HeavyAttack(),
+                        0f,
                         new CoroutineClock(this),
                         new ChargeHeavyAttackInputCondition(InputActionStates())
                     ),
@@ -88,7 +100,7 @@ public sealed class PlayerActionHandler : MonoBehaviour
                 ),
                 // Support Action
                 new ConditionalExecution(
-                    gun.SupportAction(),
+                    SelectedWeapon().SupportAction(),
                     new AndConditions(
                         new SupportActionInputCondition(InputActionStates()),
                         IsBattleState()
@@ -96,48 +108,41 @@ public sealed class PlayerActionHandler : MonoBehaviour
                 ),
                 // Ability Action
                 new ConditionalExecution(
-                    gun.Ability(),
+                    SelectedWeapon().Ability(),
                     new AndConditions(
                         new AbilityInputCondition(InputActionStates()),
                         IsBattleState()
                     )
                 )
-            ));
-        }
-        return weaponActions[0];
-    }
+            );
 
     private ActionExecution ClassAbilities()
-    {
-        if (classAbilities.Count == 0)
-        {
-            Class selectedClass = new ComponentInObject<Class>(gameObject, new NullClass()).Value();
-            classAbilities.Add(new MultipleActionExecutions(selectedClass.Abilities()));
-        }
-        return classAbilities[0];
-    }
+        => classAbilities ??=
+            new MultipleActionExecutions(
+                new ComponentInObject<Class>(
+                    gameObject, 
+                    new NullClass()
+                ).Value().Abilities()
+            );
 
     private ActionExecution StateToggler()
-    {
-        if (stateToggler.Count == 0)
-        {
-            stateToggler.Add(
-                new OnTrueExecution(
-                    new ConstantExecution(
-                        new ToggleCall(PlayerState()
+        => stateToggler ??=
+            new OnTrueExecution(
+                new ConstantExecution(
+                    new ToggleCall(PlayerState()
                     )
                 ),
                 new BuildMenuInputCondition(InputActionStates())
-            ));
-        }
-        return stateToggler[0];
-    }
+            );
     
 
     private void Update()
     {
         ClassAbilities().Execute();
+        
         WeaponActions().Execute();
+        SelectedWeapon().Present();
+        
         StateToggler().Execute();
     }
 }
