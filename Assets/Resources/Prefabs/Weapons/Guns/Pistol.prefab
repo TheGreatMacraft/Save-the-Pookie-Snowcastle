@@ -188,10 +188,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Enemy
-  shakeCamera: 0
-  cameraShake: {fileID: 0}
+  cameraShakeComponent: {fileID: 0}
   shakeMagnitude: 10
   shakeDuration: 0.3
+  weaponModel: {fileID: 7639144372114242279}
   infiniteMagazineSize: 0
   magazineSize: 10
   reloadCooldown: 1

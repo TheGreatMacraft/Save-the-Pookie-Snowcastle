@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public sealed class PlayerSelectedWeaponComponent
-    : MonoBehaviour, Scalar<WeaponActions>
+    : MonoBehaviour, Scalar<Weapon>
 {
     [SerializeField] private WeaponComponent[] weapons;
 
@@ -65,7 +65,7 @@ public sealed class PlayerSelectedWeaponComponent
             );
 
 
-    public WeaponActions Value() => weapons[PlayerSlot().Value()];
+    public Weapon Value() => weapons[PlayerSlot().Value()];
 
     private void Update()
     {

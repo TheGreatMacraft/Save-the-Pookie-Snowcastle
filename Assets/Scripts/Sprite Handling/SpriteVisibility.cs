@@ -3,7 +3,9 @@ using UnityEngine;
 public sealed class SpriteVisibility
     : Visibility
 {
-    private SpriteRenderer spriteRenderer;
+    private readonly SpriteRenderer spriteRenderer;
+    
+    private Condition isVisible;
 
 
     public SpriteVisibility(SpriteRenderer spriteRenderer)
@@ -12,16 +14,9 @@ public sealed class SpriteVisibility
     }
 
 
-    public void Hide()
-    {
-        spriteRenderer.enabled = false;
-    }
+    public void Hide() => spriteRenderer.enabled = false;
     
-    public void Show()
-    {
-        spriteRenderer.enabled = true;
-    }
+    public void Show() => spriteRenderer.enabled = true;
 
-    public bool IsMet()
-        => spriteRenderer.enabled;
+    public Condition IsVisible() => isVisible ??= new IsTrue(()  => spriteRenderer.enabled);
 }

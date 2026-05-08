@@ -30,6 +30,7 @@ public abstract class WeaponComponent
     private PlayerState playerState;
 
     private Presentation weaponPresentation;
+    private Visibility spriteVisibility;
 
 
     protected Clock CoroutineClock()
@@ -85,7 +86,11 @@ public abstract class WeaponComponent
             );
 
 
-    public void Present() => weaponPresentation.Present();
+    public void Present() => WeaponPresentation().Present();
+
+    public void Show() => SpriteVisibility().Show();
+    public void Hide() => SpriteVisibility().Hide();
+    public bool IsMet() => SpriteVisibility().IsMet();
 
     public virtual ActionExecution DefaultAttack() => nullAction;
     public virtual ActionExecution SupportAction() => nullAction;

@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 8135393775164944145}
   - component: {fileID: 200964632114378383}
   - component: {fileID: 6893790947134081353}
-  - component: {fileID: 1474035878083642469}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -189,10 +188,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Enemy
-  shakeCamera: 0
-  cameraShake: {fileID: 0}
+  cameraShakeComponent: {fileID: 0}
   shakeMagnitude: 25
   shakeDuration: 0.2
+  weaponModel: {fileID: 7639144372114242279}
   infiniteMagazineSize: 0
   magazineSize: 16
   reloadCooldown: 1
@@ -205,16 +204,3 @@ MonoBehaviour:
   projectileLifeTime: 0
   projectileSpawnPoint: {fileID: 6338241069805926485}
   projectilePrefab: {fileID: 7075100572068852357, guid: 52b9aaeb1edbce449a46893a5c5bb3a0, type: 3}
---- !u!114 &1474035878083642469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3866190957987981482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7657e0a1a9254d4e86db6ef0a1a47f65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 7639144372114242279}

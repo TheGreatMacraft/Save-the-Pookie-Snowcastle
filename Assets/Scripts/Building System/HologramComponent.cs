@@ -54,6 +54,6 @@ public sealed class HologramComponent
         spriteVisibility.Hide();
     }
 
-    public bool IsMet() 
-        => spriteVisibility.IsVisible().IsMet();
+    public Condition IsVisible()
+        => spriteVisibility.IsVisible();
 }
