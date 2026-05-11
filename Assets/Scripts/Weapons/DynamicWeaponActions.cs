@@ -1,12 +1,11 @@
-public sealed class DynamicWeapon : Weapon
+public sealed class DynamicWeaponActions : WeaponActions
 {
     private readonly ActionExecution defaultAttack;
     private readonly ActionExecution supportAction;
     private readonly ActionExecution heavyAttack;
     private readonly ActionExecution ability;
-    private readonly Presentation weaponPresentation;
 
-    public DynamicWeapon(Scalar<Weapon> source)
+    public DynamicWeaponActions(Scalar<Weapon> source)
     : this(
         new ProxyActionExecution(
             () => source.Value().DefaultAttack()
@@ -19,25 +18,20 @@ public sealed class DynamicWeapon : Weapon
         ),
         new ProxyActionExecution(
             () => source.Value().Ability()
-        ), 
-        new ProxyPresentation(
-            () => source.Value()
         )
     ) {}
 
-    private DynamicWeapon(
+    private DynamicWeaponActions(
         ActionExecution defaultAttack,
         ActionExecution supportAction,
         ActionExecution heavyAttack,
-        ActionExecution ability,
-        Presentation weaponPresentation
+        ActionExecution ability
     )
     {
         this.defaultAttack = defaultAttack;
         this.supportAction = supportAction;
         this.heavyAttack = heavyAttack;
         this.ability = ability;
-        this.weaponPresentation = weaponPresentation;
     }
 
 
@@ -52,7 +46,4 @@ public sealed class DynamicWeapon : Weapon
 
     public ActionExecution Ability()
         => ability;
-
-    public void Present()
-        => weaponPresentation.Present();
 }

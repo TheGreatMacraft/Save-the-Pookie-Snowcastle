@@ -15,7 +15,7 @@ public sealed class PlayerActionHandler : MonoBehaviour
     private PlayerState playerState;
     private Condition isBattleState;
     
-    private Weapon selectedWeapon;
+    private WeaponActions selectedWeapon;
 
     private Presentation weaponPresentation;
     
@@ -60,9 +60,9 @@ public sealed class PlayerActionHandler : MonoBehaviour
     
     
     // Selected Weapon
-    private Weapon SelectedWeapon()
+    private WeaponActions SelectedWeapon()
         => selectedWeapon ??=
-            new DynamicWeapon(
+            new DynamicWeaponActions(
                 new ComponentInObject<Scalar<Weapon>>(
                     gameObject,
                     new NullScalar<Weapon>(new NullWeapon())
@@ -141,7 +141,6 @@ public sealed class PlayerActionHandler : MonoBehaviour
         ClassAbilities().Execute();
         
         WeaponActions().Execute();
-        SelectedWeapon().Present();
         
         StateToggler().Execute();
     }

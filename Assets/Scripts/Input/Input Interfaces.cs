@@ -5,9 +5,9 @@ public interface InputAction
 
 public interface Visibility : Togglable
 {
-    public void Hide();
-    public void Show();
-    public Condition IsVisible();
+    void Hide();
+    void Show();
+    Condition IsVisible();
     
     void Togglable.Toggle()
     {

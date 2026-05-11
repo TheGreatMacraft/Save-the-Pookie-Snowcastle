@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 [RequireComponent(typeof(PhysicalBodyComponent))]
 [DisallowMultipleComponent]
@@ -14,7 +15,7 @@ public abstract class WeaponComponent
     [SerializeField] protected float shakeDuration;
     
     [Header("Weapon Presentation")]
-    [SerializeField] private SpriteRenderer weaponModel;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     
     
     private ActionExecution nullAction = new NullActionExecution();
@@ -28,9 +29,11 @@ public abstract class WeaponComponent
     
     private PlayerMovement playerMovement;
     private PlayerState playerState;
+    
+    private Scalar<Weapon> selectedWeapon;
+    private Condition isWeaponSelected;
 
-    private Presentation weaponPresentation;
-    private Visibility spriteVisibility;
+    private Presentation weaponModel;
 
 
     protected Clock CoroutineClock()
@@ -73,25 +76,39 @@ public abstract class WeaponComponent
                 Parent(),
                 new NullPlayerState()
             ).Value();
+
+
+    private Scalar<Weapon> SelectedWeapon()
+        => selectedWeapon ??=
+            new ComponentInObject<Scalar<Weapon>>(
+                Parent(),
+                new NullScalar<Weapon>(new NullWeapon())
+            ).Value();
+
+    private Condition IsWeaponSelected()
+        => isWeaponSelected ??=
+            new IsSameCondition<Weapon>(SelectedWeapon(), this);
     
     
-    private Presentation WeaponPresentation()
-        => weaponPresentation ??=
-            new WeaponPresentation(
-                weaponModel,
+    private Presentation WeaponModel()
+        => weaponModel ??=
+            new WeaponModel(
+                spriteRenderer,
                 WeaponAnchor(),
                 TargetLocation(),
                 PlayerMovement(),
-                PlayerState()
+                PlayerState(),
+                IsWeaponSelected()
             );
 
 
-    public void Present() => WeaponPresentation().Present();
+    private void Update()
+    {
+        WeaponModel().Present();
+    }
 
-    public void Show() => SpriteVisibility().Show();
-    public void Hide() => SpriteVisibility().Hide();
-    public bool IsMet() => SpriteVisibility().IsMet();
 
+    // Weapon Actions
     public virtual ActionExecution DefaultAttack() => nullAction;
     public virtual ActionExecution SupportAction() => nullAction;
     public virtual ActionExecution HeavyAttack() => nullAction;

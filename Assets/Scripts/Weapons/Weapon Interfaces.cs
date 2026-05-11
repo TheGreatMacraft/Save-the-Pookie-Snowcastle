@@ -14,6 +14,4 @@ public interface WeaponActions
     public ActionExecution Ability();
 }
 
-public interface WeaponModel : Presentation, Visibility {}
-
-public interface Weapon : WeaponActions, WeaponModel {}
+public interface Weapon : WeaponActions {}

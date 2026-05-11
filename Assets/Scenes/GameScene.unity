@@ -530,6 +530,18 @@ PrefabInstance:
       propertyPath: shakeDuration
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6893790947134081353, guid: cee8327a45558074f9a770d41297d14a, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 17506232}
+    - target: {fileID: 6893790947134081353, guid: cee8327a45558074f9a770d41297d14a, type: 3}
+      propertyPath: cameraShakeComponent
+      value: 
+      objectReference: {fileID: 729618658}
+    - target: {fileID: 7639144372114242279, guid: cee8327a45558074f9a770d41297d14a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8135393775164944145, guid: cee8327a45558074f9a770d41297d14a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4417,6 +4429,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5848423544174150320, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6018728630485218242, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
       propertyPath: hologram
       value: 
@@ -4435,6 +4451,10 @@ PrefabInstance:
       objectReference: {fileID: 2029662113}
     - target: {fileID: 7242312909835481374, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
       propertyPath: weaponModel
+      value: 
+      objectReference: {fileID: 102376387}
+    - target: {fileID: 7242312909835481374, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}
+      propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 102376387}
     - target: {fileID: 7242312909835481374, guid: af14de61d9f36f54c9ec80f50fb92e66, type: 3}

@@ -26,15 +26,17 @@ public sealed class PlayerSelectedWeaponComponent
                     null
                 ).Value()
             );
+    
 
     private ActionExecution SlotSelection()
         => slotSelection ??=
             new MultipleActionExecutions(
                 new ConditionalExecution(
                     new ConstantExecution(
-                        new SimpleActionCall(
-                            () => PlayerSlot().SetTo(0)
-                        )
+                        new SimpleActionCall(() =>
+                        {
+                            PlayerSlot().SetTo(0);
+                        })
                     ),
                     new OnPressed(
                         InputActionStates().PrimarySlotActionState()
@@ -43,8 +45,10 @@ public sealed class PlayerSelectedWeaponComponent
                 
                 new ConditionalExecution(
                     new ConstantExecution(
-                        new SimpleActionCall(
-                            () => PlayerSlot().SetTo(1)
+                        new SimpleActionCall(() =>
+                            {
+                                PlayerSlot().SetTo(1);
+                            }
                         )
                     ),
                     new OnPressed(
@@ -54,8 +58,10 @@ public sealed class PlayerSelectedWeaponComponent
                 
                 new ConditionalExecution(
                     new ConstantExecution(
-                        new SimpleActionCall(
-                            () => PlayerSlot().SetTo(2)
+                        new SimpleActionCall(() =>
+                            {
+                                PlayerSlot().SetTo(0);
+                            }
                         )
                     ),
                     new OnPressed(
@@ -65,7 +71,8 @@ public sealed class PlayerSelectedWeaponComponent
             );
 
 
-    public Weapon Value() => weapons[PlayerSlot().Value()];
+    public Weapon Value() 
+        => weapons[PlayerSlot().Value()];
 
     private void Update()
     {
