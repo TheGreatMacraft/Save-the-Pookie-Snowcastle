@@ -3,12 +3,14 @@ using UnityEngine;
 
 public sealed class PlayerComponent : 
     MonoBehaviour,
-    TargetLocationSource
+    TargetLocation
 {
     [SerializeField] private Camera camera;
     
     private Location mouseWorldLocation;
     private Target mouseWorld;
+
+    private Condition trueCondition = new TrueCondition();
     
     
     private void Awake()
@@ -21,4 +23,6 @@ public sealed class PlayerComponent :
     
     public Vector3 Coordinates()
         => mouseWorldLocation.Coordinates();
+
+    public Condition IsTargetFound() => trueCondition;
 }

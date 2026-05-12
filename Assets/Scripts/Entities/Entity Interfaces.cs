@@ -50,11 +50,15 @@ public interface Target :
     Location, Tagged
 {
     void Hit(Impact impact, Terminable disposableHitter);
+    bool Exists();
 }
 
 public interface TargetPicker : Scalar<Target> {}
 
-public interface TargetLocationSource : Location { }
+public interface TargetLocation : Location
+{
+    Condition IsTargetFound();
+}
 
 // Speed
 public interface Speed : Scalar<float> {}

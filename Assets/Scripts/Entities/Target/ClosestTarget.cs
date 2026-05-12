@@ -5,6 +5,7 @@ public sealed class ClosestTarget
     private readonly string targetTag;
     
     private readonly Target nullTarget = new NullTarget();
+    private Condition targetFound;
 
 
     public ClosestTarget(

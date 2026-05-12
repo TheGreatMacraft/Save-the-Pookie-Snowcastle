@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 [RequireComponent(typeof(PhysicalBodyComponent))]
 [DisallowMultipleComponent]
@@ -27,13 +28,11 @@ public sealed class BuildingComponent
                 )
             );
 
-    
-    private void Awake()
-    {
-        TargetScouter().FindNewTarget();
-    }
-    
+
     // Proxy
     public Vector3 Coordinates()
-        => targetScouter.CurrentTarget().Coordinates();
+        => TargetScouter().CurrentTarget().Coordinates();
+
+    public Condition IsTargetFound()
+        => TargetScouter().IsTargetFound();
 }

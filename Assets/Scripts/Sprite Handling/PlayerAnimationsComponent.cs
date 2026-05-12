@@ -21,9 +21,9 @@ public sealed class PlayerAnimationsComponent
             new NullLocation()
             ).Value();
 
-        TargetLocationSource targetLocationSource = new ComponentInObject<TargetLocationSource>(
+        TargetLocation targetLocationSource = new ComponentInObject<TargetLocation>(
             parent,
-            new NullTargetLocationSource()
+            new NullTargetLocation()
             ).Value();
 
         Vector facingDirection = new Vector(

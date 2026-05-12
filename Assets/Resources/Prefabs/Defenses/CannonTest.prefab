@@ -197,6 +197,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 6893790947134081353, guid: cee8327a45558074f9a770d41297d14a, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 7812556712629097680}
+    - target: {fileID: 7639144372114242279, guid: cee8327a45558074f9a770d41297d14a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8135393775164944145, guid: cee8327a45558074f9a770d41297d14a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -253,6 +261,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8d2685f06e496bb09c39b2a4a99055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!212 &7812556712629097680 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7639144372114242279, guid: cee8327a45558074f9a770d41297d14a, type: 3}
+  m_PrefabInstance: {fileID: 461750606379544119}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8542992265511141670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8135393775164944145, guid: cee8327a45558074f9a770d41297d14a, type: 3}

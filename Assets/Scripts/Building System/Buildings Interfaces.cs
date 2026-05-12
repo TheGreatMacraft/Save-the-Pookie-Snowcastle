@@ -1,1 +1,1 @@
-public interface Building : TargetLocationSource {}
+public interface Building : TargetLocation {}

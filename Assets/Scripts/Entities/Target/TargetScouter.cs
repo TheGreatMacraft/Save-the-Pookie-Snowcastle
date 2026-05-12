@@ -1,7 +1,12 @@
 public sealed class TargetScouter
 {
     private readonly TargetPicker targetPicker;
+    
     private Target currentTarget;
+    private Target nullTarget;
+    
+    private Condition isTargetFound;
+    private Condition currentTargetExists;
     
     
     public TargetScouter(TargetPicker targetLocator)
@@ -9,19 +14,26 @@ public sealed class TargetScouter
     
     private TargetScouter(
         TargetPicker targetPicker,
-        Target currentTarget
+        Target nullTarget
         )
     {
         this.targetPicker = targetPicker;
-        this.currentTarget = currentTarget;
+        this.nullTarget = nullTarget;
+        this.currentTarget = nullTarget;
     }
 
 
-    public void FindNewTarget()
-    {
-        currentTarget = targetPicker.Value();
-    }
-    
-    public Target CurrentTarget()
-        => currentTarget;
+    public void FindNewTarget() => currentTarget = targetPicker.Value();
+
+    public Target CurrentTarget() => currentTarget;
+
+    public Condition IsTargetFound()
+        => isTargetFound ??=
+            new IsTrue(() =>
+            {
+                if(currentTarget == nullTarget || !currentTarget.Exists())
+                    FindNewTarget();
+                    
+                return currentTarget != nullTarget && currentTarget.Exists();
+            });
 }

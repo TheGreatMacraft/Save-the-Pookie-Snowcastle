@@ -10,7 +10,7 @@ public sealed class WeaponModel
     public WeaponModel(
         SpriteRenderer spriteRenderer,
         PhysicalBody weaponAnchor,
-        Location targetLocation,
+        TargetLocation targetLocation,
         PlayerMovement playerMovement,
         PlayerState playerState,
         Condition isWeaponSelected
@@ -26,27 +26,37 @@ public sealed class WeaponModel
                 ),
                 spriteRenderer
             ),
+            new SpriteVisibility(spriteRenderer),
             new AndConditions(
                 playerMovement.RollAction().Concluded(),
-                new IsIdentityCondition<State>(
-                    playerState, new BattleState()
+                new OrConditions(
+                    new IsIdentityCondition<State>(
+                        playerState, new BattleState()
+                    ),
+                    new IsIdentityCondition<State>(
+                        playerState, new NullState()
+                    )
                 ),
                 isWeaponSelected
             ),
-            new SpriteVisibility(spriteRenderer)
+            targetLocation.IsTargetFound()
         ) {}
 
     private WeaponModel(
          Orientation weaponOrientation,
+         Togglable spriteVisibility,
          Condition weaponVisible,
-         Togglable spriteVisibility
+         Condition targetFound
     )
     : this(
         new ConditionalExecution(
             new ConstantExecution(
                 new SimpleActionCall(() => weaponOrientation.Orient())
             ),
-            weaponVisible
+            new AndConditions(
+                weaponVisible,
+                targetFound
+            )
         ),
         new OnChangeExecution(
             new ConstantExecution(

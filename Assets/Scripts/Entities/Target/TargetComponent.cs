@@ -8,6 +8,7 @@ public sealed class TargetComponent :
 {
     private Tagged taggedObject;
     private Location targetLocation;
+    private Condition exists;
 
     
     private Tagged TaggedObject()
@@ -35,4 +36,7 @@ public sealed class TargetComponent :
     
     public bool IsTaggedAs(string checkTag)
         => TaggedObject().IsTaggedAs(checkTag);
+
+    public bool Exists()
+        => this != null;
 }

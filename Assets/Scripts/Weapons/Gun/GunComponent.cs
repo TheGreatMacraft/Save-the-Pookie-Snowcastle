@@ -78,6 +78,9 @@ public abstract class GunComponent
                     CoroutineClock(),
                     false
                 ),
-                reloadAction.Concluded()
+                new AndConditions(
+                    SupportAction().Concluded(),
+                    TargetLocation().IsTargetFound()
+                )
             );
 }

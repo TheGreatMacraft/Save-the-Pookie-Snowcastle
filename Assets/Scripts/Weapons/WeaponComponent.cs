@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 [RequireComponent(typeof(PhysicalBodyComponent))]
 [DisallowMultipleComponent]
@@ -25,7 +24,7 @@ public abstract class WeaponComponent
     private GameObject parent;
     
     private PhysicalBody weaponAnchor;
-    private Location targetLocation;
+    private TargetLocation targetLocation;
     
     private PlayerMovement playerMovement;
     private PlayerState playerState;
@@ -55,11 +54,11 @@ public abstract class WeaponComponent
                 new NullPhysicalBody()
             ).Value();
 
-    private Location TargetLocation()
-        => targetLocation ??
-           new ComponentInObject<TargetLocationSource>(
-               new ParentOfGameObject(gameObject).Value(),
-               new NullTargetLocationSource()
+    protected TargetLocation TargetLocation()
+        => targetLocation ??=
+           new ComponentInObject<TargetLocation>(
+               Parent(),
+               new NullTargetLocation()
            ).Value();
 
 
@@ -82,7 +81,7 @@ public abstract class WeaponComponent
         => selectedWeapon ??=
             new ComponentInObject<Scalar<Weapon>>(
                 Parent(),
-                new NullScalar<Weapon>(new NullWeapon())
+                new NullScalar<Weapon>(this)
             ).Value();
 
     private Condition IsWeaponSelected()

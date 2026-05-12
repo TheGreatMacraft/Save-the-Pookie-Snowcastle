@@ -5,6 +5,7 @@ public sealed class DynamicWeaponActions : WeaponActions
     private readonly ActionExecution heavyAttack;
     private readonly ActionExecution ability;
 
+    
     public DynamicWeaponActions(Scalar<Weapon> source)
     : this(
         new ProxyActionExecution(

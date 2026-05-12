@@ -6,7 +6,7 @@ using UnityEngine;
 
 public sealed class BasicEnemy : 
     MonoBehaviour,
-    TargetLocationSource
+    TargetLocation
 {
     [SerializeField] private float speed;
     [SerializeField] private String targetTag;
@@ -58,4 +58,7 @@ public sealed class BasicEnemy :
     // Proxy
     public Vector3 Coordinates()
         => targetScouter.CurrentTarget().Coordinates();
+
+    public Condition IsTargetFound()
+        => targetScouter.IsTargetFound();
 }

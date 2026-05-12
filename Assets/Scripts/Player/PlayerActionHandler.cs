@@ -16,8 +16,6 @@ public sealed class PlayerActionHandler : MonoBehaviour
     private Condition isBattleState;
     
     private WeaponActions selectedWeapon;
-
-    private Presentation weaponPresentation;
     
     private ActionExecution weaponActions;
     private ActionExecution stateToggler;

@@ -7,4 +7,5 @@ public class NullTarget : Target
     public void Hit(Impact impact, Terminable disposableHitter) {}
     public Vector3 Coordinates() => nullLocation.Coordinates();
     public bool IsTaggedAs(string Tag) => false;
+    public bool Exists() => false;
 }
